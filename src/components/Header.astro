@@ -46,22 +46,15 @@ const isActive = (path: string) => {
   class="app-layout flex flex-col items-center justify-between sm:flex-row"
 >
 
-  <div
-    class="border-border bg-background relative flex w-full items-baseline justify-between border-b py-4 sm:items-center sm:py-6"
-  >
-  <div>
-    <a
-      href={getRelativeLocaleUrl(locale, "")}
-      class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"
-    >
-      {site.title} 
-    </a> 
-     <a
-      href={getRelativeLocaleUrl(locale, "")}
-      class=" block py-1 mt-2 text-xl whitespace-nowrap leading-8 font-semibold sm:static sm:my-auto sm:text-sm sm:leading-none"
-    >
-      {site.description}
-    </a></div>
+    <div class="border-border bg-background relative flex w-full flex-col border-b py-4 sm:py-6">
+    <div>
+      <a href={getRelativeLocaleUrl(locale, "")} class="block py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:text-2xl">
+        {site.title}
+      </a>
+      <a href={getRelativeLocaleUrl(locale, "")} class="block py-1 mt-1 text-sm leading-6 font-medium text-gray-600 whitespace-nowrap">
+        {site.description}
+      </a>
+   
    
   
 
@@ -173,7 +166,7 @@ const isActive = (path: string) => {
         }
       </ul>
     </nav>
-
+ </div>
   </div>
 
  
