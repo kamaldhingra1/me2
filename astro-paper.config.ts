@@ -12,11 +12,9 @@ export default defineAstroPaperConfig({
     lang: "en",
     timezone: "America/New_York",
     dir: "ltr",
-    outDir: './docs',
+    outDir: './dist',
     output: "static",
-    build: {
-      assets: "astro"
-  },
+
   },
 
 

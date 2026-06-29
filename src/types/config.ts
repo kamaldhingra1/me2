@@ -17,7 +17,7 @@ interface SiteConfig {
   base: string;
   outDir: string;
   output: string;
-  build: string;
+
   lang?: string;
   /** IANA timezone for post dates, e.g. "Asia/Bangkok" */
   timezone?: string;
