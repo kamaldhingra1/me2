@@ -7,11 +7,15 @@ export default defineAstroPaperConfig({
     description: "Cyber, AI Security Architecture & Beyond..",
     author: "Kamal Dhingra",
     profile: "https://kamaldhingra.com",
+    base: "/",
     ogImage: "default-og.jpg",
     lang: "en",
     timezone: "America/New_York",
     dir: "ltr",
   },
+
+
+
   posts: {
     perPage: 4,
     perIndex: 4,

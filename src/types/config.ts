@@ -12,6 +12,7 @@ interface SiteConfig {
   /** Fallback OG image filename in /public, e.g. "og.jpg" */
   ogImage?: string;
   /** HTML lang attribute, defaults to "en" */
+  base: string;
   lang?: string;
   /** IANA timezone for post dates, e.g. "Asia/Bangkok" */
   timezone?: string;
