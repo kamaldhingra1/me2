@@ -1,0 +1,48 @@
+---
+interface Props {
+  type?: 'note' | 'tip' | 'warning' | 'danger' | 'intro' | 'Exe' | 'Sol';
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+
+const typeStyles = {
+  note: {
+    bg: 'bg-blue-50 border-blue-400 text-blue-800',
+    icon: '💡'
+  },
+  tip: {
+    bg: 'bg-green-50 border-green-400 text-green-800',
+    icon: '🚀'
+  },
+  warning: {
+    bg: 'bg-yellow-50 border-yellow-400 text-yellow-800',
+    icon: '⚠️'
+  },
+  danger: {
+    bg: 'bg-red-50 border-red-400 text-red-800',
+    icon: '🚨'
+  },
+  intro: {
+    bg: 'bg-blue-50 border-blue-400 text-blue-800',
+    icon: ''
+  },
+  Exe: {
+    bg: 'bg-purple-50 border-purple-400 text-purple-800',
+    icon: '🚨'
+  },
+  Sol: {
+    bg: 'bg-green-50 border-green-400 text-green-800',
+    icon: '🚀'
+  }
+};
+
+const { bg, icon } = typeStyles[type] || {};
+---
+
+<div class={`border-l-4 p-4 my-4 rounded-r-md ${bg}`}>
+  {title && <p class="font-bold mb-1 flex items-center gap-2"><span>{icon}</span> {title}</p>}
+  <div class="text-sm">
+    <slot />
+  </div>
+</div>
