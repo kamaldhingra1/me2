@@ -2,7 +2,7 @@ import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://kamaldhingra.com/",
+    url: "https://kamaldhingra1.github.io/me2/",
     title: "Kamal Dhingra",
     description: "Cyber, AI Security Architecture & Beyond..",
     author: "Kamal Dhingra",
