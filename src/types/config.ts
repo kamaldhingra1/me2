@@ -1,3 +1,5 @@
+import type { OutputFileType } from "typescript";
+
 interface SiteConfig {
   /** Deployed URL of the site, e.g. "https://example.com" */
   url: string;
@@ -13,6 +15,9 @@ interface SiteConfig {
   ogImage?: string;
   /** HTML lang attribute, defaults to "en" */
   base: string;
+  outDir: string;
+  output: string;
+  build: string;
   lang?: string;
   /** IANA timezone for post dates, e.g. "Asia/Bangkok" */
   timezone?: string;
