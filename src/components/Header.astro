@@ -46,16 +46,17 @@ const isActive = (path: string) => {
 <header class="app-layout flex flex-col items-center justify-between sm:flex-row w-full px-4">
 
   <div class="border-border bg-background relative flex w-full flex-col border-b py-4 sm:py-6 sm:flex-row sm:items-center sm:justify-between">
-    
+      <div class="flex flex-row items-center gap-4 flex-wrap">
 <!-- Grouped Title and Description Container -->
          <IconRss
           width={35}
           height={35}
           class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
-        />
+        /></div>
     <div class="flex flex-col">
     
       <a href={getRelativeLocaleUrl(locale, "")} class="block py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:text-2xl">
+       
         {site.title}
       </a>
       <a href={getRelativeLocaleUrl(locale, "")} class="block py-1  text-sm leading-6 font-medium text-gray-600 whitespace-nowrap">
