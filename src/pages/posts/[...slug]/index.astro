@@ -131,7 +131,10 @@ const ogImage = ogImageUrl
       </span>
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
     </div>
-
+   <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
+      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+    </ul>
+    
     <article
       id="article"
       class:list={[
@@ -141,6 +144,12 @@ const ogImage = ogImageUrl
       ]}
     >
       <Content />
+      <div class="text-left">
+ <a href="/om/" title="Click to Know the meaning" target="_blank" class="text-sm" >  Om Tat Sat </a> 
+</div>
+    <div class="text-xs italic text-gray-500">
+    <p>All content provided on this blog is for informational and educational purposes only. The views expressed here are mine alone and do not represent the views of my employer. </p>
+     </div> 
     </article>
 
     <hr class="my-8 border-dashed" />

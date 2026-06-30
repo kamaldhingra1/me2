@@ -42,22 +42,18 @@ const isActive = (path: string) => {
   {t.a11y.skipToContent}
 </a>
 
-<header
-  class="app-layout flex flex-col items-center justify-between sm:flex-row"
->
-
-    <div class="border-border bg-background relative flex w-full flex-col border-b py-4 sm:py-6">
-    <div>
+<header class="app-layout flex flex-col items-center justify-between sm:flex-row w-full px-4">
+  <div class="border-border bg-background relative flex w-full flex-col border-b py-4 sm:py-6 sm:flex-row sm:items-center sm:justify-between">
+    
+<!-- Grouped Title and Description Container -->
+    <div class="flex flex-col">
       <a href={getRelativeLocaleUrl(locale, "")} class="block py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:text-2xl">
         {site.title}
       </a>
       <a href={getRelativeLocaleUrl(locale, "")} class="block py-1 mt-1 text-sm leading-6 font-medium text-gray-600 whitespace-nowrap">
         {site.description}
       </a>
-   
-   
-  
-
+    </div>
     
     <nav
       id="nav-menu"
@@ -166,7 +162,7 @@ const isActive = (path: string) => {
         }
       </ul>
     </nav>
- </div>
+ 
   </div>
 
  
