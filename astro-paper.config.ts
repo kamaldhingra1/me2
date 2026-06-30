@@ -4,7 +4,7 @@ export default defineAstroPaperConfig({
   site: {
     url: "https://kamaldhingra1.github.io/me2/",
     title: "Kamal Dhingra",
-    description: "Cyber, AI Security Architecture & Beyond..",
+    description: "Cyber, AI Security Architecture & Beyond",
     author: "Kamal Dhingra",
     profile: "https://kamaldhingra.com",
     base: "/",
