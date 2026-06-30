@@ -11,6 +11,7 @@ import LinkButton from "./LinkButton.astro";
 import { stripBase, stripLocale } from "@/utils/withBase";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
+import IconRss from "@/assets/icons/favicon.svg";
 
 const { site, features } = config;
 
@@ -43,9 +44,15 @@ const isActive = (path: string) => {
 </a>
 
 <header class="app-layout flex flex-col items-center justify-between sm:flex-row w-full px-4">
+     <IconRss
+          width={40}
+          height={40}
+          class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
+        />
   <div class="border-border bg-background relative flex w-full flex-col border-b py-4 sm:py-6 sm:flex-row sm:items-center sm:justify-between">
-  
+    
 <!-- Grouped Title and Description Container -->
+  
     <div class="flex flex-col">
       <a href={getRelativeLocaleUrl(locale, "")} class="block py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:text-2xl">
         {site.title}
