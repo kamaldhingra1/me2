@@ -1,0 +1,158 @@
+---
+export interface Props {
+  title?: string;
+  type?: "info" | "success" | "warning" | "critical" | "assumption";
+}
+
+const {
+  title = "Architecture Note",
+  type = "info",
+} = Astro.props;
+
+const styles = {
+  info: {
+    border: "border-cyan-500/40",
+    bg: "bg-cyan-50",
+    title: "text-cyan-800",
+    icon: "ℹ️",
+    marker: "text-cyan-700",
+  },
+
+  success: {
+    border: "border-emerald-500/40",
+    bg: "bg-emerald-50",
+    title: "text-emerald-800",
+    icon: "✅",
+    marker: "text-emerald-700",
+  },
+
+  warning: {
+    border: "border-amber-500/40",
+    bg: "bg-amber-50",
+    title: "text-amber-800",
+    icon: "⚠️",
+    marker: "text-amber-700",
+  },
+
+  critical: {
+    border: "border-red-500/40",
+    bg: "bg-red-50",
+    title: "text-red-800",
+    icon: "🚨",
+    marker: "text-red-700",
+  },
+
+  assumption: {
+    border: "border-blue-500/40",
+    bg: "bg-blue-50",
+    title: "text-blue-800",
+    icon: "💡",
+    marker: "text-blue-700",
+  },
+};
+
+const current = styles[type];
+---
+
+<div
+  class:list={[
+    "not-prose my-6 rounded-2xl border border-l-4",
+    current.border,
+    current.bg,
+    "p-5 shadow-sm",
+  ]}
+>
+  <div class="mb-3 flex items-center gap-3">
+    <span class="text-xl leading-none" aria-hidden="true">
+      {current.icon}
+    </span>
+
+    <h4
+      class:list={[
+        "m-0 text-base font-bold tracking-tight",
+        current.title,
+      ]}
+    >
+      {title}
+    </h4>
+  </div>
+
+  <div
+    class:list={[
+      "architecture-note-content",
+      "leading-7 text-slate-800",
+      "max-w-none",
+      current.marker,
+    ]}
+  >
+    <slot />
+  </div>
+</div>
+
+<style>
+  .architecture-note-content :global(p) {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: rgb(30 41 59);
+  }
+
+  .architecture-note-content :global(ul) {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+  }
+
+  .architecture-note-content :global(ol) {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    list-style-type: decimal;
+  }
+
+  .architecture-note-content :global(li) {
+    margin-top: 0.375rem;
+    margin-bottom: 0.375rem;
+    padding-left: 0.25rem;
+    color: rgb(30 41 59);
+  }
+
+  .architecture-note-content :global(li::marker) {
+    font-weight: 700;
+  }
+
+  .architecture-note-content :global(li > ul),
+  .architecture-note-content :global(li > ol) {
+    margin-top: 0.375rem;
+    margin-bottom: 0.375rem;
+  }
+
+  .architecture-note-content :global(strong) {
+    color: rgb(15 23 42);
+    font-weight: 700;
+  }
+
+  .architecture-note-content :global(a) {
+    color: rgb(8 145 178);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+  }
+
+  .architecture-note-content :global(code) {
+    border-radius: 0.375rem;
+    background-color: rgb(226 232 240);
+    padding: 0.125rem 0.375rem;
+    color: rgb(15 23 42);
+    font-size: 0.875em;
+    font-weight: 600;
+  }
+
+  .architecture-note-content :global(*:first-child) {
+    margin-top: 0;
+  }
+
+  .architecture-note-content :global(*:last-child) {
+    margin-bottom: 0;
+  }
+</style>

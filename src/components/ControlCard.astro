@@ -1,0 +1,171 @@
+---
+export type Maturity =
+  | "Foundational"
+  | "Intermediate"
+  | "Advanced"
+  | "Flagship";
+
+export interface Props {
+  title: string;
+  maturity?: Maturity;
+  category?: string;
+  icon?: string;
+}
+
+const {
+  title,
+  maturity = "Advanced",
+  category = "Control Domain",
+  icon = "🛡️",
+} = Astro.props;
+
+const maturityStyles = {
+  Foundational: {
+    borderTop: "border-t-sky-400",
+    labelText: "text-sky-300",
+    badgeText: "text-sky-300",
+    badgeRing: "ring-sky-400/30",
+    iconBg: "bg-sky-500/15 ring-sky-400/30",
+    iconText: "text-sky-300",
+    shadow: "shadow-sky-950/30",
+  },
+
+  Intermediate: {
+    borderTop: "border-t-teal-400",
+    labelText: "text-teal-300",
+    badgeText: "text-teal-300",
+    badgeRing: "ring-teal-400/30",
+    iconBg: "bg-teal-500/15 ring-teal-400/30",
+    iconText: "text-teal-300",
+    shadow: "shadow-teal-950/30",
+  },
+
+  Advanced: {
+    borderTop: "border-t-violet-400",
+    labelText: "text-violet-300",
+    badgeText: "text-violet-300",
+    badgeRing: "ring-violet-400/30",
+    iconBg: "bg-violet-500/15 ring-violet-400/30",
+    iconText: "text-violet-300",
+    shadow: "shadow-violet-950/30",
+  },
+
+  Flagship: {
+    borderTop: "border-t-amber-400",
+    labelText: "text-amber-300",
+    badgeText: "text-amber-300",
+    badgeRing: "ring-amber-400/30",
+    iconBg: "bg-amber-500/15 ring-amber-400/30",
+    iconText: "text-amber-300",
+    shadow: "shadow-amber-950/30",
+  },
+};
+
+const styles = maturityStyles[maturity];
+---
+
+<section
+  class:list={[
+    "not-prose my-6 rounded-2xl border border-slate-700/70 border-t-4",
+    styles.borderTop,
+    "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800",
+    "p-5 shadow-2xl",
+    styles.shadow,
+    "transition-all duration-300 hover:-translate-y-1",
+  ]}
+>
+  <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+    <div class="flex items-start gap-3">
+      <div
+        class:list={[
+          "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl",
+          "ring-1 shadow-lg text-xl",
+          styles.iconBg,
+          styles.iconText,
+        ]}
+        aria-hidden="true"
+      >
+        {icon}
+      </div>
+
+      <div>
+        <div
+          class:list={[
+            "mb-1 text-xs font-extrabold uppercase tracking-[0.16em]",
+            styles.labelText,
+          ]}
+        >
+          {category}
+        </div>
+
+        <h3 class="m-0 text-lg font-bold leading-snug text-white">
+          {title}
+        </h3>
+      </div>
+    </div>
+
+    <span
+      class:list={[
+        "inline-flex w-fit items-center rounded-full px-3 py-1",
+        "bg-slate-950/70 text-xs font-bold ring-1",
+        styles.badgeText,
+        styles.badgeRing,
+      ]}
+    >
+      {maturity}
+    </span>
+  </div>
+
+  <div class="control-card-body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .control-card-body {
+    color: rgb(226 232 240);
+    line-height: 1.75;
+    font-size: 1rem;
+  }
+
+  .control-card-body :global(p) {
+    color: rgb(226 232 240);
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.75;
+  }
+
+  .control-card-body :global(ul),
+  .control-card-body :global(ol) {
+    color: rgb(226 232 240);
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+  }
+
+  .control-card-body :global(li) {
+    color: rgb(226 232 240);
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
+    line-height: 1.75;
+  }
+
+  .control-card-body :global(strong) {
+    color: white;
+    font-weight: 700;
+  }
+
+  .control-card-body :global(a) {
+    color: rgb(103 232 249);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .control-card-body :global(code) {
+    color: rgb(196 181 253);
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 0.375rem;
+    padding: 0.1rem 0.35rem;
+  }
+</style>

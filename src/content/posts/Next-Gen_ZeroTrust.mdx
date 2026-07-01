@@ -1,0 +1,1000 @@
+---
+title: 'Next-Gen Zero Trust Security Architecture for AI: A 2026+ Enterprise Reference Model'
+summary: A 2026+ Enterprise Reference Architecture View for Securing GenAI, RAG, Multi-Agent Systems, and Traditional ML Pipelines
+tags:
+- AI Security
+- Zero Trust
+- GenAI Security
+- Multi-Agent AI
+- RAG Security
+- AI Governance
+- AI SecOps
+- AI Supply Chain Security
+draft: false
+author: Kamal Dhingra
+description: A CISO-oriented guide to securing the full AI lifecycle across GenAI, RAG, agentic AI, multi-agent systems, and traditional ML using Zero Trust, threat modeling, assurance, and AI SecOps.
+heroQuote: The next generation of AI will not be secured by model guardrails alone. It requires a lifecycle-based, identity-driven, continuously validated Zero Trust architecture.
+pubDatetime: 2026-06-28T04:58:53Z
+modDatetime: 2026-06-28T00:00:00.000Z
+slug: Next-Gen-ZT-for-AI
+featured: true
+hideEditPost: true
+---
+import Callout from '@/components/Callout.astro';
+import ArchitectureNote from '@/components/ArchitectureNote.astro';
+import ControlCard from '@/components/ControlCard.astro';
+import exampleImage from '../../assets/images/posts/AI_LifeCycle.png';
+import exampleImage2 from '../../assets/images/posts/AI_TM_Layer.png';
+import exampleImage3 from '../../assets/images/posts/Cross-CuttingZTControls.png';
+import exampleImage4 from '../../assets/images/posts/AI_Identity_Trust_Fabric.png';
+import exampleImage5 from '../../assets/images/posts/ZT_Pillars.png';
+import exampleImage6 from '../../assets/images/posts/AI_SecCon_Domains.png';
+import exampleImage7 from '../../assets/images/posts/AI_ZT_Ref.png';
+export const ColumnContainer = ({ children }) => (
+  <div className="columns-2 md:columns-3 lg:columns-4 gap-6">
+    {children}
+  </div>
+);
+
+## A 2026+ Enterprise Reference Architecture View for Securing GenAI, RAG, Multi-Agent Systems, and Traditional ML Pipelines
+<Callout type="Exe" title="Executive Takeaway">
+AI security must evolve from isolated model controls to a full lifecycle, Zero Trust operating model. The enterprise must secure not only models, but also data, prompts, tools, agents, memory, retrieval pipelines, orchestration workflows, supply chain artifacts, runtime behavior, and governance evidence.
+</Callout>
+
+Artificial intelligence is no longer a single model running in an isolated environment. Modern AI systems are distributed, dynamic, and deeply embedded into enterprise workflows. A typical enterprise AI solution may include foundation models, fine-tuned adapters, retrieval-augmented generation pipelines, vector databases, APIs, plugins, autonomous agents, multi-agent orchestration, business applications, data platforms, CI/CD pipelines, and cloud infrastructure.
+
+This complexity changes the security model.
+
+Traditional application and other security controls are still required, but they are no longer sufficient. AI introduces new attack surfaces such as prompt injection, retrieval poisoning, model extraction, hallucination abuse, memory poisoning, agent hijacking, tool misuse, malicious adapters, insecure model supply chains, and cross-agent privilege escalation.
+
+To address this shift, enterprises need a **Next-Generation Zero Trust (Always Validating) Security Architecture for AI** — one that protects the full AI lifecycle, verifies every identity, governs every interaction, monitors runtime behavior, validates trust continuously, and integrates AI security into existing enterprise security operations.
+
+<Callout type="Exe" title="Next-Gen Zero Trust Reference Architecture View">
+This reference architecture view is designed as a **2026+ enterprise-grade blueprint** for securing GenAI, RAG, agentic AI, multi-agent systems, and traditional machine learning workloads.
+<details>
+  <summary>Click to View Ref Architecture</summary>
+
+  <img src={exampleImage7.src} alt="**2026+ enterprise-grade blueprint**" />
+</details>
+</Callout>
+---
+
+## Table of Contents
+
+- [Executive Summary](#executive-summary)
+- [Why Zero Trust for AI?](#why-zero-trust-for-ai)
+- [1. AI Lifecycle and Pipeline Layer](#1-ai-lifecycle-and-pipeline-layer)
+- [2. Threat Modeling Layer](#2-threat-modeling-layer)
+- [3. Cross-Cutting Zero Trust Controls](#3-cross-cutting-zero-trust-controls)
+- [4. AI Identity Trust Fabric](#4-ai-identity-trust-fabric)
+- [5. Dynamic Agent Trust Engine](#5-dynamic-agent-trust-engine)
+- [6. Zero Trust Pillars for AI](#6-zero-trust-pillars-for-ai)
+- [7. Built-In and Automated Zero Trust Enablers](#7-built-in-and-automated-zero-trust-enablers)
+- [8. AI Security Control Domains](#8-ai-security-control-domains)
+- [9. AI Supply Chain Security](#9-ai-supply-chain-security)
+- [10. Attestation and Provenance](#10-attestation-and-provenance)
+- [11. AI Assurance and Validation](#11-ai-assurance-and-validation)
+- [12. Continuous AI Red Teaming Program](#12-continuous-ai-red-teaming-program)
+- [13. Responsible AI Governance](#13-responsible-ai-governance)
+- [14. Key AI-Specific Risks](#14-key-ai-specific-risks)
+- [15. Multi-Agent Orchestration Safeguards](#15-multi-agent-orchestration-safeguards)
+- [16. AI Runtime Kill Chain](#16-ai-runtime-kill-chain)
+- [17. Enterprise Integration Layer](#17-enterprise-integration-layer)
+- [18. Reference AI Use Case Patterns](#18-reference-ai-use-case-patterns)
+- [19. Alignment to Standards and Frameworks](#19-alignment-to-standards-and-frameworks)
+- [20. Desired Outcomes](#20-desired-outcomes)
+- [Recommended Implementation Approach](#recommended-implementation-approach)
+- [Conclusion](#conclusion)
+
+---
+
+## Executive Summary
+
+AI security must move from a collection of point controls to a **Full lifecycle-based, Zero Trust operating model**.
+
+This architecture is built around seven core assumptions:
+<ArchitectureNote title="Architecture Assumptions" type="assumption">
+
+1. **Every AI asset must be identified, classified, and governed.**
+2. **Every user, agent, workload, model, tool, service, and data source must have an identity.**
+3. **Every interaction must be authenticated, authorized, encrypted, monitored, and logged.**
+4. **Every AI output must be treated as untrusted until validated.**
+5. **Every model, dataset, prompt, adapter, plugin, and agent must have provenance and assurance evidence.**
+6. **Every AI system must be continuously evaluated for security, safety, privacy, resilience, and compliance.**
+7. **Every autonomous action must be bounded by policy, least privilege, monitoring, and containment.**
+</ArchitectureNote>
+The goal is not only to secure AI models. The goal is to secure the **entire AI digital supply chain and runtime ecosystem**.
+
+<ArchitectureNote title="Architecture Principle" type="info">
+Model guardrails are necessary but insufficient. Enterprise AI security requires layered controls across lifecycle, identity, data, prompts, retrieval, tools, agents, supply chain, runtime, SecOps, governance, and assurance.
+</ArchitectureNote>
+
+---
+
+## Why Zero Trust for AI?
+
+Zero Trust is based on a simple principle:
+<ArchitectureNote title="Why Zero Trust" type="critical">
+> Never trust implicitly. Always verify explicitly.
+</ArchitectureNote>
+For AI systems, this principle becomes even more important because trust boundaries are constantly shifting.
+
+A GenAI application may retrieve documents from a knowledge base, call external APIs, invoke tools, use plugins, hand off tasks to agents, store memory, perform reasoning, and generate outputs that influence users or business processes. Each step introduces risk.
+
+A malicious document can manipulate a RAG pipeline. A compromised plugin can abuse tool permissions. A weakly governed agent can take unauthorized action. A poisoned dataset can influence model behavior. A leaked system prompt can expose internal policy logic. A vulnerable code assistant can generate insecure software. A hijacked autonomous workflow can cause operational impact.
+
+Zero Trust for AI therefore means applying continuous verification across:
+<ControlCard title="Across All " type="Flagship" category="Controls" Maturity="">
+<ColumnContainer>
+  <ul>
+    <li>Human users</li>
+    <li>Agents and bots</li>
+    <li>Workloads</li>
+    <li>Models</li>
+    <li>Applications</li>
+    <li>APIs</li>
+    <li>Tools</li>
+    <li>MCP servers</li>
+    <li>Data stores</li>
+    <li> Vector databases</li>
+<li>Prompts</li>
+<li>Runtime sessions</li>
+<li>Infrastructure</li>
+<li>Supply chain artifacts</li>
+  </ul>
+</ColumnContainer>
+</ControlCard>
+The architecture treats AI as a living ecosystem, not a static application.
+
+---
+
+## 1. AI Lifecycle and Pipeline Layer
+
+The AI lifecycle and pipeline layer represents the full journey from planning through retirement. This is important because AI security cannot begin at deployment. Controls must be embedded from the earliest planning stage through data ingestion, preparation, training, validation, deployment, monitoring, and decommissioning.
+<div className="my-6 text-center">
+  <img 
+    src={exampleImage.src}
+    alt="AI Lifecycle and Pipeline Layer"
+    className="mx-auto max-w-full h-auto border border-green-400 rounded-md"
+  />
+  <p className="text-sm text-gray-500 italic mt-2">
+    Figure 1: Ai lifeCycle and Pipeline Layer
+  </p>
+</div>
+
+### 1. Plan and Require
+
+**Purpose:** Define the security foundation for AI initiatives.
+
+This phase establishes AI strategy, policies, standards, risk appetite, ownership, and regulatory requirements. Security teams use this stage to identify AI assets, classify data, define responsible AI expectations, and determine which systems require deeper assessment.
+
+**Why this matters:** Many AI risks begin before a model is trained or deployed. If an organization does not understand which AI systems exist, what data those systems use, who owns those systems, and what business decisions those systems influence, security teams cannot govern risk effectively.
+
+Key controls include:
+<ControlCard title="Key Controls " type="Foundational" category="Plan & Require" Maturity="Foundational">
+<ColumnContainer>
+  <ul>
+<li> AI asset inventory</li>
+<li>Risk and threat modeling</li>
+<li> Responsible AI requirements</li>
+<li> Bias and impact assessment</li>
+<li> Data classification</li>
+<li>Security architecture review</li>
+<li>Governance approval</li>
+ </ul>
+</ColumnContainer>
+</ControlCard>
+### 2. Collect and Ingest
+
+**Purpose:** Secure all data entering the AI ecosystem.
+
+This phase protects training data, fine-tuning data, RAG source data, streaming data, and third-party data. It validates quality, origin, consent, and usage rights before data influences models or generated outputs.
+
+**Why this matters:** AI systems are highly dependent on data integrity. If input data is poisoned, incomplete, biased, mislabeled, or untrusted, downstream model behavior can become unreliable or unsafe.
+
+Key controls include:
+<ControlCard title="Key Controls " type="critical" category="Collect & Ingest" Maturity="Advanced">
+<ColumnContainer>
+  <ul>
+<li>Secure data lakes</li>
+  <li>RAG source validation</li>
+  <li>Vendor and third-party risk assessment</li>
+  <li>Consent management</li>
+  <li>Data governance</li>
+  <li>Data provenance</li>
+  <li>Dataset lineage</li>
+  <li>Data quality checks</li>
+ </ul>
+</ColumnContainer>
+</ControlCard>
+### 3. Prepare and Label
+
+**Purpose:** Protect data transformation, annotation, labeling, enrichment, masking, and preprocessing workflows.
+
+**Why this matters:** Data preparation is often overlooked, but this is where sensitive information may be exposed, manipulated, mislabeled, or incorrectly transformed. If this phase is compromised, model training and inference quality are also compromised.
+
+Key controls include:
+<ControlCard title="Key Controls " type="critical" category="Prepare and Label" Maturity="Flagship">
+<ColumnContainer>
+  <ul>
+<li>AI-assisted annotation controls</li>
+  <li>Data quality validation</li>
+  <li>PII detection and masking</li>
+  <li>Data augmentation governance</li>
+  <li>Malware and toxic content scanning</li>
+  <li>Labeling integrity checks</li>
+  <li>Human review for high-risk datasets</li>
+ </ul>
+</ColumnContainer>
+</ControlCard>
+### 4. Train and Develop
+
+**Purpose:** Secure model development, fine-tuning, AI application engineering, notebooks, dependencies, pipelines, and compute infrastructure.
+
+**Why this matters:** Training and development environments often contain sensitive datasets, credentials, model weights, experiments, and intellectual property. These environments are high-value targets.
+
+Key controls include:
+<ControlCard title="Key Controls " type="critical" category="Train and Develop" Maturity="Flagship">
+<ColumnContainer>
+  <ul>
+<li>Secure GPU and HPC compute</li>
+  <li>PETs and adapter security</li>
+  <li>Secure coding for AI and ML</li>
+  <li>Adversarial training</li>
+  <li>Data leakage prevention</li>
+  <li>Model cards and documentation</li>
+  <li>Dependency scanning</li>
+  <li>Secrets management</li> 
+  </ul>
+</ColumnContainer>
+</ControlCard>
+### 5. Validate and Evaluate
+
+**Purpose:** Verify that AI systems are safe, secure, reliable, and fit for deployment.
+
+**Why this matters:** AI systems can behave unpredictably under adversarial prompts, unusual inputs, poisoned context, manipulated tools, or unexpected retrieval results. Validation must go beyond accuracy testing.
+
+Key controls include:
+<ControlCard title="Key Controls " type="critical" category="Validate and Evaluate" Maturity="Flagship">
+<ColumnContainer>
+<ul>
+  <li>Automated evaluation</li>
+  <li>LLM-as-judge testing</li>
+  <li>Red teaming</li>
+  <li>Jailbreak testing</li>
+  <li>Safety and guardrail testing</li>
+  <li>Fairness and bias testing</li>
+  <li>Hallucination and factuality testing</li>
+  <li>Robustness evaluation</li>
+  <li>Human review for high-impact use cases</li>
+</ul>
+</ColumnContainer>
+</ControlCard>
+### 6. Deploy and Operate
+
+**Purpose:** Secure production deployment, model serving, APIs, agents, orchestration layers, and runtime environments.
+
+**Why this matters:** Production AI systems interact with users, applications, APIs, tools, documents, and enterprise systems. Deployment security must ensure only approved, tested, and governed components are released.
+
+Key controls include:
+<ControlCard title="Key Controls " type="critical" category="Deploy and Operate" Maturity="Flagship">
+<ColumnContainer>
+<ul>
+  <li>Model serving security</li>
+  <li>Agent orchestration governance</li>
+  <li>MCP and tool governance</li>
+  <li>CI/CD for AI with policy gates</li>
+  <li>Blue/green and canary deployment</li>
+  <li>Environment hardening</li>
+  <li>Runtime secrets protection</li>
+  <li>API protection</li>
+</ul>
+</ColumnContainer>
+</ControlCard>
+### 7. Monitor and Improve
+
+**Purpose:** Provide continuous visibility, detection, feedback, and improvement.
+
+**Why this matters:** AI security is not static. Models drift. Threats evolve. Agents take actions. Users discover new prompt patterns. Attackers refine jailbreaks. Continuous monitoring is essential.
+
+Key controls include:
+<ControlCard title="Key Controls " type="critical" category="Monitor and Improve" Maturity="Flagship">
+<ColumnContainer>
+<ul>
+  <li>Model monitoring</li>
+  <li>Agent behavior monitoring</li>
+  <li>Security telemetry</li>
+  <li>Human-in-the-loop review</li>
+  <li>Feedback and reinforcement learning from human feedback</li>
+  <li>Drift detection</li>
+  <li>Abuse detection</li>
+  <li>Continuous learning</li>
+</ul>
+</ColumnContainer>
+</ControlCard>
+### 8. Retire and Archive
+
+**Purpose:** Safely retire AI models, datasets, prompts, agents, workflows, and pipelines.
+
+**Why this matters:** Old AI systems may retain data, credentials, embeddings, prompts, logs, model weights, or access paths. Improper retirement can create long-lived security and compliance exposure.
+
+Key controls include:
+<ControlCard title="Key Controls " type="critical" category="Retire and Archive" Maturity="Flagship">
+<ColumnContainer>
+<ul>
+  <li>Secure decommissioning</li>
+  <li>Data and model disposal</li>
+  <li>Model retirement</li>
+  <li>Sanitization and deletion</li>
+  <li>Audit and evidence preservation</li>
+  <li>Access revocation</li>
+  <li>Retention enforcement</li>
+</ul>
+</ColumnContainer>
+</ControlCard>
+---
+
+## 2. Threat Modeling Layer
+
+The threat modeling layer is intentionally placed directly below the AI lifecycle. This matters because security controls should not be added randomly. Controls should be derived from assets, data flows, trust boundaries, threat scenarios, risk scoring, and business impact.
+
+<Callout type="warning" title="Why Threat Modeling Comes Early">
+AI threat modeling should happen before production deployment and continue after deployment. New prompts, tools, agents, models, datasets, and workflows can introduce new risks at any point in the lifecycle.
+</Callout>
+
+The threat modeling layer includes:
+<div className="my-6 text-center max-w-4xl mx-auto">
+  <img 
+    src={exampleImage2.src} 
+    alt="AI Threat Model Layer" 
+    className="mx-auto w-full h-auto border border-green-400 rounded-md" 
+  />
+
+  <p className="text-sm text-gray-500 italic mt-2">
+    Figure 2: AI Threat Model Layer
+  </p>
+</div>
+<ArchitectureNote title="AI Threat Model Includes" type="info">
+1. ## AI Assets and Data Identification
+
+-- Identifies models, datasets, agents, prompts, tools, APIs, MCP servers, memory stores, vector databases, workflows, and infrastructure. This ensures the organization knows what must be secured.
+
+2. ## Data Flow and Trust Boundary Mapping
+
+-- Maps how information moves between users, applications, models, agents, tools, data stores, APIs, and infrastructure. This helps identify where attackers may inject, manipulate, exfiltrate, or abuse data.
+
+3. ## STRIDE for AI
+
+-- Applies threat categories such as spoofing, tampering, repudiation, information disclosure, denial of service, and elevation of privilege to AI-specific assets such as prompts, agents, models, context, memory, tools, and retrieval pipelines.
+
+4. ## AI-Specific Threat Library
+
+-- Includes GenAI and agentic threats such as prompt injection, jailbreaks, model extraction, tool abuse, agent hijacking, retrieval poisoning, memory poisoning, context manipulation, malicious adapters, and cross-agent privilege escalation.
+
+5. ## Risk Scoring and Prioritization
+
+-- Prioritizes risks based on impact, likelihood, exploitability, detectability, business criticality, data sensitivity, and autonomy level.
+
+6. ## Control Mapping and Mitigation Planning
+
+-- Maps risks to preventive, detective, corrective, and compensating controls. This ensures security controls are traceable to specific threats.
+
+7. ## Continuous Threat Validation and Feedback
+
+-- Threat models must evolve as AI systems evolve. Continuous validation gives security teams a feedback loop for new attack paths and control gaps.
+</ArchitectureNote>
+---
+
+## 3. Cross-Cutting Zero Trust Controls
+
+Cross-cutting Zero Trust controls apply across every lifecycle phase.
+
+**Purpose:** Provide consistent security enforcement across AI systems and ensure controls are not limited to one environment or one stage.
+
+Key controls include:
+<div className="my-6 text-center max-w-4xl mx-auto">
+  <img 
+    src={exampleImage3.src} 
+    alt="Cross-Cutting Zero Trust Controls" 
+    className="mx-auto w-full h-auto border border-green-400 rounded-md" 
+  />
+
+  <p className="text-sm text-gray-500 italic mt-2">
+    Figure 3: Cross Cutting Zero Trust Controls
+  </p>
+</div>
+<ArchitectureNote title="Cross Cutting ZT Controls" type="info">
+- **Identity verification:** Tie every interaction to a verified user, agent, workload, service, device, API, or tool.
+- **Least privilege:** Limit access to only what is required by role, context, time, task, and risk.
+- **Micro-segmentation:** Segment AI workloads, data stores, tools, models, and APIs to reduce lateral movement.
+- **Data loss prevention:** Prevent sensitive data leakage through prompts, outputs, logs, embeddings, and API responses.
+- **Privacy-enhancing technologies:** Use techniques such as tokenization, differential privacy, federated learning, confidential computing, and trusted execution environments.
+- **Policy enforcement:** Enforce policies through OPA, Rego, Cedar, Kyverno, API gateways, AI gateways, and model gateways.
+- **Observability and audit:** Capture logs, metrics, traces, lineage, prompts, outputs, tool calls, and agent actions.
+- **Automated threat response:** Revoke sessions, block tools, isolate agents, update policy, stop workflows, and escalate alerts.
+</ArchitectureNote>
+---
+
+## 4. AI Identity Trust Fabric
+
+The AI Identity Trust Fabric is a foundational element of the architecture.
+
+Traditional identity systems focus primarily on users and applications. AI systems introduce many additional identities: agents, tools, models, prompts, services, APIs, workloads, datasets, and devices.
+
+**Purpose:** Assign identity to every participant in the AI ecosystem, establish trust before allowing interaction, and continuously score trust based on behavior and context.
+
+The fabric includes:
+<div className="my-6 text-center max-w-4xl mx-auto">
+  <img 
+    src={exampleImage4.src} 
+    alt="AI Identity Trust Fabric" 
+    className="mx-auto w-full h-auto border border-green-400 rounded-md" 
+  />
+
+  <p className="text-sm text-gray-500 italic mt-2">
+    Figure 4: AI Identity Trust Fabric
+  </p>
+</div>
+<ArchitectureNote title="AI Identity Trust Fabric" type="info">
+** Human Identities
+
+Controls include SSO, MFA, conditional access, and risk-based authentication. These controls verify people accessing AI systems.
+
+1. ## Agent Identities
+
+-- Controls include SPIFFE/SPIRE IDs, agent certificates, short-lived tokens, and agent lifecycle management. These controls prevent rogue agents, spoofed agents, and unauthorized agent-to-agent communication.
+
+2. ## Workload Identities
+
+-- Controls include workload identity, service accounts, artifact attestation, and SBOM/SLSA evidence. These controls verify AI workloads before granting access.
+
+3. ## Service Identities
+
+-- Controls include mTLS, service mesh, and API identities. These controls secure service-to-service communication.
+
+4. ## Device Identities
+
+-- Controls include device posture, compliance checks, and trusted device validation. These controls establish endpoint and infrastructure trustworthiness.
+
+5. ## Trust and Reputation
+
+-- Controls include reputation scoring, behavioral trust, and risk scoring. These controls make trust dynamic rather than static.
+
+6. ## Trust Registry
+
+-- Controls include federated registry, revocation lists, and policy distribution. These controls maintain authoritative records of trusted agents, services, tools, and models.
+
+7. ## Key Management
+
+-- Controls include KMS, HSM, agent key management, and key rotation. These controls protect cryptographic trust anchors.
+</ArchitectureNote>
+---
+
+## 5. Dynamic Agent Trust Engine
+
+The Dynamic Agent Trust Engine is a major control for multi-agent and autonomous AI systems.
+<ControlCard title="Dynamic Agent Trust Engine" maturity="Advanced">
+The Dynamic Agent Trust Engine enables adaptive authorization for autonomous workflows by making trust continuous, contextual, and behavior-driven.
+</ControlCard>
+**Purpose:** Continuously calculate trust for agents and agent actions, then use behavior, context, tool usage, telemetry, and policy signals to drive authorization.
+
+**Why this matters:** Static permissions are dangerous for autonomous agents. An agent may be trusted at the start of a session but become risky based on behavior, tool calls, data access, policy violations, or unexpected actions.
+<ArchitectureNote title="Dynamic Agent Trust Engine" type="assumption">
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
+  <div>
+    ### Inputs include:
+    <ul>
+      <li>Agent behavior</li>
+      <li>Agent actions</li>
+      <li>Tool usage</li>
+      <li>Policy violations</li>
+      <li>Telemetry</li>
+      <li>Reputation signals</li>
+      <li>Context risk</li>
+    </ul>
+  </div>
+
+  <div>
+    ### Outputs include:
+    <ul>
+      <li>Real-time agent risk score</li>
+      <li>Authorization decision</li>
+      <li>Tool access decision</li>
+      <li>Workflow continuation decision</li>
+      <li>Isolation or containment action</li>
+    </ul>
+  </div>
+</div>
+</ArchitectureNote>
+
+
+---
+
+## 6. Zero Trust Pillars for AI
+
+The architecture defines six Zero Trust pillars tailored for AI.
+<div className="my-6 text-center max-w-4xl mx-auto">
+  <img 
+    src={exampleImage5.src} 
+    alt="Zero Trust Pillars for AI" 
+    className="mx-auto w-full h-auto border border-green-400 rounded-md" 
+  />
+
+  <p className="text-sm text-gray-500 italic mt-2">
+    Figure 5: Zero Trust Pillars for AI
+  </p>
+</div>
+<ArchitectureNote title="Zero Trust Pillars for AI (Purpose & Control)" type="assumption">
+### 1. Verify Explicitly
+
+ - (P):Confirm identity, device posture, application integrity, session risk, and behavioral context.
+
+ - (C):Controls include strong authentication, device and app integrity, continuous risk scoring, adaptive access, and behavioral analytics.
+
+### 2. Least Privilege Access
+
+ - (P):Limit users, agents, services, and tools to only the access required.
+
+ - (C):Controls include fine-grained agent permissions, context-aware authorization, just-in-time access, dynamic scope, time-bound tokens, and limited tool and data access.
+
+### 3. Secure Interactions
+
+ - (P):Protect communication between users, applications, agents, tools, models, APIs, and services.
+
+ - (C):Controls include mTLS, secure messaging, input and output guardrails, prompt injection protection, session boundaries, and timeouts.
+
+### 4. Protect Data and Models
+
+ - (P):Secure sensitive data, embeddings, prompts, outputs, model weights, adapters, and metadata.
+
+ - (C):Controls include encryption, model watermarking, metadata and lineage, data minimization, privacy-preserving AI, and access control for vector stores.
+
+### 5. Isolate and Contain
+
+ - (P):Limit blast radius and contain compromised agents, tools, models, or sessions.
+
+ - (C):Controls include workload and agent sandboxing, tenant isolation, network segmentation, egress controls, kill switches, and circuit breakers.
+
+### 6. Observe, Detect, and Respond
+
+ - (P):Continuously detect threats and respond to unsafe or malicious AI behavior.
+
+ - (C):Controls include AI runtime monitoring, agent and tool behavior analytics, AI threat detection, automated response, continuous compliance, forensics, and audit.
+</ArchitectureNote>
+---
+
+## 7. Built-In and Automated Zero Trust Enablers
+
+These enablers operationalize the architecture. AI moves too quickly for manual governance. Policy, enforcement, detection, and response must be automated wherever possible.
+
+Important enablers include:
+<ControlCard title="Zero Trust Enablers " type="critical" category="Built-in & Automated" Maturity="Flagship">
+<ColumnContainer>
+<ul>
+  <li>Policy engine</li>
+  <li>Policy as code</li>
+  <li>Continuous verification</li>
+  <li>AI-native segmentation</li>
+  <li>End-to-end encryption</li>
+  <li>Automated response</li>
+  <li>Security orchestration</li>
+  <li>Deception and honeypots</li>
+  <li>Drift and anomaly detection</li>
+</ul>
+</ColumnContainer>
+</ControlCard>
+
+
+---
+
+## 8. AI Security Control Domains
+
+The architecture includes specialized security domains for modern AI systems.
+<div className="my-6 text-center max-w-4xl mx-auto">
+  <img 
+    src={exampleImage6.src} 
+    alt="AI Security Control Domains" 
+    className="mx-auto w-full h-auto border border-green-400 rounded-md" 
+  />
+
+  <p className="text-sm text-gray-500 italic mt-2">
+    Figure 6: AI Security Control Domains
+  </p>
+</div>
+<ArchitectureNote title="Zero Trust Pillars for AI (Purpose & Control)" type="assumption">
+1. ### MCP Security
+
+- (P): Secure Model Context Protocol servers, tools, and endpoints.
+
+- (C): Controls include MCP server allowlisting, signed MCP endpoints, tool risk scoring, tool attestation, dynamic tool authorization, and tool behavior monitoring.
+
+2. ### Memory Security
+
+- (P): Protect short-term memory, long-term memory, shared memory, and vector memory.
+
+- (C): Controls include memory integrity checks, encrypted memory stores, memory poisoning detection, access control and isolation, retention policies, TTL policies, and sensitive memory tagging.
+
+3. ### RAG Security
+
+- (P): Secure retrieval-augmented generation pipelines.
+
+- (C): Controls include retrieval trust scoring, source and content validation, vector database integrity, poisoning and injection detection, citation and provenance enforcement, and chunk and embedding validation.
+
+4. ### AI Runtime Protection
+
+- (P): Protect AI systems during inference and operation.
+
+- (P): Controls include runtime behavior monitoring, model and agent drift detection, tool invocation monitoring, hallucination detection, output anomaly detection, and runtime policy enforcement.
+
+5. ### AI SOC and Threat Detection
+
+- (P): Integrate AI-specific detection and response into security operations.
+
+- (C): Controls include prompt and jailbreak detection, agent anomaly detection, tool abuse detection, credential misuse detection, rogue agent detection, autonomous containment, and session revocation.
+
+6. ### Multi-Agent Security
+
+- (P): Secure agent-to-agent communication, coordination, delegation, and execution.
+
+- (C): Controls include agent-to-agent mTLS, authentication, signed messages, context isolation, human approval gates, coordination policy controls, reputation and trust validation, loop and escalation controls, kill switches, and recovery workflows.
+
+7. ### Advanced Data Security
+
+- (P): Protect data across training, retrieval, inference, logs, memory, and outputs.
+
+- (C): Controls include differential privacy, tokenization, dynamic masking, confidential computing, trusted execution environments, and synthetic data controls.
+</ArchitectureNote>
+---
+
+## 9. AI Supply Chain Security
+
+AI supply chain security protects the artifacts and dependencies that make AI systems work.
+
+**Purpose:** Establish trust in models, datasets, agents, prompts, adapters, plugins, tools, pipelines, and dependencies.
+
+The architecture includes four critical bills of materials.
+<ArchitectureNote title="AI Supply Chain Security" type="assumption">
+
+    **BoM Type & Purpose:**
+    ### MBOM — Model Bill of Materials
+      -- Tracks model lineage, training provenance, fine-tuning history, and licensing.
+    ### DBOM — Dataset Bill of Materials
+      -- Tracks data origin, data licensing, quality, accuracy, and usage rights.
+    ### ABOM — Agent Bill of Materials
+      -- Tracks agent components, tools, plugins, permissions, and dependencies.
+    ### PBOM — Prompt Bill of Materials
+      -- Tracks system prompts, templates, guardrails, and versioning.
+    
+
+</ArchitectureNote>
+
+---
+
+## 10. Attestation and Provenance
+
+**Purpose:** Prove that AI artifacts are authentic, approved, and untampered.
+
+Without provenance, teams cannot confidently determine whether a model, dataset, prompt, adapter, or agent was modified, replaced, or sourced from an untrusted location.
+
+Controls include:
+<ControlCard title="Attestation and Provenance " type="critical" category="Supply Chain Security" Maturity="Flagship">
+<ColumnContainer>
+<ul>
+   <li>SLSA and Sigstore</li>
+  <li>Artifact signing</li>
+  <li>Provenance verification</li>
+  <li>SBOM and BOM validation</li>
+  <li>Continuous monitoring</li>
+</ul>
+</ColumnContainer>
+</ControlCard>
+<ArchitectureNote title="Trust" type="success">
+This creates a chain of trust across the AI supply chain.
+</ArchitectureNote>
+---
+
+## 11. AI Assurance and Validation
+<Callout type="Exe" title="Executive Takeaway">
+This section is especially important for CISOs, boards, auditors, regulators, and risk committees.
+</Callout>
+AI Assurance answers a critical leadership question:
+
+> How do we know the controls are working?
+
+**Purpose:** Provide measurable evidence that AI systems are secure, safe, compliant, and resilient.
+
+Controls include:
+<ControlCard title="AI Assurance and Validation " type="critical" category="AI Security" Maturity="Flagship">
+<ColumnContainer>
+<ul>
+ <li>Model cards</li>
+  <li>System cards</li>
+  <li>Control effectiveness testing</li>
+  <li>AI penetration testing</li>
+  <li>Adversarial testing</li>
+  <li>AI security scorecards</li>
+  <li>Continuous control validation</li>
+  <li>Residual risk tracking</li>
+</ul>
+</ColumnContainer>
+</ControlCard>
+
+
+
+
+---
+
+## 12. Continuous AI Red Teaming Program
+
+**Purpose:** Continuously test AI systems against adversarial behavior.
+
+AI threat actors constantly develop new prompt attacks, jailbreaks, tool abuse techniques, data poisoning methods, and agent manipulation strategies. Periodic testing is not enough.
+
+Testing areas include:
+
+- Prompt and jailbreak attacks
+- Agent manipulation attacks
+- RAG poisoning and injection
+- Tool and MCP abuse
+- Adversarial ML and data attacks
+- Model extraction and evasion
+
+A mature AI red teaming program helps organizations discover weaknesses before attackers do.
+
+---
+
+## 13. Responsible AI Governance
+
+Security and responsible AI must work together.
+
+**Purpose:** Govern AI risk, ethics, transparency, accountability, safety, and compliance.
+
+Governance controls include:
+
+- AI inventory and catalog
+- Risk register and assessment
+- Regulatory mapping
+- Bias and fairness governance
+- Transparency and explainability
+- Human oversight and approval
+- Incident reporting and audit
+
+This helps align AI security with enterprise risk management.
+
+---
+
+## 14. Key AI-Specific Risks
+
+The architecture explicitly highlights AI-specific risks so readers understand what the controls are designed to mitigate.
+
+### Prompt and Context Risks
+
+Examples include prompt injection, jailbreaks, context manipulation, hallucination abuse, and system prompt leakage.
+
+### Data and Retrieval Risks
+
+Examples include data poisoning, retrieval poisoning, memory poisoning, and sensitive data leakage.
+
+### Model and Supply Chain Risks
+
+Examples include model theft, model extraction, backdoored models, malicious adapters, and dependency poisoning.
+
+### Agentic Risks
+
+Examples include agent hijacking, tool poisoning, MCP compromise, cross-agent privilege escalation, and recursive agent failures.
+
+---
+
+## 15. Multi-Agent Orchestration Safeguards
+
+Multi-agent systems require special guardrails because the risk is not limited to one model or one agent.
+
+**Purpose:** Govern coordination, delegation, escalation, and recovery across multiple agents.
+
+Controls include:
+
+- Workflow policy enforcement
+- Goal and intent validation
+- Agent-to-agent authorization
+- Permission inheritance control
+- Escalation limits
+- Checkpointing and rollback
+- Quarantine and isolation modes
+- Loop and recursion prevention
+- Human approval gates
+
+This creates boundaries for autonomy.
+
+---
+
+## 16. AI Runtime Kill Chain
+
+The AI Runtime Kill Chain shows how an attacker may move through an AI system.
+
+**Purpose:** Help security teams map threats to controls and explain attack progression in a way that executives and engineering teams can understand.
+
+Example attack path:
+
+1. Reconnaissance
+2. Prompt injection
+3. Context poisoning
+4. Tool abuse
+5. Privilege escalation
+6. Data access and exfiltration
+7. Autonomous propagation
+
+Each stage maps to controls such as input validation, context isolation, tool governance, least privilege, policy enforcement, data protection, and loop prevention.
+
+---
+
+## 17. Enterprise Integration Layer
+
+AI security cannot operate in isolation.
+
+**Purpose:** Connect AI security controls with existing enterprise security and risk platforms.
+
+Integration points include:
+
+- SIEM
+- SOAR
+- GRC
+- ITSM
+- CMDB
+- IAM
+- PAM
+- Secrets vault
+- Data catalog
+- DLP
+- Email security
+- EDR/XDR
+- Cloud security
+- IoT security
+- Audit systems
+
+This allows AI risks to become visible within existing enterprise workflows.
+
+---
+
+## 18. Reference AI Use Case Patterns
+
+The architecture includes compact use case patterns to show practical application without overwhelming the diagram.
+
+### RAG Copilot
+
+Top risks: prompt injection and data leakage.  
+Key controls: retrieval trust and output guardrails.
+
+### Code Assistant
+
+Top risks: secret leakage and vulnerable code.  
+Key controls: input scanning and tool sandboxing.
+
+### Research Agent
+
+Top risks: tool abuse and information manipulation.  
+Key controls: tool governance and human approval.
+
+### Fraud ML System
+
+Top risks: model drift and data poisoning.  
+Key controls: data validation and drift monitoring.
+
+### AIOps Agent
+
+Top risks: excessive actions and change bypass.  
+Key controls: least privilege and approval gates.
+
+### Autonomous Workflow
+
+Top risks: cross-agent escalation and runaway loops.  
+Key controls: policy enforcement and loop prevention.
+
+### Multi-Agent System
+
+Top risks: agent spoofing and context poisoning.  
+Key controls: mTLS, trust validation, and context isolation.
+
+---
+
+## 19. Alignment to Standards and Frameworks
+
+A flagship enterprise architecture should align with recognized standards and frameworks.
+
+This architecture maps well to:
+
+
+- NIST AI RMF
+- NIST SP 800-207 Zero Trust
+- ISO/IEC 42001 AI Management System
+- MITRE ATLAS
+- OWASP Top 10 for LLM Applications
+- CSA AI Controls Matrix
+- EU AI Act
+- SOC 2
+- ISO 27001
+- PCI DSS
+- HIPAA
+- GDPR
+
+**Purpose:** Provide governance credibility, support audit readiness, map controls to compliance obligations, and enable consistent communication with risk, legal, privacy, compliance, and engineering teams.
+
+---
+
+## 20. Desired Outcomes
+
+The architecture is designed to produce measurable business and security outcomes:
+
+- Reduced AI attack surface
+- Stronger data and model protection
+- Lower risk of breach and abuse
+- Deterministic and predictable AI operations
+- Continuous assurance and compliance
+- Trusted, safe, and responsible AI
+- Faster innovation with confidence
+- Improved resilience of AI systems
+- Stronger executive visibility into AI risk
+
+Ultimately, the goal is to enable innovation without losing control.
+
+---
+
+## Recommended Implementation Approach
+
+Organizations should not attempt to implement the entire architecture at once. A phased approach is more practical.
+
+### Phase 1: Discover and Govern
+
+Start with AI inventory, AI asset classification, data source mapping, risk assessment, ownership model, and governance policies.
+
+**Goal:** Establish visibility and accountability.
+
+### Phase 2: Secure the AI Lifecycle
+
+Implement controls across data ingestion, model training, prompt management, RAG pipelines, deployment pipelines, monitoring, and retirement.
+
+**Goal:** Embed security into the AI development and operations lifecycle.
+
+### Phase 3: Build the Identity Trust Fabric
+
+Implement human identity, workload identity, agent identity, service identity, tool identity, trust registry, and key management.
+
+**Goal:** Ensure every actor and component has verifiable identity.
+
+### Phase 4: Secure GenAI, RAG, and Agents
+
+Prioritize prompt injection defense, retrieval trust, memory security, MCP security, tool governance, agent sandboxing, and human approval gates.
+
+**Goal:** Address the highest-risk modern AI patterns.
+
+### Phase 5: Operationalize AI SecOps
+
+Integrate with SIEM, SOAR, XDR, GRC, ITSM, IAM, PAM, DLP, and cloud security.
+
+**Goal:** Make AI security part of enterprise security operations.
+
+### Phase 6: Establish Continuous Assurance
+
+Implement AI red teaming, AI penetration testing, control validation, runtime monitoring, security scorecards, model and system cards, and residual risk tracking.
+
+**Goal:** Prove that controls work and continuously improve.
+
+---
+
+## Conclusion
+
+The next generation of enterprise AI will not be secured by model guardrails alone.
+
+Modern AI security requires a layered, lifecycle-based, identity-driven, continuously monitored, and Zero Trust-aligned architecture. This includes protection for data, models, prompts, agents, tools, memory, retrieval pipelines, APIs, infrastructure, supply chains, and runtime behavior.
+
+A flagship AI security architecture must answer four fundamental questions:
+
+1. **What AI assets do we have?**
+2. **Who or what is allowed to access them?**
+3. **How do we know the interactions are safe?**
+4. **How do we detect, contain, and recover when something goes wrong?**
+
+The **Next-Gen Zero Trust Security Architecture for AI** provides a practical blueprint for answering those questions.
+
+It helps enterprises move from experimental AI adoption to secure, governed, resilient, and trusted AI at scale.
+
+For CISOs, enterprise architects, AI platform teams, governance leaders, and security operations teams, this architecture provides a common language and operating model for securing the future of AI.
