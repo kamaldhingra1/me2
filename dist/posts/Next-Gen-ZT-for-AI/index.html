@@ -724,29 +724,14 @@
 <div class="border-l-4 p-4 my-4 rounded-r-md bg-yellow-50 border-yellow-400 text-yellow-800"><p class="font-bold mb-1 flex items-center gap-2"><span>⚠️</span> Why Threat Modeling Comes Early</p><div class="text-sm"><p>AI threat modeling should happen before production deployment and continue after deployment. New prompts, tools, agents, models, datasets, and workflows can introduce new risks at any point in the lifecycle.</p></div></div>
 <p>The threat modeling layer includes:</p>
 <div class="my-6 text-center max-w-4xl mx-auto"><img src="/_astro/AI_TM_Layer.-nrPqjh8.png" alt="AI Threat Model Layer" class="mx-auto w-full h-auto border border-green-400 rounded-md"/><p class="text-sm text-gray-500 italic mt-2"><p>Figure 2: AI Threat Model Layer</p></p></div>
-<div class="not-prose my-6 rounded-2xl border border-l-4 border-cyan-500/40 bg-cyan-50 p-5 shadow-sm" data-astro-cid-kimhgvm2><div class="mb-3 flex items-center gap-3" data-astro-cid-kimhgvm2><span class="text-xl leading-none" aria-hidden="true" data-astro-cid-kimhgvm2>ℹ️</span><h4 class="m-0 text-base font-bold tracking-tight text-cyan-800" data-astro-cid-kimhgvm2>AI Threat Model Includes</h4></div><div class="architecture-note-content leading-7 text-slate-800 max-w-none text-cyan-700" data-astro-cid-kimhgvm2><ol>
-<li>
-<h2 id="ai-assets-and-data-identification">AI Assets and Data Identification</h2>
-— Identifies models, datasets, agents, prompts, tools, APIs, MCP servers, memory stores, vector databases, workflows, and infrastructure. This ensures the organization knows what must be secured.</li>
-<li>
-<h2 id="data-flow-and-trust-boundary-mapping">Data Flow and Trust Boundary Mapping</h2>
-— Maps how information moves between users, applications, models, agents, tools, data stores, APIs, and infrastructure. This helps identify where attackers may inject, manipulate, exfiltrate, or abuse data.</li>
-<li>
-<h2 id="stride-for-ai">STRIDE for AI</h2>
-— Applies threat categories such as spoofing, tampering, repudiation, information disclosure, denial of service, and elevation of privilege to AI-specific assets such as prompts, agents, models, context, memory, tools, and retrieval pipelines.</li>
-<li>
-<h2 id="ai-specific-threat-library">AI-Specific Threat Library</h2>
-— Includes GenAI and agentic threats such as prompt injection, jailbreaks, model extraction, tool abuse, agent hijacking, retrieval poisoning, memory poisoning, context manipulation, malicious adapters, and cross-agent privilege escalation.</li>
-<li>
-<h2 id="risk-scoring-and-prioritization">Risk Scoring and Prioritization</h2>
-— Prioritizes risks based on impact, likelihood, exploitability, detectability, business criticality, data sensitivity, and autonomy level.</li>
-<li>
-<h2 id="control-mapping-and-mitigation-planning">Control Mapping and Mitigation Planning</h2>
-— Maps risks to preventive, detective, corrective, and compensating controls. This ensures security controls are traceable to specific threats.</li>
-<li>
-<h2 id="continuous-threat-validation-and-feedback">Continuous Threat Validation and Feedback</h2>
-— Threat models must evolve as AI systems evolve. Continuous validation gives security teams a feedback loop for new attack paths and control gaps.</li>
-</ol></div></div>
+<div class="not-prose my-6 rounded-2xl border border-l-4 border-cyan-500/40 bg-cyan-50 p-5 shadow-sm" data-astro-cid-kimhgvm2><div class="mb-3 flex items-center gap-3" data-astro-cid-kimhgvm2><span class="text-xl leading-none" aria-hidden="true" data-astro-cid-kimhgvm2>ℹ️</span><h4 class="m-0 text-base font-bold tracking-tight text-cyan-800" data-astro-cid-kimhgvm2>AI Threat Model Includes</h4></div><div class="architecture-note-content leading-7 text-slate-800 max-w-none text-cyan-700" data-astro-cid-kimhgvm2><p><strong>1. AI Assets and Data Identification</strong>
+— Identifies models, datasets, agents, prompts, tools, APIs, MCP servers, memory stores, vector databases, workflows, and infrastructure. This ensures the organization knows what must be secured.</p><p><strong>2. Data Flow and Trust Boundary Mapping</strong>
+— Maps how information moves between users, applications, models, agents, tools, data stores, APIs, and infrastructure. This helps identify where attackers may inject, manipulate, exfiltrate, or abuse data.</p><p><strong>3. STRIDE for AI</strong>
+— Applies threat categories such as spoofing, tampering, repudiation, information disclosure, denial of service, and elevation of privilege to AI-specific assets such as prompts, agents, models, context, memory, tools, and retrieval pipelines.</p><p><strong>4. AI-Specific Threat Library</strong>
+— Includes GenAI and agentic threats such as prompt injection, jailbreaks, model extraction, tool abuse, agent hijacking, retrieval poisoning, memory poisoning, context manipulation, malicious adapters, and cross-agent privilege escalation.</p><p><strong>5. Risk Scoring and Prioritization</strong>
+— Prioritizes risks based on impact, likelihood, exploitability, detectability, business criticality, data sensitivity, and autonomy level.</p><p><strong>6. Control Mapping and Mitigation Planning</strong>
+— Maps risks to preventive, detective, corrective, and compensating controls. This ensures security controls are traceable to specific threats.</p><p><strong>7. Continuous Threat Validation and Feedback</strong>
+— Threat models must evolve as AI systems evolve. Continuous validation gives security teams a feedback loop for new attack paths and control gaps.</p></div></div>
 <hr/>
 <h2 id="3-cross-cutting-zero-trust-controls">3. Cross-Cutting Zero Trust Controls</h2>
 <p>Cross-cutting Zero Trust controls apply across every lifecycle phase.</p>
@@ -770,32 +755,15 @@
 <p><strong>Purpose:</strong> Assign identity to every participant in the AI ecosystem, establish trust before allowing interaction, and continuously score trust based on behavior and context.</p>
 <p>The fabric includes:</p>
 <div class="my-6 text-center max-w-4xl mx-auto"><img src="/_astro/AI_Identity_Trust_Fabric.XOoZzK2D.png" alt="AI Identity Trust Fabric" class="mx-auto w-full h-auto border border-green-400 rounded-md"/><p class="text-sm text-gray-500 italic mt-2"><p>Figure 4: AI Identity Trust Fabric</p></p></div>
-<div class="not-prose my-6 rounded-2xl border border-l-4 border-cyan-500/40 bg-cyan-50 p-5 shadow-sm" data-astro-cid-kimhgvm2><div class="mb-3 flex items-center gap-3" data-astro-cid-kimhgvm2><span class="text-xl leading-none" aria-hidden="true" data-astro-cid-kimhgvm2>ℹ️</span><h4 class="m-0 text-base font-bold tracking-tight text-cyan-800" data-astro-cid-kimhgvm2>AI Identity Trust Fabric</h4></div><div class="architecture-note-content leading-7 text-slate-800 max-w-none text-cyan-700" data-astro-cid-kimhgvm2><ol>
-<li>
-<h2 id="human-identities">Human Identities</h2>
-— Controls include SSO, MFA, conditional access, and risk-based authentication. These controls verify people accessing AI systems.</li>
-<li>
-<h2 id="agent-identities">Agent Identities</h2>
-— Controls include SPIFFE/SPIRE IDs, agent certificates, short-lived tokens, and agent lifecycle management. These controls prevent rogue agents, spoofed agents, and unauthorized agent-to-agent communication.</li>
-<li>
-<h2 id="workload-identities">Workload Identities</h2>
-— Controls include workload identity, service accounts, artifact attestation, and SBOM/SLSA evidence. These controls verify AI workloads before granting access.</li>
-<li>
-<h2 id="service-identities">Service Identities</h2>
-— Controls include mTLS, service mesh, and API identities. These controls secure service-to-service communication.</li>
-<li>
-<h2 id="device-identities">Device Identities</h2>
-— Controls include device posture, compliance checks, and trusted device validation. These controls establish endpoint and infrastructure trustworthiness.</li>
-<li>
-<h2 id="trust-and-reputation">Trust and Reputation</h2>
-— Controls include reputation scoring, behavioral trust, and risk scoring. These controls make trust dynamic rather than static.</li>
-<li>
-<h2 id="trust-registry">Trust Registry</h2>
-— Controls include federated registry, revocation lists, and policy distribution. These controls maintain authoritative records of trusted agents, services, tools, and models.</li>
-<li>
-<h2 id="key-management">Key Management</h2>
-— Controls include KMS, HSM, agent key management, and key rotation. These controls protect cryptographic trust anchors.</li>
-</ol></div></div>
+<div class="not-prose my-6 rounded-2xl border border-l-4 border-cyan-500/40 bg-cyan-50 p-5 shadow-sm" data-astro-cid-kimhgvm2><div class="mb-3 flex items-center gap-3" data-astro-cid-kimhgvm2><span class="text-xl leading-none" aria-hidden="true" data-astro-cid-kimhgvm2>ℹ️</span><h4 class="m-0 text-base font-bold tracking-tight text-cyan-800" data-astro-cid-kimhgvm2>AI Identity Trust Fabric</h4></div><div class="architecture-note-content leading-7 text-slate-800 max-w-none text-cyan-700" data-astro-cid-kimhgvm2><p><strong>1. Human Identities</strong>
+— Controls include SSO, MFA, conditional access, and risk-based authentication. These controls verify people accessing AI systems.</p><p><strong>2. Agent Identities</strong>
+— Controls include SPIFFE/SPIRE IDs, agent certificates, short-lived tokens, and agent lifecycle management. These controls prevent rogue agents, spoofed agents, and unauthorized agent-to-agent communication.</p><p><strong>3. Workload Identities</strong>
+— Controls include workload identity, service accounts, artifact attestation, and SBOM/SLSA evidence. These controls verify AI workloads before granting access.</p><p><strong>4. Service Identities</strong>
+— Controls include mTLS, service mesh, and API identities. These controls secure service-to-service communication.</p><p><strong>5. Device Identities</strong>
+— Controls include device posture, compliance checks, and trusted device validation. These controls establish endpoint and infrastructure trustworthiness.</p><p><strong>6. Trust and Reputation</strong>
+— Controls include reputation scoring, behavioral trust, and risk scoring. These controls make trust dynamic rather than static.</p><p><strong>7. Trust Registry</strong>
+— Controls include federated registry, revocation lists, and policy distribution. These controls maintain authoritative records of trusted agents, services, tools, and models.</p><p><strong>8. Key Management</strong>
+— Controls include KMS, HSM, agent key management, and key rotation. These controls protect cryptographic trust anchors.</p></div></div>
 <hr/>
 <h2 id="5-dynamic-agent-trust-engine">5. Dynamic Agent Trust Engine</h2>
 <p>The Dynamic Agent Trust Engine is a major control for multi-agent and autonomous AI systems.</p>
@@ -835,7 +803,7 @@
 <h2 id="8-ai-security-control-domains">8. AI Security Control Domains</h2>
 <p>The architecture includes specialized security domains for modern AI systems.</p>
 <div class="my-6 text-center max-w-4xl mx-auto"><img src="/_astro/AI_SecCon_Domains.yWOALtNb.png" alt="AI Security Control Domains" class="mx-auto w-full h-auto border border-green-400 rounded-md"/><p class="text-sm text-gray-500 italic mt-2"><p>Figure 6: AI Security Control Domains</p></p></div>
-<div class="not-prose my-6 rounded-2xl border border-l-4 border-blue-500/40 bg-blue-50 p-5 shadow-sm" data-astro-cid-kimhgvm2><div class="mb-3 flex items-center gap-3" data-astro-cid-kimhgvm2><span class="text-xl leading-none" aria-hidden="true" data-astro-cid-kimhgvm2>💡</span><h4 class="m-0 text-base font-bold tracking-tight text-blue-800" data-astro-cid-kimhgvm2>Zero Trust Pillars for AI (Purpose &amp; Control)</h4></div><div class="architecture-note-content leading-7 text-slate-800 max-w-none text-blue-700" data-astro-cid-kimhgvm2><p><strong>1. MCP Security</strong></p><ul>
+<div class="not-prose my-6 rounded-2xl border border-l-4 border-blue-500/40 bg-blue-50 p-5 shadow-sm" data-astro-cid-kimhgvm2><div class="mb-3 flex items-center gap-3" data-astro-cid-kimhgvm2><span class="text-xl leading-none" aria-hidden="true" data-astro-cid-kimhgvm2>💡</span><h4 class="m-0 text-base font-bold tracking-tight text-blue-800" data-astro-cid-kimhgvm2>AI Security Control Domains(Purpose &amp; Control)</h4></div><div class="architecture-note-content leading-7 text-slate-800 max-w-none text-blue-700" data-astro-cid-kimhgvm2><p><strong>1. MCP Security</strong></p><ul>
 <li>(P): Secure Model Context Protocol servers, tools, and endpoints.</li>
 <li>(C): Controls include MCP server allowlisting, signed MCP endpoints, tool risk scoring, tool attestation, dynamic tool authorization, and tool behavior monitoring.</li>
 </ul><p><strong>2. Memory Security</strong></p><ul>
@@ -917,7 +885,7 @@ The architecture includes four critical bills of materials.</p>
 <p>Multi-agent systems require special guardrails because the risk is not limited to one model or one agent.</p>
 <p><strong>Purpose:</strong> Govern coordination, delegation, escalation, and recovery across multiple agents.</p>
 <p>Controls include:</p>
-<section class="not-prose my-6 rounded-2xl border border-slate-700/70 border-t-4 border-t-violet-400 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-5 shadow-2xl shadow-violet-950/30 transition-all duration-300 hover:-translate-y-1" data-astro-cid-dchythxf><div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between" data-astro-cid-dchythxf><div class="flex items-start gap-3" data-astro-cid-dchythxf><div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ring-1 shadow-lg text-xl bg-violet-500/15 ring-violet-400/30 text-violet-300" aria-hidden="true" data-astro-cid-dchythxf>🛡️</div><div data-astro-cid-dchythxf><div class="mb-1 text-xs font-extrabold uppercase tracking-[0.16em] text-violet-300" data-astro-cid-dchythxf>Responsible AI</div><h3 class="m-0 text-lg font-bold leading-snug text-white" data-astro-cid-dchythxf>Governance Controls</h3></div></div><span class="inline-flex w-fit items-center rounded-full px-3 py-1 bg-slate-950/70 text-xs font-bold ring-1 text-violet-300 ring-violet-400/30" data-astro-cid-dchythxf>Advanced</span></div><div class="control-card-body" data-astro-cid-dchythxf><div class="columns-2 md:columns-3 lg:columns-4 gap-6"><ul><li>Workflow policy enforcement</li><li>Goal and intent validation</li><li>Agent-to-agent authorization</li><li>Permission inheritance control</li><li>Escalation limits</li><li>Checkpointing and rollback</li><li>Quarantine and isolation modes</li><li>Loop and recursion prevention</li><li>Human approval gates</li></ul></div></div></section>
+<section class="not-prose my-6 rounded-2xl border border-slate-700/70 border-t-4 border-t-violet-400 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-5 shadow-2xl shadow-violet-950/30 transition-all duration-300 hover:-translate-y-1" data-astro-cid-dchythxf><div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between" data-astro-cid-dchythxf><div class="flex items-start gap-3" data-astro-cid-dchythxf><div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ring-1 shadow-lg text-xl bg-violet-500/15 ring-violet-400/30 text-violet-300" aria-hidden="true" data-astro-cid-dchythxf>🛡️</div><div data-astro-cid-dchythxf><div class="mb-1 text-xs font-extrabold uppercase tracking-[0.16em] text-violet-300" data-astro-cid-dchythxf>Multi-Agent Security</div><h3 class="m-0 text-lg font-bold leading-snug text-white" data-astro-cid-dchythxf>Orchestration Safeguards</h3></div></div><span class="inline-flex w-fit items-center rounded-full px-3 py-1 bg-slate-950/70 text-xs font-bold ring-1 text-violet-300 ring-violet-400/30" data-astro-cid-dchythxf>Advanced</span></div><div class="control-card-body" data-astro-cid-dchythxf><div class="columns-2 md:columns-3 lg:columns-4 gap-6"><ul><li>Workflow policy enforcement</li><li>Goal and intent validation</li><li>Agent-to-agent authorization</li><li>Permission inheritance control</li><li>Escalation limits</li><li>Checkpointing and rollback</li><li>Quarantine and isolation modes</li><li>Loop and recursion prevention</li><li>Human approval gates</li></ul></div></div></section>
 <div class="not-prose my-6 rounded-2xl border border-l-4 border-emerald-500/40 bg-emerald-50 p-5 shadow-sm" data-astro-cid-kimhgvm2><div class="mb-3 flex items-center gap-3" data-astro-cid-kimhgvm2><span class="text-xl leading-none" aria-hidden="true" data-astro-cid-kimhgvm2>✅</span><h4 class="m-0 text-base font-bold tracking-tight text-emerald-800" data-astro-cid-kimhgvm2>Trust</h4></div><div class="architecture-note-content leading-7 text-slate-800 max-w-none text-emerald-700" data-astro-cid-kimhgvm2><p>This creates boundaries for autonomy.</p></div></div>
 <hr/>
 <h2 id="16-ai-runtime-kill-chain">16. AI Runtime Kill Chain</h2>

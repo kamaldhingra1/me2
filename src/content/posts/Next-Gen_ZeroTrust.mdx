@@ -357,19 +357,25 @@ The threat modeling layer includes:
   </p>
 </div>
 <ArchitectureNote title="AI Threat Model Includes" type="info">
-1. ## AI Assets and Data Identification
+**1. AI Assets and Data Identification**
     -- Identifies models, datasets, agents, prompts, tools, APIs, MCP servers, memory stores, vector databases, workflows, and infrastructure. This ensures the organization knows what must be secured.
-2. ## Data Flow and Trust Boundary Mapping
+
+**2. Data Flow and Trust Boundary Mapping**
     -- Maps how information moves between users, applications, models, agents, tools, data stores, APIs, and infrastructure. This helps identify where attackers may inject, manipulate, exfiltrate, or abuse data.
-3. ## STRIDE for AI
+
+**3. STRIDE for AI**
     -- Applies threat categories such as spoofing, tampering, repudiation, information disclosure, denial of service, and elevation of privilege to AI-specific assets such as prompts, agents, models, context, memory, tools, and retrieval pipelines.
-4. ## AI-Specific Threat Library
+
+**4. AI-Specific Threat Library**
     -- Includes GenAI and agentic threats such as prompt injection, jailbreaks, model extraction, tool abuse, agent hijacking, retrieval poisoning, memory poisoning, context manipulation, malicious adapters, and cross-agent privilege escalation.
-5. ## Risk Scoring and Prioritization
+
+**5. Risk Scoring and Prioritization**
     -- Prioritizes risks based on impact, likelihood, exploitability, detectability, business criticality, data sensitivity, and autonomy level.
-6. ## Control Mapping and Mitigation Planning
+
+**6. Control Mapping and Mitigation Planning**
     -- Maps risks to preventive, detective, corrective, and compensating controls. This ensures security controls are traceable to specific threats.
-7. ## Continuous Threat Validation and Feedback
+
+**7. Continuous Threat Validation and Feedback**
     -- Threat models must evolve as AI systems evolve. Continuous validation gives security teams a feedback loop for new attack paths and control gaps.
 </ArchitectureNote>
 ---
@@ -420,21 +426,28 @@ The fabric includes:
   </p>
 </div>
 <ArchitectureNote title="AI Identity Trust Fabric" type="info">
-1. ## Human Identities
+**1. Human Identities**
     -- Controls include SSO, MFA, conditional access, and risk-based authentication. These controls verify people accessing AI systems.
-2. ## Agent Identities
+
+**2. Agent Identities**
     -- Controls include SPIFFE/SPIRE IDs, agent certificates, short-lived tokens, and agent lifecycle management. These controls prevent rogue agents, spoofed agents, and unauthorized agent-to-agent communication.
-3. ## Workload Identities
+
+**3. Workload Identities**
     -- Controls include workload identity, service accounts, artifact attestation, and SBOM/SLSA evidence. These controls verify AI workloads before granting access.
-4. ## Service Identities
+
+**4. Service Identities**
     -- Controls include mTLS, service mesh, and API identities. These controls secure service-to-service communication.
-5. ## Device Identities
+
+**5. Device Identities**
     -- Controls include device posture, compliance checks, and trusted device validation. These controls establish endpoint and infrastructure trustworthiness.
-6. ## Trust and Reputation
+
+**6. Trust and Reputation**
     -- Controls include reputation scoring, behavioral trust, and risk scoring. These controls make trust dynamic rather than static.
-7. ## Trust Registry
+
+**7. Trust Registry**
     -- Controls include federated registry, revocation lists, and policy distribution. These controls maintain authoritative records of trusted agents, services, tools, and models.
-8. ## Key Management
+
+**8. Key Management**
     -- Controls include KMS, HSM, agent key management, and key rotation. These controls protect cryptographic trust anchors.
 </ArchitectureNote>
 ---
@@ -546,7 +559,7 @@ The architecture includes specialized security domains for modern AI systems.
     Figure 6: AI Security Control Domains
   </p>
 </div>
-<ArchitectureNote title="Zero Trust Pillars for AI (Purpose & Control)" type="assumption">
+<ArchitectureNote title="AI Security Control Domains(Purpose & Control)" type="assumption">
 **1. MCP Security**
   - (P): Secure Model Context Protocol servers, tools, and endpoints.
   - (C): Controls include MCP server allowlisting, signed MCP endpoints, tool risk scoring, tool attestation, dynamic tool authorization, and tool behavior monitoring.
@@ -720,7 +733,7 @@ Multi-agent systems require special guardrails because the risk is not limited t
 **Purpose:** Govern coordination, delegation, escalation, and recovery across multiple agents.
 
 Controls include:
-<ControlCard  title="Governance Controls" type="critical" category="Responsible AI" Maturity="Flagship">
+<ControlCard  title="Orchestration Safeguards" type="critical" category="Multi-Agent Security" Maturity="Flagship">
 <ColumnContainer>
 <ul>
 <li>Workflow policy enforcement</li>
