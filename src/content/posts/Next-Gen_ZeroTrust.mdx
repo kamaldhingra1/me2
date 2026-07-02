@@ -128,7 +128,7 @@ A GenAI application may retrieve documents from a knowledge base, call external 
 - A hijacked autonomous workflow can cause operational impact.
 </Callout>
 Zero Trust for AI therefore means applying continuous verification across:
-<ControlCard title="Across All " type="Flagship" category="Controls" Maturity="">
+<ControlCard title="Across All "  category="Controls" maturity="Foundational">
 <ColumnContainer>
   <ul>
     <li>Human users</li>
@@ -148,6 +148,7 @@ Zero Trust for AI therefore means applying continuous verification across:
   </ul>
 </ColumnContainer>
 </ControlCard>
+
 The architecture treats AI as a living ecosystem, not a static application.
 ---
 ## 1. AI Lifecycle and Pipeline Layer
@@ -173,7 +174,7 @@ This phase establishes AI strategy, policies, standards, risk appetite, ownershi
 **Why this matters:** Many AI risks begin before a model is trained or deployed. If an organization does not understand which AI systems exist, what data those systems use, who owns those systems, and what business decisions those systems influence, security teams cannot govern risk effectively.
 
 Key controls include:
-<ControlCard title="Key Controls " type="Foundational" category="Plan & Require" Maturity="Foundational">
+<ControlCard title="Key Controls "  category="Plan & Require" maturity="Foundational">
 <ColumnContainer>
   <ul>
 <li> AI asset inventory</li>
@@ -195,7 +196,7 @@ This phase protects training data, fine-tuning data, RAG source data, streaming 
 **Why this matters:** AI systems are highly dependent on data integrity. If input data is poisoned, incomplete, biased, mislabeled, or untrusted, downstream model behavior can become unreliable or unsafe.
 
 Key controls include:
-<ControlCard title="Key Controls " type="critical" category="Collect & Ingest" Maturity="Advanced">
+<ControlCard title="Key Controls "  category="Collect & Ingest" maturity="Foundational">
 <ColumnContainer>
   <ul>
 <li>Secure data lakes</li>
@@ -216,7 +217,7 @@ Key controls include:
 **Why this matters:** Data preparation is often overlooked, but this is where sensitive information may be exposed, manipulated, mislabeled, or incorrectly transformed. If this phase is compromised, model training and inference quality are also compromised.
 
 Key controls include:
-<ControlCard title="Key Controls " type="critical" category="Prepare and Label" Maturity="Flagship">
+<ControlCard title="Key Controls "  category="Prepare and Label" maturity="Foundational">
 <ColumnContainer>
   <ul>
 <li>AI-assisted annotation controls</li>
@@ -236,7 +237,7 @@ Key controls include:
 **Why this matters:** Training and development environments often contain sensitive datasets, credentials, model weights, experiments, and intellectual property. These environments are high-value targets.
 
 Key controls include:
-<ControlCard title="Key Controls " type="critical" category="Train and Develop" Maturity="Flagship">
+<ControlCard title="Key Controls " category="Train and Develop" maturity="Flagship">
 <ColumnContainer>
   <ul>
 <li>Secure GPU and HPC compute</li>
@@ -257,7 +258,7 @@ Key controls include:
 **Why this matters:** AI systems can behave unpredictably under adversarial prompts, unusual inputs, poisoned context, manipulated tools, or unexpected retrieval results. Validation must go beyond accuracy testing.
 
 Key controls include:
-<ControlCard title="Key Controls " type="critical" category="Validate and Evaluate" Maturity="Flagship">
+<ControlCard title="Key Controls "  category="Validate and Evaluate" maturity="Flagship">
 <ColumnContainer>
 <ul>
   <li>Automated evaluation</li>
@@ -279,7 +280,7 @@ Key controls include:
 **Why this matters:** Production AI systems interact with users, applications, APIs, tools, documents, and enterprise systems. Deployment security must ensure only approved, tested, and governed components are released.
 
 Key controls include:
-<ControlCard title="Key Controls " type="critical" category="Deploy and Operate" Maturity="Flagship">
+<ControlCard title="Key Controls "  category="Deploy and Operate" maturity="Advanced">
 <ColumnContainer>
 <ul>
   <li>Model serving security</li>
@@ -300,7 +301,7 @@ Key controls include:
 **Why this matters:** AI security is not static. Models drift. Threats evolve. Agents take actions. Users discover new prompt patterns. Attackers refine jailbreaks. Continuous monitoring is essential.
 
 Key controls include:
-<ControlCard title="Key Controls " type="critical" category="Monitor and Improve" Maturity="Flagship">
+<ControlCard title="Key Controls "  category="Monitor and Improve" maturity="Flagship">
 <ColumnContainer>
 <ul>
   <li>Model monitoring</li>
@@ -321,7 +322,7 @@ Key controls include:
 **Why this matters:** Old AI systems may retain data, credentials, embeddings, prompts, logs, model weights, or access paths. Improper retirement can create long-lived security and compliance exposure.
 
 Key controls include:
-<ControlCard title="Key Controls " type="critical" category="Retire and Archive" Maturity="Flagship">
+<ControlCard title="Key Controls " category="Retire and Archive" maturity="Advanced">
 <ColumnContainer>
 <ul>
   <li>Secure decommissioning</li>
@@ -396,7 +397,7 @@ Key controls include:
     Figure 3: Cross Cutting Zero Trust Controls
   </p>
 </div>
-<ControlCard title="Zero Trust Controls " type="critical" category="Cross Cutting" Maturity="Flagship">
+<ControlCard title="Zero Trust Controls "  category="Cross Cutting" maturity="Flagship">
 - **Identity verification:** Tie every interaction to a verified user, agent, workload, service, device, API, or tool.
 - **Least privilege:** Limit access to only what is required by role, context, time, task, and risk.
 - **Micro-segmentation:** Segment AI workloads, data stores, tools, models, and APIs to reduce lateral movement.
@@ -531,7 +532,7 @@ The architecture defines six Zero Trust pillars tailored for AI.
 These enablers operationalize the architecture. AI moves too quickly for manual governance. Policy, enforcement, detection, and response must be automated wherever possible.
 
 Important enablers include:
-<ControlCard title="Zero Trust Enablers " type="critical" category="Built-in & Automated" Maturity="Flagship">
+<ControlCard title="Zero Trust Enablers "  category="Built-in & Automated" maturity="Flagship">
 <ColumnContainer>
 <ul>
   <li>Policy engine</li>
@@ -617,7 +618,7 @@ The architecture includes four critical bills of materials.
 Without provenance, teams cannot confidently determine whether a model, dataset, prompt, adapter, or agent was modified, replaced, or sourced from an untrusted location.
 
 Controls include:
-<ControlCard title="Attestation and Provenance " type="critical" category="Supply Chain Security" Maturity="Flagship">
+<ControlCard title="Attestation and Provenance "  category="Supply Chain Security" maturity="Flagship">
 <ColumnContainer>
 <ul>
    <li>SLSA and Sigstore</li>
@@ -643,7 +644,7 @@ AI Assurance answers a critical leadership question:
 **Purpose:** Provide measurable evidence that AI systems are secure, safe, compliant, and resilient.
 
 Controls include:
-<ControlCard title="AI Assurance and Validation " type="critical" category="AI Security" Maturity="Flagship">
+<ControlCard title="AI Assurance and Validation "  category="AI Security" maturity="Flagship">
 <ColumnContainer>
 <ul>
  <li>Model cards</li>
@@ -688,7 +689,7 @@ Security and responsible AI must work together.
 **Purpose:** Govern AI risk, ethics, transparency, accountability, safety, and compliance.
 
 Governance controls include:
-<ControlCard  title="Governance Controls" type="critical" category="Responsible AI" Maturity="Flagship">
+<ControlCard  title="Governance Controls"  category="Responsible AI" maturity="Intermediate">
 <ColumnContainer>
 <ul>
 <li>AI inventory and catalog</li>
@@ -733,7 +734,7 @@ Multi-agent systems require special guardrails because the risk is not limited t
 **Purpose:** Govern coordination, delegation, escalation, and recovery across multiple agents.
 
 Controls include:
-<ControlCard  title="Orchestration Safeguards" type="critical" category="Multi-Agent Security" Maturity="Flagship">
+<ControlCard  title="Orchestration Safeguards"  category="Multi-Agent Security" maturity="Flagship">
 <ColumnContainer>
 <ul>
 <li>Workflow policy enforcement</li>
@@ -782,7 +783,7 @@ AI security cannot operate in isolation.
 **Purpose:** Connect AI security controls with existing enterprise security and risk platforms.
 
 Integration points include:
-<ControlCard  title="Controls" type="critical" category="Enterprise Integration" Maturity="Flagship">
+<ControlCard  title="Controls"  category="Enterprise Integration" maturity="Foundational">
 <ColumnContainer>
 <ul>
 <li>SIEM</li>

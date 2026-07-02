@@ -1,3 +1,4 @@
+
 ---
 export type Maturity =
   | "Foundational"
@@ -7,17 +8,43 @@ export type Maturity =
 
 export interface Props {
   title: string;
-  maturity?: Maturity;
+  maturity?: Maturity | string;
   category?: string;
   icon?: string;
 }
 
 const {
   title,
-  maturity = "Advanced",
   category = "Control Domain",
   icon = "🛡️",
 } = Astro.props;
+
+/**
+ * Normalize maturity so MDX usage is more forgiving.
+ *
+ * Supports:
+ * - "Foundational"
+ * - "foundational"
+ * - "FOUNDATIONAL"
+ * - "Intermediate"
+ * - "advanced"
+ * - "Flagship"
+ *
+ * Falls back to "Advanced" only when maturity is missing or invalid.
+ */
+const maturityInput = Astro.props.maturity ?? "Advanced";
+
+const maturityMap: Record<string, Maturity> = {
+  foundational: "Foundational",
+  intermediate: "Intermediate",
+  advanced: "Advanced",
+  flagship: "Flagship",
+};
+
+const normalizedMaturity = String(maturityInput).trim().toLowerCase();
+
+const maturity: Maturity =
+  maturityMap[normalizedMaturity] ?? "Advanced";
 
 const maturityStyles = {
   Foundational: {
@@ -28,6 +55,7 @@ const maturityStyles = {
     iconBg: "bg-sky-500/15 ring-sky-400/30",
     iconText: "text-sky-300",
     shadow: "shadow-sky-950/30",
+    bulletColor: "#38bdf8",
   },
 
   Intermediate: {
@@ -38,6 +66,7 @@ const maturityStyles = {
     iconBg: "bg-teal-500/15 ring-teal-400/30",
     iconText: "text-teal-300",
     shadow: "shadow-teal-950/30",
+    bulletColor: "#2dd4bf",
   },
 
   Advanced: {
@@ -48,6 +77,7 @@ const maturityStyles = {
     iconBg: "bg-violet-500/15 ring-violet-400/30",
     iconText: "text-violet-300",
     shadow: "shadow-violet-950/30",
+    bulletColor: "#a78bfa",
   },
 
   Flagship: {
@@ -58,6 +88,7 @@ const maturityStyles = {
     iconBg: "bg-amber-500/15 ring-amber-400/30",
     iconText: "text-amber-300",
     shadow: "shadow-amber-950/30",
+    bulletColor: "#fbbf24",
   },
 };
 
@@ -65,6 +96,7 @@ const styles = maturityStyles[maturity];
 ---
 
 <section
+  style={`--control-card-bullet-color: ${styles.bulletColor};`}
   class:list={[
     "not-prose my-6 rounded-2xl border border-slate-700/70 border-t-4",
     styles.borderTop,
@@ -135,8 +167,18 @@ const styles = maturityStyles[maturity];
     line-height: 1.75;
   }
 
-  .control-card-body :global(ul),
+  .control-card-body :global(ul) {
+    list-style-type: disc;
+    list-style-position: outside;
+    color: rgb(226 232 240);
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+  }
+
   .control-card-body :global(ol) {
+    list-style-type: decimal;
+    list-style-position: outside;
     color: rgb(226 232 240);
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
@@ -144,10 +186,39 @@ const styles = maturityStyles[maturity];
   }
 
   .control-card-body :global(li) {
+    display: list-item;
     color: rgb(226 232 240);
     margin-top: 0.35rem;
     margin-bottom: 0.35rem;
+    padding-left: 0.15rem;
     line-height: 1.75;
+  }
+
+  .control-card-body :global(li::marker) {
+    color: var(--control-card-bullet-color);
+    font-weight: 800;
+  }
+
+  .control-card-body :global(li > ul),
+  .control-card-body :global(li > ol) {
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .control-card-body :global(ul ul) {
+    list-style-type: circle;
+  }
+
+  .control-card-body :global(ul ul ul) {
+    list-style-type: square;
+  }
+
+  .control-card-body :global(ol ol) {
+    list-style-type: lower-alpha;
+  }
+
+  .control-card-body :global(ol ol ol) {
+    list-style-type: lower-roman;
   }
 
   .control-card-body :global(strong) {
@@ -159,6 +230,7 @@ const styles = maturityStyles[maturity];
     color: rgb(103 232 249);
     text-decoration: underline;
     text-underline-offset: 3px;
+    font-weight: 600;
   }
 
   .control-card-body :global(code) {
@@ -167,5 +239,22 @@ const styles = maturityStyles[maturity];
     border: 1px solid rgba(148, 163, 184, 0.25);
     border-radius: 0.375rem;
     padding: 0.1rem 0.35rem;
+    font-size: 0.92em;
+  }
+
+  .control-card-body :global(blockquote) {
+    margin: 1rem 0;
+    border-left: 4px solid var(--control-card-bullet-color);
+    padding-left: 1rem;
+    color: rgb(203 213 225);
+    font-style: italic;
+  }
+
+  .control-card-body :global(*:first-child) {
+    margin-top: 0;
+  }
+
+  .control-card-body :global(*:last-child) {
+    margin-bottom: 0;
   }
 </style>
