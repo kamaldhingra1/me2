@@ -1,0 +1,29 @@
+---
+// 1. Define your TypeScript interface for component props
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+// 2. Destructure the props passed to the component
+const { title, subtitle } = Astro.props;
+---
+
+<!-- 3. The HTML Structure -->
+<div class="inline-header-container">
+  <h2>{title}</h2>
+  <span class="subtitle">{subtitle}</span>
+</div>
+
+<!-- 4. Scoped Styles (only applies to this component) -->
+<style>
+  .inline-header-container {
+    display: flex;
+    align-items: baseline; /* Aligns text bottoms perfectly */
+    gap: 0px;              /* Space between header and subtitle */
+  }
+
+  h2 {
+    margin: 0;             /* Removes default browser heading margins */
+  }
+</style>

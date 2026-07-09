@@ -132,7 +132,7 @@ const ogImage = ogImageUrl
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
     </div>
    <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="xs" />)}
     </ul>
     
     <article
@@ -159,7 +159,7 @@ const ogImage = ogImageUrl
     <BackToTopButton />
 
     <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="xs" />)}
     </ul>
 
     <ShareLinks />
