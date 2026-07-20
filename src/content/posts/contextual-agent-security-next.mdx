@@ -1,0 +1,398 @@
+---
+title: 'Contextual Agent Security: Is Agent Authorization the Next IAM?'
+description:  'Google Research''s Conseca framework may signal a fundamental shift from permission-based security toward context-aware authorization for autonomous AI agents.'
+draft: false
+tags: 
+- AI Security
+- Agentic AI
+- Agent Security
+- Zero Trust
+- Identity
+- Authorization
+- Google Research
+- AI Governance
+pubDatetime: 2026-07-19T04:58:53Z
+modDatetime: 2026-07-19T00:00:00.000Z
+slug: contextual-agent-security
+featured: true
+hideEditPost: true
+---
+
+import Callout from '@/components/Callout.astro';
+import ArchitectureNote from '@/components/ArchitectureNote.astro';
+import Grid from '@/components/Grid.astro';
+import Inlineheader from '@/components/Inlineheader.astro';
+
+As AI systems evolve from generating content to taking autonomous actions, security teams face a new challenge: ensuring agents perform the right action, for the right reason, in the right context.
+
+A recent Google Research paper, <a href="https://research.google/pubs/context-is-key-for-agent-security/" target="_blank">**Contextual Agent Security: A Policy for Every Purpose**</a>, introduces **Conseca**, a framework that dynamically generates task-specific security policies for AI agents. While the paper presents a technical approach, its bigger significance may be the security question it raises:
+
+<ArchitectureNote type="critical" title="Key Question">
+ Are traditional authorization models sufficient for autonomous AI agents, or does the AI era require a new form of authorization built around intent, context, and purpose?
+</ArchitectureNote>
+
+<Callout type="Exe" title="Executive Takeaway">
+
+Google's research suggests we may be approaching a fundamental shift in security architecture.
+
+Traditional authorization asks:     **Does this entity have permission?**
+
+Agent authorization asks:      **Is this action appropriate for this purpose, in this specific context, right now?**
+
+</Callout>
+
+---
+
+## We've Been Securing Applications. Now We Need to Secure Decisions.
+
+For decades, cybersecurity focused on protecting:
+
+- Users --> Applications --> APIs --> Data --> Infrastructure
+
+<ArchitectureNote type="success" title="Takeaway">
+Traditional security assumes software performs a limited and predictable set of functions.
+Agentic AI changes that assumption.
+</ArchitectureNote>
+
+**Modern agents can:**
+
+- Read and summarize emails
+- Access files and repositories
+- Query enterprise applications
+- Schedule meetings
+- Execute workflows
+- Interact with external tools
+- Make recommendations
+- Take autonomous actions
+
+The challenge is no longer simply controlling access.
+<Callout type="danger" title="">
+The challenge becomes controlling decisions.
+
+An AI agent may have legitimate access to a resource while still performing an inappropriate action. That distinction sits at the heart of Google's research.
+</Callout>
+
+## Traditional Security vs. Agentic AI Security
+<Callout type="intro" title="">
+![Traditional Security vs Agentic AI Security](/images/conseca-traditional-vs-agentic-security.png)
+</Callout>
+Traditional security evaluates permissions.
+
+**Agent security increasingly evaluates purpose.**
+
+A permission may be technically valid while the resulting decision remains contextually wrong.
+
+<ArchitectureNote type="warning" title="The Context Problem">
+
+The same action may be safe in one context and dangerous in another.
+
+Traditional security evaluates permissions.
+
+Agent security must evaluate purpose, context, and intent.
+</ArchitectureNote>
+---
+
+## The Hidden Problem: Context Changes Everything
+
+Consider a simple example.
+<Callout type="intro" title="">
+An agent has permission to delete email.
+
+### Scenario 1
+
+User request:
+
+> Remove spam emails older than 30 days.
+
+Deleting email is likely appropriate.
+</Callout>
+<Callout type="danger" title="">
+### Scenario 2
+
+User request:
+
+> Summarize my inbox.
+
+Deleting email is likely inappropriate.
+</Callout>
+Both scenarios use the same capability. Both scenarios involve the same tool. Both scenarios are executed by the same agent.
+
+**The only thing that changed was context.**
+<Callout type="Exe" title="">
+Google's central argument is that static permissions cannot adequately distinguish between these situations at scale.
+</Callout>
+## Context Determines Whether an Agent Action Is Safe
+<Callout type="tip" title="">
+![Context Determines Whether an Agent Action Is Safe](/images/conseca-context-determines-safety.png)
+</Callout>
+**This is arguably the most important lesson from the paper.**
+<Callout type="Exe" title="">
+Security decisions may increasingly depend on:
+
+- Why an action is being performed
+- What task is being executed
+- What context surrounds that task
+- What outcome the user expects
+</Callout>
+This is a shift from asking whether the action is technically allowed to asking whether the action is justified.
+
+---
+
+## Introducing Conseca
+
+Google proposes a framework called **Contextual Agent Security**, shortened as **Conseca**.
+
+**Instead of permanently granting broad permissions to agents, Conseca dynamically generates a temporary policy based on:**
+
+- **User request**
+- **Trusted context**
+- **Organizational information**
+- **Approved system information**
+- **Known constraints**
+
+**The generated policy then becomes the runtime authorization boundary for the agent.**
+
+In simple terms, traditional authorization says:  --> This agent may send email.
+
+Conseca-style authorization says:  --> This agent may send email only
+
+                                                for this task ->
+                                                in this context -> 
+                                                for this purpose ->
+                                                under these constraints
+
+**Every task receives its own policy.**
+
+## Conseca Architecture Overview
+<Callout type="Sol" title="">
+![Conseca Contextual Agent Security Flow](/images/conseca-contextual-agent-security-flow.png)
+</Callout>
+Perhaps the most interesting aspect of the design is the separation between trusted and untrusted context.
+
+<Grid isContainer>
+  <Grid sm="12" md="6">
+<Inlineheader title="✅Trusted Context " subtitle="" />
+        Examples include:
+        - Identity
+        - User attributes
+        - Organizational structure
+        - Approved business policies
+        - Environment information
+ </Grid>
+  <Grid sm="12" md="6">
+<Inlineheader title="🔴Untrusted Context" subtitle="" />
+        Examples include:
+        - Email content
+        - Webpages
+        - External documents
+        - Third-party inputs
+        - Tool responses
+</Grid>
+ </Grid>
+
+By isolating policy generation from untrusted content, Google attempts to reduce prompt-injection influence on authorization decisions.
+
+<ArchitectureNote type="info" title="Why This Matters">
+
+Conseca does not primarily attempt to secure the model.
+
+It attempts to secure the actions a model is allowed to perform.
+
+This distinction may become increasingly important as AI autonomy expands.
+
+</ArchitectureNote>
+---
+## Reading Between the Lines
+
+**Google never claims that agentic AI is unsafe.**
+
+However, the research highlights several challenges facing autonomous systems today:
+
+- Prompt injection
+- Over-permissioning
+- User approval fatigue
+- Context-sensitive decision making
+- Static authorization limitations
+
+My interpretation is straightforward:
+
+Conseca is not evidence that AI agents are failing.
+
+**It is evidence that traditional authorization models may not scale with future agent capabilities.**
+
+<ArchitectureNote type="info" title="My Interpretation">
+
+The most important contribution of this research is not the framework itself.
+
+It is the recognition that authorization for AI agents may require contextual reasoning rather than static permissions.
+
+</ArchitectureNote>
+
+---
+
+# Three Stakeholder Perspectives
+
+One of the most useful ways to understand this research is through three different lenses.
+<Grid isContainer>
+  <Grid sm="12" md="4">
+<Inlineheader title="AI Consumers " subtitle="" />
+    Individuals who primarily consume AI-generated outputs.
+        Examples include:
+        - ChatGPT users
+        - Microsoft Copilot users
+        - Gemini users
+        - Perplexity users
+
+        Primary question:
+        > Can I trust the output?
+
+        Primary concerns include:
+        - Data leakage
+        - Misinformation
+        - Manipulation
+        - Reliability
+
+    Conseca helps indirectly by reducing inappropriate actions behind the scenes. Most consumers will never know it exists.
+ </Grid>
+  <Grid sm="12" md="4">
+<Inlineheader title="AI Integrators" subtitle="" />
+    Organizations embedding AI into products, workflows, and services.
+        Examples include:
+        - SaaS providers
+        - Enterprise application teams
+        - Product engineering organizations
+        - Healthcare manufacturers
+
+        Primary question:
+        > How much autonomy should my AI have?
+
+    For this audience, Conseca represents dynamic least privilege.
+    Instead of granting broad permissions permanently, permissions become tied to context and purpose. This may be where the framework creates the most near-term value.
+</Grid>
+  <Grid sm="12" md="4">
+<Inlineheader title="AI-Native Businesses" subtitle="" />
+    Organizations whose products are fundamentally driven by AI decisions.
+        Examples include:
+        - Agent platforms
+        - Autonomous service providers
+        - AI-first startups
+        - AI workflow providers
+
+        Primary question:
+        > How do we create trust in AI-driven decisions?
+
+        For these organizations, the following capabilities become business-critical:
+        - Auditability
+        - Explainability
+        - Accountability
+        - Governance
+
+    Contextual authorization may eventually become a competitive differentiator.
+</Grid>
+ </Grid>
+
+
+
+## Three Stakeholder Lenses
+<Callout type="Sol" title="">
+![Three Stakeholder Lenses for Contextual Agent Security](/images/conseca-three-stakeholder-lenses.png)
+</Callout>
+**The same framework delivers different value depending on where an organization sits in the AI adoption journey.**
+
+---
+
+# Strengths and Limitations of Conseca
+
+No security framework is perfect.
+
+Conseca introduces meaningful improvements, but also faces important challenges.
+ <Grid isContainer>
+  <Grid sm="12" md="6">
+<Inlineheader title="✅Strengths " subtitle="" />
+    - Dynamic least privilege
+    - Context-aware authorization
+    - Reduced reliance on static permissions
+    - Human-readable rationales
+    - Better alignment between actions and purpose
+    - Potential reduction in prompt-injection impact
+ </Grid>
+  <Grid sm="12" md="6">
+<Inlineheader title="🔴Limitations" subtitle="" />
+    - Defining trusted context remains difficult
+    - Policy quality depends on model quality
+    - Intent understanding remains imperfect
+    - Multi-step attack chains remain challenging
+    - Generated policies introduce operational complexity
+</Grid>
+ </Grid>
+
+**Google openly acknowledges many of these limitations and positions Conseca as an early exploration rather than a complete solution.**
+
+<ArchitectureNote type="warning" title="A Critical Observation">
+
+Most real-world incidents involving autonomous systems are unlikely to arise from a single action.
+
+They will emerge from sequences of individually acceptable actions that collectively produce an undesirable outcome.
+
+🚀**Future agent security models may need to protect entire decision trajectories, not just individual actions.**
+
+</ArchitectureNote>
+
+---
+
+# The Bigger Picture: Agent Authorization May Become the Next IAM
+
+Looking back, every major computing era introduced a dominant security challenge.
+
+#### Authentication Era    -->  
+Who are you?
+
+#### Identity Era    --> 
+What are you allowed to access?
+
+#### Zero Trust Era  --> 
+Can this request be trusted right now?
+
+#### Agent Era  --> 
+Is this action appropriate for this purpose and context?
+
+
+## The Evolution of Security
+<Callout type="intro" title="">
+![The Evolution of Security](/images/conseca-security-evolution.png)
+</Callout>
+The industry may be entering a transition from:
+
+Identity-Based Authorization  --> **Intent-Based Authorization --> Contextual Agent Authorization**
+
+<ArchitectureNote type="info" title="Looking Ahead">
+
+For decades, security focused on who could perform an action.
+
+For autonomous AI systems, the more important question may become:
+
+**Why is this action being performed at this moment?**
+
+That shift from permission-based authorization to purpose-based authorization may become one of the defining security challenges of the agentic AI era.
+
+</ArchitectureNote>
+
+---
+
+# Final Thoughts
+
+Google's Conseca framework may or may not become the dominant implementation model for agent security.
+
+That is not the most important takeaway.
+<Callout type="Exe" title="Final Takeway">
+The more significant message is what the research signals about the future.
+
+As agents become increasingly autonomous, security teams may need to move beyond simply granting permissions and begin continuously validating purpose, context, and intent.
+
+If that vision proves correct, contextual authorization could become to AI agents what IAM became to cloud computing: a foundational control layer that every organization eventually depends on.
+</Callout>
+---
+
+## Source
+
+- Lillian Tsai and Eugene Bagdasarian, Google. <a href="https://sigops.org/s/conferences/hotos/2025/papers/hotos25-100.pdf" target="_blank"> **Contextual Agent Security: A Policy for Every Purpose.** </a>HOTOS '25, May 14-16, 2025, Banff, AB, Canada.
