@@ -1,0 +1,141 @@
+---
+/**
+ * ArchitectureNote2.astro
+ * Reusable callout component for architecture/security blog posts.
+ *
+ * Usage:
+ * <ArchitectureNote type="insight" title="Executive Takeaway">
+ *   Your markdown content here.
+ * </ArchitectureNote>
+ *
+ * Supported types:
+ * insight | info | warning | success | danger | note
+ */
+
+export interface Props {
+  type?: 'insight' | 'info' | 'warning' | 'success' | 'danger' | 'note';
+  title?: string;
+}
+
+const {
+  type = 'note',
+  title = 'Architecture Note',
+} = Astro.props;
+
+const variants = {
+  insight: {
+    label: 'Insight',
+    icon: '✦',
+    wrapper: 'border-violet-300/80 bg-violet-50/80 dark:border-violet-500/40 dark:bg-violet-950/30',
+    badge: 'bg-violet-100 text-violet-800 dark:bg-violet-900/70 dark:text-violet-200',
+    title: 'text-violet-950 dark:text-violet-100',
+    iconWrap: 'bg-violet-600 text-white dark:bg-violet-500',
+  },
+  info: {
+    label: 'Info',
+    icon: 'i',
+    wrapper: 'border-sky-300/80 bg-sky-50/80 dark:border-sky-500/40 dark:bg-sky-950/30',
+    badge: 'bg-sky-100 text-sky-800 dark:bg-sky-900/70 dark:text-sky-200',
+    title: 'text-sky-950 dark:text-sky-100',
+    iconWrap: 'bg-sky-600 text-white dark:bg-sky-500',
+  },
+  warning: {
+    label: 'Warning',
+    icon: '!',
+    wrapper: 'border-amber-300/80 bg-amber-50/80 dark:border-amber-500/40 dark:bg-amber-950/30',
+    badge: 'bg-amber-100 text-amber-900 dark:bg-amber-900/70 dark:text-amber-200',
+    title: 'text-amber-950 dark:text-amber-100',
+    iconWrap: 'bg-amber-500 text-white dark:bg-amber-500',
+  },
+  success: {
+    label: 'Good Practice',
+    icon: '✓',
+    wrapper: 'border-emerald-300/80 bg-emerald-50/80 dark:border-emerald-500/40 dark:bg-emerald-950/30',
+    badge: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/70 dark:text-emerald-200',
+    title: 'text-emerald-950 dark:text-emerald-100',
+    iconWrap: 'bg-emerald-600 text-white dark:bg-emerald-500',
+  },
+  danger: {
+    label: 'Risk',
+    icon: '×',
+    wrapper: 'border-rose-300/80 bg-rose-50/80 dark:border-rose-500/40 dark:bg-rose-950/30',
+    badge: 'bg-rose-100 text-rose-800 dark:bg-rose-900/70 dark:text-rose-200',
+    title: 'text-rose-950 dark:text-rose-100',
+    iconWrap: 'bg-rose-600 text-white dark:bg-rose-500',
+  },
+  note: {
+    label: 'Architecture Note',
+    icon: '•',
+    wrapper: 'border-slate-300/80 bg-slate-50/80 dark:border-slate-600/50 dark:bg-slate-900/50',
+    badge: 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200',
+    title: 'text-slate-950 dark:text-slate-100',
+    iconWrap: 'bg-slate-700 text-white dark:bg-slate-500',
+  },
+} as const;
+
+const v = variants[type] ?? variants.note;
+---
+
+<aside class={`not-prose my-8 rounded-2xl border p-5 shadow-sm backdrop-blur ${v.wrapper}`}>
+  <div class="flex items-start gap-4">
+    <div class={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-lg font-bold shadow-sm ${v.iconWrap}`} aria-hidden="true">
+      {v.icon}
+    </div>
+
+    <div class="min-w-0 flex-1">
+      <div class="mb-2 flex flex-wrap items-center gap-2">
+        <span class={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide ${v.badge}`}>
+          {v.label}
+        </span>
+        {title && (
+          <h4 class={`m-0 text-base font-semibold leading-snug ${v.title}`}>
+            {title}
+          </h4>
+        )}
+      </div>
+
+      <div class="architecture-note-content text-sm leading-7 text-slate-800 dark:text-slate-200 md:text-base">
+        <slot />
+      </div>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .architecture-note-content :global(p) {
+    margin: 0.65rem 0;
+  }
+
+  .architecture-note-content :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .architecture-note-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .architecture-note-content :global(ul),
+  .architecture-note-content :global(ol) {
+    margin: 0.75rem 0 0.75rem 1.25rem;
+    padding: 0;
+  }
+
+  .architecture-note-content :global(li) {
+    margin: 0.35rem 0;
+  }
+
+  .architecture-note-content :global(strong) {
+    font-weight: 700;
+  }
+
+  .architecture-note-content :global(code) {
+    border-radius: 0.375rem;
+    padding: 0.125rem 0.35rem;
+    background: rgba(15, 23, 42, 0.08);
+    font-size: 0.9em;
+  }
+
+  :global(.dark) .architecture-note-content :global(code) {
+    background: rgba(255, 255, 255, 0.12);
+  }
+</style>
