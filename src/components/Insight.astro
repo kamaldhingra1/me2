@@ -1,0 +1,83 @@
+
+---
+interface Props {
+  title?: string;
+  variant?: "default" | "success" | "warning" | "danger" | "info";
+}
+
+const {
+  title = "Insight",
+  variant = "default",
+} = Astro.props;
+
+const variants = {
+  default: {
+    border: "border-cyan-400/70",
+    bg: "bg-cyan-950/35",
+    badge: "bg-cyan-400 text-slate-950",
+    title: "text-cyan-200",
+    body: "text-slate-100",
+    icon: "✦",
+  },
+  info: {
+    border: "border-sky-400/70",
+    bg: "bg-sky-950/35",
+    badge: "bg-sky-400 text-slate-950",
+    title: "text-sky-200",
+    body: "text-slate-100",
+    icon: "i",
+  },
+  success: {
+    border: "border-emerald-400/70",
+    bg: "bg-emerald-950/35",
+    badge: "bg-emerald-400 text-slate-950",
+    title: "text-emerald-200",
+    body: "text-slate-100",
+    icon: "✓",
+  },
+  warning: {
+    border: "border-amber-400/80",
+    bg: "bg-amber-950/35",
+    badge: "bg-amber-400 text-slate-950",
+    title: "text-amber-200",
+    body: "text-slate-100",
+    icon: "!",
+  },
+  danger: {
+    border: "border-rose-400/80",
+    bg: "bg-rose-950/35",
+    badge: "bg-rose-400 text-slate-950",
+    title: "text-rose-200",
+    body: "text-slate-100",
+    icon: "!",
+  },
+};
+
+const style = variants[variant] ?? variants.default;
+---
+
+<aside
+  class={`my-6 rounded-2xl border ${style.border} ${style.bg} p-5 shadow-lg shadow-slate-950/20`}
+>
+  <div class="flex items-start gap-4">
+    <div
+      class={`mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${style.badge} text-sm font-bold`}
+    >
+      {style.icon}
+    </div>
+
+    <div class="min-w-0">
+      <div
+        class={`mb-2 text-sm font-semibold uppercase tracking-wide ${style.title}`}
+      >
+        {title}
+      </div>
+
+      <div
+        class={`prose prose-invert max-w-none ${style.body} prose-p:my-2 prose-ul:my-2 prose-li:my-1`}
+      >
+        <slot />
+      </div>
+    </div>
+  </div>
+</aside>

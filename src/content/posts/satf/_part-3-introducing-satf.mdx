@@ -1,0 +1,114 @@
+---
+title: "Introducing the Secure Agent Trust Framework"
+description: "Baseline 1.0 for trusted autonomous actions and secure agentic outputs."
+date: "2026-07-22"
+series: "Secure Agent Trust Framework"
+part: 3
+tags: ["satf", "agentic-ai", "ai-security", "zero-trust", "agent-security"]
+image: "/images/satf/satf-baseline-1-framework.png"
+---
+
+import ArchitectureNote from '../../components/ArchitectureNote.astro';
+import Insight from '../../components/Insight.astro';
+
+<ArchitectureNote title="Series Navigation" variant="info">
+This is Part 3 of 4 in the Secure Agent Trust Framework series.
+
+- Part 1: The Agent Trust Gap — link to be added after publishing
+- Part 2: Trust Is Not Granted Once — link to be added after publishing
+- Part 3: Introducing the Secure Agent Trust Framework — link to be added after publishing
+- Part 4: Inside SATF — link to be added after publishing
+</ArchitectureNote>
+
+# Introducing the Secure Agent Trust Framework
+
+## Baseline 1.0 for Trusted Autonomous Actions and Secure Agentic Outputs
+
+![SATF Baseline 1.0 Framework](/images/satf/satf-baseline-1-framework.png)
+
+## Executive TL;DR
+
+The Secure Agent Trust Framework, or SATF, is an end-to-end enterprise framework for autonomous agent governance and contextual security.
+
+SATF separates three concerns that are often blended together:
+
+1. the conceptual trust model,
+2. the cross-cutting control plane,
+3. the runtime and response plane.
+
+The core premise is simple:
+
+> Trust is not granted once. Trust is established, enforced, validated, reassessed, adapted, and revoked when needed.
+
+## SATF Trust Lifecycle
+
+SATF starts with the trust lifecycle because trust is dynamic.
+
+```text
+Establish → Enforce → Validate → Reassess → Adapt → Contain / Re-establish
+```
+
+<Insight title="SATF Insight">
+Trust is not a binary switch. Trust is a lifecycle with state, evidence, decay, adaptation, and recovery.
+</Insight>
+
+## Three coordinated views
+
+SATF Baseline 1.0 is organized into three coordinated views.
+
+## 1. Conceptual Trust Plane
+
+The conceptual trust plane defines what must be true for an agent to be trusted.
+
+It contains:
+
+- **Core: Agent Trust Fabric**
+- **Ring 1: Trust Establishment**
+- **Ring 2: Trust Enforcement**
+- **Ring 3: Trust Validation**
+
+## 2. Cross-Cutting Control Plane
+
+Governance, Telemetry, and Assurance span all trust rings.
+
+This plane continuously ingests telemetry, assurance findings, audit results, policy exceptions, risk changes, and validation evidence. It then feeds machine-enforceable adaptive policies into Ring 2 Policy Decision Points.
+
+<ArchitectureNote title="Validation Discovers, Governance Decides, Enforcement Applies" variant="info">
+SATF separates responsibilities. Ring 3 produces validation evidence. The cross-cutting control plane turns evidence into adaptive policy. Ring 2 enforces the policy at runtime.
+</ArchitectureNote>
+
+## 3. Runtime and Response Plane
+
+The runtime and response plane is the operational surface where the framework is applied.
+
+It includes:
+
+- Runtime Agent Ecosystem,
+- Response and Containment,
+- Trusted Agent Outcomes.
+
+Response and containment are not another trust ring. They are operational consequences when trust degrades or fails.
+
+## What makes SATF different
+
+SATF is not just an identity model, a threat model, or a governance checklist.
+
+It combines all three into an operating framework:
+
+```text
+Trust lifecycle + Trust fabric + Trust rings + Control plane + Runtime response
+```
+
+Part 4 goes inside the framework: delegation provenance, goal integrity, continuous reassessment, adaptive trust policies, and the maturity model.
+
+
+## References
+
+- OpenAI, *OpenAI and Hugging Face partner to address security incident during model evaluation*.
+- Hugging Face, *Security incident disclosure — July 2026*.
+- Cloud Security Alliance AI Safety Initiative, *Hugging Face’s Autonomous AI Agent Breach*.
+- Anthropic, *Zero Trust for AI Agents*.
+- Google DeepMind, *AI Control Roadmap* and TRAIT&R.
+- Tsai and Bagdasarian, *Contextual Agent Security / Conseca*.
+- Meta AI / Rule of Two discussions for agentic applications.
+- MITRE ATLAS, OWASP LLM / Agentic guidance, NIST AI RMF, ISO/IEC 42001.

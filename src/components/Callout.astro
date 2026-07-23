@@ -42,7 +42,7 @@ const { bg, icon } = typeStyles[type] || {};
 
 <div class={`border-l-4 p-4 my-4 rounded-r-md ${bg}`}>
   {title && <p class="font-bold mb-1 flex items-center gap-2"><span>{icon}</span> {title}</p>}
-  <div class="text-sm">
+  <div class="text-base">
     <slot />
   </div>
 </div>
