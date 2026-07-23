@@ -1,0 +1,131 @@
+---
+title: 'Trust Is Not Granted Once'
+description:  'SATF Series: Part 2- Why agent trust requires more than IAM and static permissions.'
+draft: false
+author: Kamal Dhingra
+tags: 
+- AI Security
+- Agentic AI
+- Agent Security
+- Zero Trust
+- Identity
+- SATF
+pubDatetime: 2026-07-23T04:58:53Z
+modDatetime: 2026-07-23T00:00:00.000Z
+slug: secure-agent-trust-framework-part2
+featured: true
+hideEditPost: true
+heroImage: "/images/satf/part2-trust-is-not-granted-once.png"
+---
+
+import Callout from '@/components/Callout.astro';
+import ArchitectureNote from '@/components/ArchitectureNote.astro';
+import ArchitectureNote2 from '@/components/ArchitectureNote2.astro';
+import Grid from '@/components/Grid.astro';
+import Inlineheader from '@/components/Inlineheader.astro';
+import Insight from '@/components/Insight.astro';
+
+
+<ArchitectureNote title="Series Navigation" variant="info">
+This is Part 2 of 4 in the Secure Agent Trust Framework series.
+
+- <a href="https://www.kamaldhingra.com/posts/satf/secure-agent-trust-framework-part1/">Part 1: The Agent Trust Gap</a> 
+- Part 2: Trust Is Not Granted Once 👇
+- Part 3: Introducing the Secure Agent Trust Framework
+- Part 4: Inside SATF
+</ArchitectureNote>
+
+# Secure Agent Trust Framework (SATF) Series- Part 2: Trust Is Not Granted Once
+
+## Why Agent Trust Requires More Than Identity and Access Management
+
+![Trust Is Not Granted Once](/images/satf/part2-trust-is-not-granted-once.png)
+
+## Executive TL;DR
+
+Autonomous AI agents change the enterprise trust problem. They do not simply authenticate and execute predefined logic. Agents interpret goals, select tools, use memory, invoke APIs, delegate to other agents, and act across systems.
+
+Traditional IAM and Zero Trust are necessary, but not sufficient. Agent trust must be dynamic, contextual, observable, and continuously reassessed.
+
+
+<ArchitectureNote2 type="insight" title="SATF Provides">
+Trust is not a permission. Trust is a dynamic state that can increase, decay, or be revoked based on evidence.
+</ArchitectureNote2>
+
+## The shift from applications to agents
+
+Traditional applications execute predefined logic. APIs expose known operations. Human users initiate requests and remain accountable for their actions.
+
+Agents are different.
+
+> An agent may receive an open-ended goal, reason through a plan, choose tools, read or update memory, query RAG systems, invoke APIs, delegate subtasks, and communicate externally. A simple user request can become a chain of autonomous actions across systems, data stores, models, and other agents.
+
+That changes the security question from:
+
+<Callout type="danger">
+Does this identity have permission?
+
+to:
+
+Should this agent be allowed to perform this action, for this goal, in this context, right now?
+</Callout>
+
+## Why identity alone is insufficient
+
+Identity remains foundational. Every agent needs a strong identity, attributable actions, scoped credentials, and lifecycle governance. But identity only answers who is acting.
+
+Agent trust also needs to answer:
+
+- What is the agent trying to accomplish?
+- Who delegated the task?
+- What goal is being optimized?
+- What tools, data, memory, and external channels are involved?
+- Has the agent deviated from the approved objective?
+- Should the action be allowed, constrained, escalated, or contained?
+
+<ArchitectureNote title="Identity Is Not Trust" variant="warning">
+Identity answers who is acting. Trust asks whether the current action should be allowed under the current goal, context, risk, and behavior.
+</ArchitectureNote>
+
+## Trust decay
+
+Trust can decay when new evidence appears:
+
+- anomalous behavior,
+- excessive delegation,
+- unsafe tool usage,
+- goal drift,
+- policy violations,
+- memory contamination,
+- failed assurance checks,
+- privilege escalation attempts,
+- supply chain alerts.
+
+<Callout type="Sol">
+**As trust decays, enforcement should move from allow to constrain, step-up review, monitor, contain, or revoke.**
+</Callout>
+## Where SATF comes in
+
+<a href="https://github.com/kamaldhingra1/secure-agent-trust-framework" target="_blank">The Secure Agent Trust Framework (SATF)</a> is a vendor-neutral framework for trusted autonomous actions and secure agentic outputs.
+
+SATF introduces a lifecycle for agent trust:
+
+<ArchitectureNote2 type="success">
+**Establish → Enforce → Validate → Reassess → Adapt → Contain / Re-establish**
+</ArchitectureNote2>
+
+Part 3 introduces the SATF Baseline 1.0 framework and its three coordinated views: the Conceptual Trust Plane, the Cross-Cutting Control Plane, and the Runtime and Response Plane.
+
+
+## References
+
+- Secure Agent Trust Framework (SATF), <a href="https://github.com/kamaldhingra1/secure-agent-trust-framework" target="_blank"> *SATF- End-to-End Enterprise Framework for Autonomous Agent Governance and Contextual Security*</a>
+- OpenAI, <a href="https://openai.com/index/hugging-face-model-evaluation-security-incident/" target="_blank"> *OpenAI and Hugging Face partner to address security incident during model evaluation*</a>
+- Cloud Security Alliance AI Safety Initiative,<a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-huggingface-clawhub-malware-supply-chain-2/" target="_blank"> *Hugging Face’s Autonomous AI Agent Breach*.</a>
+- Anthropic, <a href="https://claude.com/blog/zero-trust-for-ai-agents" target="_blank">*Zero Trust for AI Agents*.</a> 
+- Google DeepMind, <a href="https://deepmind.google/blog/securing-the-future-of-ai-agents/" target="_blank"> *AI Control Roadmap* and TRAIT&R.</a>
+- Tsai and Bagdasarian,<a href="https://sigops.org/s/conferences/hotos/2025/papers/hotos25-100.pdf" target="_blank"> *Contextual Agent Security / Conseca*.</a>
+- CSA ATF,<a href="https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents" target="_blank"> *The Agentic Trust Framework: Zero Trust Governance for AI Agents*.</a>
+- Meta AI / Rule of Two discussions for agentic applications.
+- MITRE ATLAS, OWASP LLM / Agentic guidance, NIST AI RMF, ISO/IEC 42001.
+
