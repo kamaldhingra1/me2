@@ -1,0 +1,191 @@
+---
+title: 'Introducing the Secure Agent Trust Framework (SATF)'
+description:  'SATF Series: Part 3- End-to-End Enterprise Framework for Autonomous Agent Governance and Contextual Security, trusted autonomous actions and secure agentic outputs.'
+draft: false
+author: Kamal Dhingra
+tags: 
+- AI Security
+- Agentic AI
+- Agent Security
+- Zero Trust
+- Identity
+- SATF
+pubDatetime: 2026-07-25T04:58:53Z
+modDatetime: 2026-07-25T00:00:00.000Z
+slug: secure-agent-trust-framework-part3
+featured: true
+hideEditPost: true
+heroImage: "/images/satf/satf-baseline-1-framework.png"
+---
+
+import Callout from '@/components/Callout.astro';
+import ArchitectureNote from '@/components/ArchitectureNote.astro';
+import ArchitectureNote2 from '@/components/ArchitectureNote2.astro';
+import Grid from '@/components/Grid.astro';
+import Inlineheader from '@/components/Inlineheader.astro';
+import Insight from '@/components/Insight.astro';
+
+
+<ArchitectureNote title="Series Navigation" variant="info">
+This is Part 2 of 4 in the Secure Agent Trust Framework series.
+
+- <a href="https://www.kamaldhingra.com/posts/satf/secure-agent-trust-framework-part1/">Part 1: The Agent Trust Gap</a> 
+- <a href="https://www.kamaldhingra.com/posts/satf/secure-agent-trust-framework-part2/">Part 2: Trust Is Not Granted Once </a>
+- Part 3: Introducing the Secure Agent Trust Framework (SATF)👇
+- Part 4: Inside SATF
+</ArchitectureNote>
+
+# Secure Agent Trust Framework (SATF) Series- Part 3: Introducing the Secure Agent Trust Framework (SATF)
+
+## End-to-End Enterprise Framework for Autonomous Agent Governance and Contextual Security, Trusted Autonomous actions and secure outputs.
+### Safe, Trusted, Compliant, Resilient, and Expected Outcomes
+
+![SATF Baseline 1.0 Framework](/images/satf/satf-baseline-1-framework.png)
+
+## Executive TL;DR
+
+The Secure Agent Trust Framework, or SATF, is an end-to-end enterprise framework for autonomous agent governance and contextual security.
+
+SATF is a vendor-neutral framework for establishing, enforcing, validating, reassessing, adapting, and revoking trust in autonomous agent systems to ensure trusted and secure output.
+
+The core premise is simple:
+
+> Trust is not granted once. Trust is established, enforced, validated, reassessed, adapted, and revoked when needed.
+
+# Why SATF Exists
+
+Traditional security frameworks focus on securing identities, access, resources, networks, and applications.
+
+Autonomous agents introduce a different challenge.
+
+<Callout type="Exe">
+The fundamental objective is no longer simply protecting access.
+
+**The objective is ensuring that autonomous agents consistently produce secure outcomes.**
+</Callout>
+
+<Callout type="Sol">
+SATF helps organizations achieve:
+
+- Safe Outcomes ✅
+- Trusted Outcomes ✅
+- Compliant Outcomes ✅
+- Resilient Outcomes ✅
+- Expected Outcomes ✅
+</Callout>
+---
+
+## What Is a Secure Outcome?
+
+<ArchitectureNote2 type="success">
+A secure outcome is:
+
+- The right action ->
+- Performed by the right agent ->
+- For the right objective ->
+- Using the right authority ->
+- Within approved boundaries ->
+- With continuous validation ->
+- With recoverable trust ->
+</ArchitectureNote2>
+
+> SATF continuously evaluates trust throughout the agent lifecycle to ensure that task completion never overrides secure outcomes.
+
+---
+
+## SATF Core Principle
+
+<ArchitectureNote2 type="insight">
+The controls are not the goal.
+
+**Secure outcomes are the goal.**
+</ArchitectureNote2>
+> SATF exists to ensure autonomous agents consistently produce safe, trusted, compliant, resilient, and expected outcomes, even when objectives evolve, context changes, authority is delegated, tools expand, threats emerge, and trust must be continuously reassessed.
+
+## SATF Trust Lifecycle
+
+SATF starts with the trust lifecycle because trust is dynamic.
+
+<Callout type="Sol">
+            **Establish → Enforce → Validate → Reassess → Adapt → Contain / Re-establish**
+<img src="/images/satf/trust_lifecycle.png" alt="SATF Trust Lifecycle" class="w-full h-auto rounded-xl" />
+</Callout>
+
+<ArchitectureNote2 type="insight" title="SATF Provides">
+Trust is not a binary switch. Trust is a lifecycle with state, evidence, decay, adaptation, and recovery.
+</ArchitectureNote2>
+
+## SATF - Three coordinated views
+
+SATF is organized into three coordinated views.
+<Callout type="Sol">
+1. The conceptual trust model [Core Agent Trust Fabric, Trust Rings -> Establish, Enforce, Validate]
+2. The cross-cutting control plane [Governance and Assurance across all trust rings]
+3. The runtime and response plane [Operational surface for framework application]
+</Callout>
+
+## 1. Conceptual Trust Plane
+
+The conceptual trust plane defines what must be true for an agent to be trusted.
+
+<img src="/images/satf/concept_trust_plane.png" alt="Conceptual Trust Plane" class="w-full h-auto rounded-xl" />
+<Callout type="tip">
+It contains:
+
+- **Core: Agent Trust Fabric**. --> This is the decision (dynamic evaluation) engine for autonomous trust.
+- **Ring 1: Trust Establishment**. --> create a secure starting posture before agent execution.
+- **Ring 2: Trust Enforcement** --> Runtime authorization and policy enforcement for agent actions
+- **Ring 3: Trust Validation** --> Proves whether trust assumptions still hold under drift, manipulation, and adversarial conditions.
+</Callout>
+
+## 2. Cross-Cutting Control Plane
+
+Governance, Telemetry, and Assurance span all trust rings.
+<img src="/images/satf/crosscutting_control_plane.png" alt="Cross-Cutting Control Plane" class="w-full h-auto rounded-xl" />
+
+This plane continuously ingests telemetry, assurance findings, audit results, policy exceptions, risk changes, and validation evidence. It then feeds machine-enforceable adaptive policies into Ring 2 Policy Decision Points.
+
+<ArchitectureNote title="Validation Discovers, Governance Decides, Enforcement Applies" variant="info">
+SATF separates responsibilities. Ring 3 produces validation evidence. The cross-cutting control plane turns evidence into adaptive policy. Ring 2 enforces the policy at runtime.
+</ArchitectureNote>
+
+## 3. Runtime and Response Plane
+
+The runtime and response plane is the operational surface where the framework is applied.
+
+<img src="/images/satf/response_plane.png" alt="Runtime & Response Plane" class="w-full h-auto rounded-xl" />
+
+<Callout type="Sol">
+It includes:
+
+- Runtime Agent Ecosystem,
+- Response and Containment,
+- Trusted Agent Outcomes.
+</Callout> 
+> Response and containment are not another trust ring. They are operational consequences when trust degrades or fails.
+
+## What makes SATF different
+
+SATF is not just an identity model, a threat model, or a governance checklist.
+
+> It combines all three into an operating framework for trusted and secure outcomes:
+
+<ArchitectureNote2 type="insight">
+**Trust lifecycle + Trust fabric + Trust rings + Control plane + Runtime response --> Secure Outcomes**
+</ArchitectureNote2>
+
+Part 4 goes inside the framework: delegation provenance, goal integrity, continuous reassessment, adaptive trust policies, and the maturity model.
+
+
+## References
+
+- Secure Agent Trust Framework (SATF), <a href="https://github.com/kamaldhingra1/secure-agent-trust-framework" target="_blank"> *SATF- End-to-End Enterprise Framework for Autonomous Agent Governance and Contextual Security*</a>
+- OpenAI, <a href="https://openai.com/index/hugging-face-model-evaluation-security-incident/" target="_blank"> *OpenAI and Hugging Face partner to address security incident during model evaluation*</a>
+- Cloud Security Alliance AI Safety Initiative,<a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-huggingface-clawhub-malware-supply-chain-2/" target="_blank"> *Hugging Face’s Autonomous AI Agent Breach*.</a>
+- Anthropic, <a href="https://claude.com/blog/zero-trust-for-ai-agents" target="_blank">*Zero Trust for AI Agents*.</a> 
+- Google DeepMind, <a href="https://deepmind.google/blog/securing-the-future-of-ai-agents/" target="_blank"> *AI Control Roadmap* and TRAIT&R.</a>
+- Tsai and Bagdasarian,<a href="https://sigops.org/s/conferences/hotos/2025/papers/hotos25-100.pdf" target="_blank"> *Contextual Agent Security / Conseca*.</a>
+- CSA ATF,<a href="https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents" target="_blank"> *The Agentic Trust Framework: Zero Trust Governance for AI Agents*.</a>
+- Meta AI / Rule of Two discussions for agentic applications.
+- MITRE ATLAS, OWASP LLM / Agentic guidance, NIST AI RMF, ISO/IEC 42001.
+
