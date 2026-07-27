@@ -35,6 +35,7 @@ const t = useTranslations(locale);
   <Main pageTitle={t.pages.searchTitle} pageDesc={t.pages.searchDesc}>
     <div
       id="pagefind-search"
+      transition:persist 
       data-backurl={backUrl}
       data-bundle-path={pagefindBundlePath}
     >
