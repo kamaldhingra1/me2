@@ -65,20 +65,34 @@
   .item .ex{ font-size:12.5px; color:var(--text-muted); margin:0; }
   .empty-msg{ font-size:13px; color:var(--text-muted); }
   footer{ margin-top:32px; font-size:12px; color:var(--text-muted); }
-  .article-image-container {
+ .article-image-container {
   width: 100%;
-  height: 550px; /* Change this to your preferred height */
+  /* Set a fluid height based on aspect ratio (e.g., 16/9 or 21/9) */
+  aspect-ratio: 16 / 9; 
   overflow: hidden;
-  margin-bottom: 2rem; /* Adds space below the image */
+  margin-bottom: 2rem; 
 }
 
 /* Specific styling for the image inside that container */
 .article-image-container img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Crops the image perfectly without stretching it */
-  object-position: center; /* Centers the crop point */
-  display: block; /* Removes extra whitespace underneath the image */}
+  object-fit: cover; 
+  object-position: center; 
+  display: block; 
+  /* Hint the browser to optimize for scaling performance */
+  image-rendering: -webkit-optimize-contrast; 
+  will-change: transform; 
+}
+
+/* Optional: Keep it taller on desktop screens */
+@media (min-width: 768px) {
+  .article-image-container {
+    height: 550px;
+    aspect-ratio: auto;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -87,11 +101,9 @@
   <div class="article-image-container">
   <img src="/images/te/SATF-Agent_Threats_Flow.png" alt="Agentic AI Threat explorer">
 </div>
- <h2>Agentic AI pipeline Stages</h2>
-  <div class="article-image-container">
-  <img src="/images/te/pipelineview.svg" alt="Agentic AI pipeline Stages">
-</div>
- 
+ <h2>Agentic AI pipeline Stages -> where and when threats trigger</h2>
+  <img src="/images/te/pipelineview.svg" alt="Agentic AI pipeline Stages" width="600" height="300" >
+
   <h1>Agentic AI threat explorer</h1>
   <p class="sub">Filter by pipeline stage, browse by domain. This is as a static reference — severity/likelihood tagging planned for a future iteration.</p>
 
