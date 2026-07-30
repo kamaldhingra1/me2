@@ -82,11 +82,7 @@
   display: block; 
 
 }
-/* Target only the SVG to remove rasterization blur/choppiness */
-.article-image-container img[src$=".svg"] {
-  image-rendering: auto;
-  will-change: auto;
-}
+
 /* Optional: Keep it taller on desktop screens */
 @media (min-width: 768px) {
   .article-image-container {
