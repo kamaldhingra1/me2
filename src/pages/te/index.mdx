@@ -7,7 +7,106 @@ featured: false
 draft: false
 description: "TE"
 ---
-
+<style is:global>{`
+  .responsive-table-grid table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  @media (max-width: 639px) {
+    .responsive-table-grid thead {
+      display: none;
+    }
+    .responsive-table-grid tbody,
+    .responsive-table-grid tr {
+      display: block;
+      width: 100%;
+    }
+    .responsive-table-grid tr {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      background-color: #ffffff;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    .responsive-table-grid td:nth-child(3),
+    .responsive-table-grid td:nth-child(4),
+    .responsive-table-grid td:nth-child(5) {
+      grid-column: span 2;
+      padding-top: 4px;
+    }
+    .responsive-table-grid td {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      color: #475569;
+    }
+    .responsive-table-grid td:nth-child(1) {
+      font-weight: 700;
+      color: #2563eb;
+    }
+    .responsive-table-grid td:nth-child(2) {
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .responsive-table-grid td:nth-child(3)::before { 
+      content: "Stage: "; 
+      font-weight: 600; 
+      color: #1e3a8a;
+    }
+    .responsive-table-grid td:nth-child(4)::before { 
+      content: "Description: "; 
+      font-weight: 600; 
+      color: #1e3a8a; 
+      display: block; 
+      margin-top: 4px;
+    }
+    .responsive-table-grid td:nth-child(5)::before { 
+      content: "Example: "; 
+      font-weight: 600; 
+      color: #1e3a8a; 
+      display: block; 
+      margin-top: 4px;
+    }
+  }
+  @media (min-width: 640px) {
+    .responsive-table-grid th, 
+    .responsive-table-grid td {
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+    .responsive-table-grid th {
+      background-color: #95bced;
+      font-weight: 600;
+      color: #1e3a8a;
+      border-bottom: 1px solid #bfdbfe;
+    }
+    .responsive-table-grid tr {
+      border-bottom: 1px solid #dbeafe;
+    }
+    .responsive-table-grid tr:nth-child(even) {
+      background-color: rgba(239, 246, 255, 0.4);
+    }
+    .responsive-table-grid td:nth-child(1) {
+      font-weight: 700;
+      color: #2563eb;
+    }
+    .responsive-table-grid td:nth-child(2) {
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .responsive-table-grid td:nth-child(3),
+    .responsive-table-grid td:nth-child(4),
+    .responsive-table-grid td:nth-child(5) {
+      color: #475569;
+    }
+  }
+`}</style>
 
 # Agentic AI threat model
 
@@ -31,6 +130,8 @@ For the clickable, filterable version of this same data, see [`Agent Threat Expl
 
 ### Agent Core (Reasoning) (7)
 
+<div class="responsive-table-grid">
+
 | ID | Threat | Pipeline stage(s) | Description | Example |
 |---|---|---|---|---|
 | T01 | Goal overreach | Stage 2 - Reasoning | Agent expands or reinterprets its objective beyond the scope the user or operator granted. | Asked to 'clean up files', agent also deletes logs it decides are 'clutter'. |
@@ -41,6 +142,8 @@ For the clickable, filterable version of this same data, see [`Agent Threat Expl
 | T32 | Denial of wallet / recursion loop | Cross-cutting (Stage 2 to 3) | Unbounded recursion, retries, or sub-task spawning drains API budget or compute without a human noticing until cost is incurred. | A planning loop repeatedly re-invokes an expensive tool call on failure with no backoff or spend ceiling. |
 | T33 | Multimodal / steganographic jailbreak | Stage 1 to 2 - Ingest to reasoning | Instructions hidden in image, audio, or other non-text channels bypass filters built for the text modality. | An instruction embedded in image metadata or sub-audible audio reaches reasoning without passing text-based content filters. |
 
+</div>
+<div class="responsive-table-grid">
 ### Orchestration (3)
 
 | ID | Threat | Pipeline stage(s) | Description | Example |
@@ -48,7 +151,8 @@ For the clickable, filterable version of this same data, see [`Agent Threat Expl
 | T05 | Delegation hijack | Stage 2 to 3 - Reasoning to delegation | A malicious or compromised component intercepts or redirects a delegated sub-task. | A sub-task meant for a reporting tool is silently rerouted to an attacker-controlled endpoint. |
 | T06 | Task injection | Stage 1 to 2 - Ingest to orchestration | Unauthorized tasks are inserted into the delegation queue, appearing legitimate to downstream components. | A crafted document adds an extra 'send credentials to' step to the task list the agent processes. |
 | T07 | Priority manipulation | Stage 2 - Orchestration | Task ordering or urgency is manipulated to force premature or out-of-sequence execution. | An injected 'urgent' flag causes the agent to skip a review step it would normally wait for. |
-
+</div>
+<div class="responsive-table-grid">
 ### Memory & Context (4)
 
 | ID | Threat | Pipeline stage(s) | Description | Example |
@@ -57,7 +161,8 @@ For the clickable, filterable version of this same data, see [`Agent Threat Expl
 | T11 | Context leakage | Stage 2 - Memory read/write | Information from one context, user, or session boundary bleeds into another. | One tenant's retrieved documents appear in another tenant's agent session. |
 | T12 | Long-term memory corruption | Stage 2 - Memory read/write | Persistent memory is degraded or falsified over time, compounding errors across sessions. | Repeated small factual injections gradually shift the agent's stored 'known facts' about a user. |
 | T34a | Indirect prompt injection (stored payload) | Stage 2 - Memory read/write | Untrusted content ingested earlier is stored, then later retrieved and treated as trusted instruction. | An email footer with hidden instructions is summarized into memory and acted on in a later session. |
-
+</div>
+<div class="responsive-table-grid">
 ### Identity & Access (3)
 
 | ID | Threat | Pipeline stage(s) | Description | Example |
@@ -65,7 +170,8 @@ For the clickable, filterable version of this same data, see [`Agent Threat Expl
 | T15 | Identity spoofing | Stage 3 - Tool / identity boundary | An entity impersonates a legitimate user, agent, or service identity to gain trust. | A sub-agent presents credentials claiming to be the orchestrator that spawned it. |
 | T16 | Privilege escalation | Stage 3 - Tool / identity boundary | An agent or component gains permissions beyond what its task or role requires. | A read-only reporting agent obtains write access via a misconfigured shared credential. |
 | T17 | Session hijack | Stage 3 - Tool / identity boundary | An active authenticated session is taken over and reused by an unauthorized party. | A leaked session token lets an attacker continue an agent's authenticated browser session. |
-
+</div>
+<div class="responsive-table-grid">
 ### Tool & External Services (3)
 
 | ID | Threat | Pipeline stage(s) | Description | Example |
@@ -73,20 +179,23 @@ For the clickable, filterable version of this same data, see [`Agent Threat Expl
 | T20 | Malicious tool call | Stage 3 - Tool execution | The agent is induced to invoke a tool or API in a harmful or unintended way. | A crafted input tricks the agent into calling a 'send email' tool to exfiltrate data. |
 | T21 | Unauthorized API access | Stage 3 - Tool execution | A tool call reaches an API or scope the agent was not authorized to use. | An agent scoped to a sandbox API instead reaches a production endpoint due to shared credentials. |
 | T26 | Sandbox escape | Stage 3 - Tool execution | Execution breaks out of its intended isolation boundary into the host system or network. | A code-execution tool call reaches the underlying host filesystem outside its container. |
-
+</div>
+<div class="responsive-table-grid">
 ### Output & Exfiltration (1)
 
 | ID | Threat | Pipeline stage(s) | Description | Example |
 |---|---|---|---|---|
 | T34b | Covert side-channel exfiltration | Stage 4 - Output rendering | Sensitive data is smuggled out through a rendering channel that isn't monitored as a data-egress path. | Markdown image syntax rendered by the agent causes a client to fetch a URL encoding stolen data. |
-
+</div>
+<div class="responsive-table-grid">
 ### Sub-Agents & Swarms (2)
 
 | ID | Threat | Pipeline stage(s) | Description | Example |
 |---|---|---|---|---|
 | T27 | Trust ledger manipulation | Stage 2 to 3 - Swarm coordination | The record used to establish trust between cooperating agents is falsified or tampered with. | A rogue sub-agent inflates its own trust score to gain approval authority over peers. |
 | T28 | Agentic swarm escalation | Stage 2 to 3 - Swarm coordination | Coordinated sub-agents collectively achieve an outcome no single agent was authorized to perform alone. | Several scoped-down sub-agents each perform a benign step that together bypass a control. |
-
+</div>
+<div class="responsive-table-grid">
 ### Human Governance (HITL) (3)
 
 | ID | Threat | Pipeline stage(s) | Description | Example |
@@ -94,10 +203,12 @@ For the clickable, filterable version of this same data, see [`Agent Threat Expl
 | T35 | Approval fatigue | Stage 3 to 4 - Human approval gate | Frequent, low-stakes-seeming approval requests condition a human reviewer to rubber-stamp without scrutiny. | A supervisor approves dozens of routine-looking requests per day and misses the one that isn't. |
 | T36 | Deceptive approval UI / clickjacking | Stage 3 to 4 - Human approval gate | The approval interface itself is manipulated so the human approves something other than what they believe. | An overlay or relabeled button causes a reviewer to approve a broader action than displayed. |
 | T37 | Social engineering of human supervisor | Stage 3 to 4 - Human approval gate | The agent, or content it surfaces, persuades a human overseer to override a safety control directly. | The agent argues a blocked action is urgent and safe, prompting the supervisor to bypass the gate. |
-
+</div>
+<div class="responsive-table-grid">
 ### System & Escalation Boundary (2)
 
 | ID | Threat | Pipeline stage(s) | Description | Example |
 |---|---|---|---|---|
 | T30 | Cascading failure | Cross-cutting - all stages | A failure in one component propagates and compounds across other components rather than staying contained. | A memory corruption event triggers repeated flawed tool calls, each worsening system state. |
 | T31 | Out-of-bound escalation cycle | Cross-cutting - all stages | Once containment is breached, the system re-enters a failure loop rather than halting or degrading safely. | A containment failure triggers recovery logic that itself re-triggers the same failure condition. |
+</div>
