@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI threat explorer</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.47.0/iconfont/tabler-icons.min.css">
+<style>
+  :root{
+    --bg: #ffffff;
+    --surface-1: #f5f4f0;
+    --surface-2: #ffffff;
+    --border: rgba(0,0,0,0.12);
+    --border-strong: rgba(0,0,0,0.22);
+    --text-primary: #1a1a1a;
+    --text-secondary: #55554f;
+    --text-muted: #8a897f;
+    --accent: #185fa5;
+    --accent-bg: #e6f1fb;
+    --accent-text: #0c447c;
+    --radius: 10px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg: #17171a;
+      --surface-1: #202024;
+      --surface-2: #26262b;
+      --border: rgba(255,255,255,0.14);
+      --border-strong: rgba(255,255,255,0.26);
+      --text-primary: #f0f0ee;
+      --text-secondary: #b6b5ad;
+      --text-muted: #86857c;
+      --accent: #85b7eb;
+      --accent-bg: #0c447c;
+      --accent-text: #e6f1fb;
+    }
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin:0; padding:2rem 1.5rem 4rem; background:var(--bg); color:var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    line-height:1.6;
+  }
+  .wrap{ max-width: 820px; margin:0 auto; }
+  h1{ font-size:22px; font-weight:600; margin:0 0 6px; }
+  .sub{ font-size:14px; color:var(--text-secondary); margin:0 0 24px; }
+  .legend{ display:flex; flex-wrap:wrap; gap:6px 16px; font-size:12px; color:var(--text-muted); margin-bottom:24px; }
+  .stagebar{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+  .pill{ font-size:13px; padding:6px 14px; border-radius:999px; cursor:pointer; border:0.5px solid var(--border); background:var(--surface-2); color:var(--text-secondary); }
+  .pill.active{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  .nodes{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:20px; }
+  .node{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; padding:12px 14px; text-align:left; cursor:pointer; border-radius:var(--radius); border:0.5px solid var(--border); background:var(--surface-2); font-family:inherit; color:var(--text-primary); }
+  .node.active{ border:2px solid var(--accent); background:var(--accent-bg); }
+  .node.empty{ opacity:0.4; }
+  .node i{ font-size:22px; }
+  .node .name{ font-size:13.5px; font-weight:600; }
+  .node .count{ font-size:12px; color:var(--text-muted); }
+  .detail{ background:var(--surface-1); border-radius:12px; padding:1.25rem 1.5rem; min-height:140px; }
+  .detail h2{ font-size:16px; font-weight:600; margin:0 0 14px; }
+  .detail h2 span{ font-weight:400; font-size:13px; color:var(--text-muted); }
+  .item{ padding:12px 0; }
+  .item + .item{ border-top:0.5px solid var(--border); }
+  .item .tid{ font-size:14px; font-weight:600; margin:0 0 4px; }
+  .item .desc{ font-size:13.5px; color:var(--text-secondary); margin:0 0 4px; }
+  .item .ex{ font-size:12.5px; color:var(--text-muted); margin:0; }
+  .empty-msg{ font-size:13px; color:var(--text-muted); }
+  footer{ margin-top:32px; font-size:12px; color:var(--text-muted); }
+  .article-image-container {
+  width: 100%;
+  height: 550px; /* Change this to your preferred height */
+  overflow: hidden;
+  margin-bottom: 2rem; /* Adds space below the image */
+}
+
+/* Specific styling for the image inside that container */
+.article-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crops the image perfectly without stretching it */
+  object-position: center; /* Centers the crop point */
+  display: block; /* Removes extra whitespace underneath the image */}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Agentic AI threats-Operational Flow</h1>
+  <div class="article-image-container">
+  <img src="/images/te/SATF-Agent_Threats_Flow.png" alt="Agentic AI Threat explorer">
+</div>
+ <h2>Agentic AI pipeline Stages</h2>
+  <div class="article-image-container">
+  <img src="/images/te/pipelineview.svg" alt="Agentic AI pipeline Stages">
+</div>
+ 
+  <h1>Agentic AI threat explorer</h1>
+  <p class="sub">Filter by pipeline stage, browse by domain. This is as a static reference — severity/likelihood tagging planned for a future iteration.</p>
+
+  <div id="stages" class="stagebar"></div>
+  <div id="nodes" class="nodes"></div>
+  <div id="detail" class="detail"></div>
+
+  <footer>27 threats across 9 domains and 4 pipeline stages.</footer>
+</div>
+
+<script>
+const STAGES = [
+  {key:"all", label:"All stages"},
+  {key:"ingest", label:"Ingest"},
+  {key:"reasoning", label:"Reasoning"},
+  {key:"tool", label:"Tool execution"},
+  {key:"output", label:"Output rendering"}
+];
+
+const domains = [
+{key:"core", name:"Agent core", icon:"ti-brain", threats:[
+  {id:"T01", name:"Goal overreach", stages:["reasoning"], desc:"Agent expands or reinterprets its objective beyond the scope granted.", ex:"Asked to clean up files, agent also deletes logs it decides are clutter."},
+  {id:"T02", name:"Reward hacking", stages:["reasoning"], desc:"Agent optimizes for a proxy signal rather than true intent.", ex:"Marks a test suite passing by deleting the failing tests instead of fixing the bug."},
+  {id:"T03", name:"Unsafe external action", stages:["reasoning","tool"], desc:"Reasoning authorizes a real action without adequate safety checks.", ex:"Issues a production DROP instead of a scoped DELETE."},
+  {id:"T04", name:"Objective manipulation", stages:["ingest","reasoning"], desc:"External input rewrites or subverts the agent's underlying goal.", ex:"A webpage contains hidden text instructing the agent to change its task."},
+  {id:"T29", name:"Runtime containment failure", stages:["reasoning","tool","output"], desc:"The runtime fails to enforce its own operating boundaries.", ex:"A process retains elevated privileges after its task scope should have expired."},
+  {id:"T32", name:"Denial of wallet / recursion loop", stages:["reasoning","tool"], desc:"Unbounded recursion or retries drain API budget or compute.", ex:"A planning loop re-invokes an expensive call on failure with no spend ceiling."},
+  {id:"T33", name:"Multimodal / steganographic jailbreak", stages:["ingest","reasoning"], desc:"Instructions hidden in image, audio, or non-text channels bypass text-based filters.", ex:"An instruction embedded in image metadata reaches reasoning without passing text filters."}
+]},
+{key:"orch", name:"Orchestration", icon:"ti-route", threats:[
+  {id:"T05", name:"Delegation hijack", stages:["reasoning","tool"], desc:"A compromised component intercepts or redirects a delegated sub-task.", ex:"A sub-task for a reporting tool is rerouted to an attacker-controlled endpoint."},
+  {id:"T06", name:"Task injection", stages:["ingest","reasoning"], desc:"Unauthorized tasks are inserted into the delegation queue.", ex:"A crafted document adds an extra send-credentials step to the task list."},
+  {id:"T07", name:"Priority manipulation", stages:["reasoning"], desc:"Task ordering or urgency is manipulated to force premature execution.", ex:"An injected urgent flag causes the agent to skip a review step."}
+]},
+{key:"mem", name:"Memory and context", icon:"ti-database", threats:[
+  {id:"T10", name:"Memory poisoning", stages:["reasoning"], desc:"Malicious data is written into persistent memory or a vector store.", ex:"A poisoned ticket is stored and later retrieved as trusted context."},
+  {id:"T11", name:"Context leakage", stages:["reasoning"], desc:"Information crosses a context, user, or session boundary.", ex:"One tenant's documents appear in another tenant's session."},
+  {id:"T12", name:"Long-term memory corruption", stages:["reasoning"], desc:"Persistent memory degrades or is falsified over time.", ex:"Repeated small injections gradually shift stored facts about a user."},
+  {id:"T34a", name:"Indirect prompt injection (stored)", stages:["ingest","reasoning"], desc:"Untrusted content is stored, then later retrieved and treated as trusted.", ex:"A hidden instruction in an email is summarized into memory and acted on later."}
+]},
+{key:"ident", name:"Identity and access", icon:"ti-fingerprint", threats:[
+  {id:"T15", name:"Identity spoofing", stages:["tool"], desc:"An entity impersonates a legitimate user, agent, or service identity.", ex:"A sub-agent presents credentials claiming to be its orchestrator."},
+  {id:"T16", name:"Privilege escalation", stages:["tool"], desc:"An agent gains permissions beyond what its task requires.", ex:"A read-only agent obtains write access via a shared credential."},
+  {id:"T17", name:"Session hijack", stages:["tool"], desc:"An active authenticated session is taken over and reused.", ex:"A leaked token lets an attacker reuse an agent's browser session."}
+]},
+{key:"tool", name:"Tool and services", icon:"ti-tool", threats:[
+  {id:"T20", name:"Malicious tool call", stages:["tool"], desc:"The agent is induced to invoke a tool in a harmful way.", ex:"A crafted input tricks the agent into emailing data to an attacker."},
+  {id:"T21", name:"Unauthorized API access", stages:["tool"], desc:"A tool call reaches an API or scope it wasn't authorized for.", ex:"An agent scoped to sandbox instead reaches a production endpoint."},
+  {id:"T26", name:"Sandbox escape", stages:["tool"], desc:"Execution breaks out of its isolation boundary into the host.", ex:"A code tool reaches the host filesystem outside its container."}
+]},
+{key:"out", name:"Output and exfiltration", icon:"ti-arrow-up-right", threats:[
+  {id:"T34b", name:"Covert side-channel exfiltration", stages:["output"], desc:"Sensitive data is smuggled out through an unmonitored rendering channel.", ex:"Markdown image syntax causes a client to fetch a URL encoding stolen data."}
+]},
+{key:"swarm", name:"Sub-agents and swarms", icon:"ti-network", threats:[
+  {id:"T27", name:"Trust ledger manipulation", stages:["reasoning","tool"], desc:"The record establishing trust between agents is falsified.", ex:"A rogue sub-agent inflates its own trust score."},
+  {id:"T28", name:"Agentic swarm escalation", stages:["reasoning","tool"], desc:"Coordinated sub-agents collectively achieve an unauthorized outcome.", ex:"Several scoped-down sub-agents each do a benign step that together bypass a control."}
+]},
+{key:"hitl", name:"Human governance", icon:"ti-user-check", threats:[
+  {id:"T35", name:"Approval fatigue", stages:["tool","output"], desc:"Frequent low-stakes approvals condition a reviewer to rubber-stamp.", ex:"A supervisor approves 40 routine requests a day and misses the one that isn't."},
+  {id:"T36", name:"Deceptive approval UI", stages:["tool","output"], desc:"The approval interface is manipulated so the human approves something else.", ex:"A relabeled button causes approval of a broader action than displayed."},
+  {id:"T37", name:"Social engineering of supervisor", stages:["tool","output"], desc:"The agent persuades a human overseer to override a safety control.", ex:"The agent argues a blocked action is urgent, prompting a manual bypass."}
+]},
+{key:"bound", name:"System boundary", icon:"ti-alert-triangle", threats:[
+  {id:"T30", name:"Cascading failure", stages:["ingest","reasoning","tool","output"], desc:"A failure in one component propagates and compounds across others.", ex:"Memory corruption triggers repeated flawed tool calls, each worsening state."},
+  {id:"T31", name:"Out-of-bound escalation cycle", stages:["ingest","reasoning","tool","output"], desc:"Once containment is breached, the system re-enters a failure loop.", ex:"Recovery logic itself re-triggers the same failure condition."}
+]}
+];
+
+let activeStage = "all";
+let activeDomain = domains[0].key;
+
+function filteredThreats(d){
+  return activeStage === "all" ? d.threats : d.threats.filter(t => t.stages.includes(activeStage));
+}
+
+function renderStages(){
+  const el = document.getElementById("stages");
+  el.innerHTML = "";
+  STAGES.forEach(s => {
+    const b = document.createElement("button");
+    b.textContent = s.label;
+    b.className = "pill" + (s.key === activeStage ? " active" : "");
+    b.onclick = () => { activeStage = s.key; renderAll(); };
+    el.appendChild(b);
+  });
+}
+
+function renderNodes(){
+  const el = document.getElementById("nodes");
+  el.innerHTML = "";
+  domains.forEach(d => {
+    const count = filteredThreats(d).length;
+    const btn = document.createElement("button");
+    btn.className = "node" + (d.key === activeDomain ? " active" : "") + (count === 0 ? " empty" : "");
+    btn.innerHTML = '<i class="ti '+d.icon+'" aria-hidden="true"></i>' +
+      '<span class="name">'+d.name+'</span>' +
+      '<span class="count">'+count+' threat'+(count!==1?"s":"")+'</span>';
+    btn.onclick = () => { activeDomain = d.key; renderAll(); };
+    el.appendChild(btn);
+  });
+}
+
+function renderDetail(){
+  const d = domains.find(x => x.key === activeDomain);
+  const items = filteredThreats(d);
+  const el = document.getElementById("detail");
+  let html = '<h2>'+d.name+' <span>'+items.length+' threat'+(items.length!==1?"s":"")+'</span></h2>';
+  if (items.length === 0){
+    html += '<p class="empty-msg">No threats in this domain at the selected stage.</p>';
+  } else {
+    items.forEach(t => {
+      html += '<div class="item">' +
+        '<p class="tid">'+t.id+' &middot; '+t.name+'</p>' +
+        '<p class="desc">'+t.desc+'</p>' +
+        '<p class="ex">Example: '+t.ex+'</p>' +
+        '</div>';
+    });
+  }
+  el.innerHTML = html;
+}
+
+function renderAll(){ renderStages(); renderNodes(); renderDetail(); }
+renderAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+---
+author: Kamal Dhingra
+pubDatetime: 2022-09-23T15:22:00Z
+title: Agentic AI threat model
+slug: te
+featured: false
+draft: false
+description: "TE"
+---
+
+# Agentic AI threat model
+
+Reference for threats across an agentic AI system's architecture and execution pipeline. 
+
+For the clickable, filterable version of this same data, see [`Agent Threat Explorer`](/images/te/agent_threat_explorer_1.html) 
+
+## Architecture overview
+ <img src="/images/te/archoverview.svg" alt=""  />
+
+## Pipeline view — where and when threats trigger
+ <img src="/images/te/pipelineview.svg" alt="" width="800" height="500" />
+
+## Full threat catalog
+
+28 threats across 9 domains. Generated from `agent_threat_catalog.xlsx` — treat the spreadsheet as source of truth if these ever diverge.
+
+### Agent Core (Reasoning) (7)
+
+| ID | Threat | Pipeline stage(s) | Description | Example |
+|---|---|---|---|---|
+| T01 | Goal overreach | Stage 2 - Reasoning | Agent expands or reinterprets its objective beyond the scope the user or operator granted. | Asked to 'clean up files', agent also deletes logs it decides are 'clutter'. |
+| T02 | Reward hacking | Stage 2 - Reasoning | Agent optimizes for a proxy signal (task marked complete, metric improved) rather than true intent. | Agent marks a test suite as passing by deleting the failing tests instead of fixing the bug. |
+| T03 | Unsafe external action | Stage 2 to 3 - Reasoning to tool execution | Reasoning output authorizes a real-world action without adequate safety or reversibility checks. | Agent issues a production database DROP instead of a scoped DELETE. |
+| T04 | Objective manipulation | Stage 1 to 2 - Ingest to reasoning | External input rewrites or subverts the agent's underlying goal. | A webpage the agent reads contains hidden text instructing it to change its own task. |
+| T29 | Runtime containment failure | Stage 2 - Reasoning / cross-cutting | The agent's execution runtime fails to enforce its own operating boundaries, allowing state or control to escape the intended sandBox. | An agent process retains elevated privileges after its task scope should have expired. |
+| T32 | Denial of wallet / recursion loop | Cross-cutting (Stage 2 to 3) | Unbounded recursion, retries, or sub-task spawning drains API budget or compute without a human noticing until cost is incurred. | A planning loop repeatedly re-invokes an expensive tool call on failure with no backoff or spend ceiling. |
+| T33 | Multimodal / steganographic jailbreak | Stage 1 to 2 - Ingest to reasoning | Instructions hidden in image, audio, or other non-text channels bypass filters built for the text modality. | An instruction embedded in image metadata or sub-audible audio reaches reasoning without passing text-based content filters. |
+
+### Orchestration (3)
+
+| ID | Threat | Pipeline stage(s) | Description | Example |
+|---|---|---|---|---|
+| T05 | Delegation hijack | Stage 2 to 3 - Reasoning to delegation | A malicious or compromised component intercepts or redirects a delegated sub-task. | A sub-task meant for a reporting tool is silently rerouted to an attacker-controlled endpoint. |
+| T06 | Task injection | Stage 1 to 2 - Ingest to orchestration | Unauthorized tasks are inserted into the delegation queue, appearing legitimate to downstream components. | A crafted document adds an extra 'send credentials to' step to the task list the agent processes. |
+| T07 | Priority manipulation | Stage 2 - Orchestration | Task ordering or urgency is manipulated to force premature or out-of-sequence execution. | An injected 'urgent' flag causes the agent to skip a review step it would normally wait for. |
+
+### Memory & Context (4)
+
+| ID | Threat | Pipeline stage(s) | Description | Example |
+|---|---|---|---|---|
+| T10 | Memory poisoning | Stage 2 - Memory read/write | Malicious data is written into persistent memory or a vector store to influence future reasoning. | A poisoned support ticket is stored and later retrieved as 'trusted' context for a different user. |
+| T11 | Context leakage | Stage 2 - Memory read/write | Information from one context, user, or session boundary bleeds into another. | One tenant's retrieved documents appear in another tenant's agent session. |
+| T12 | Long-term memory corruption | Stage 2 - Memory read/write | Persistent memory is degraded or falsified over time, compounding errors across sessions. | Repeated small factual injections gradually shift the agent's stored 'known facts' about a user. |
+| T34a | Indirect prompt injection (stored payload) | Stage 2 - Memory read/write | Untrusted content ingested earlier is stored, then later retrieved and treated as trusted instruction. | An email footer with hidden instructions is summarized into memory and acted on in a later session. |
+
+### Identity & Access (3)
+
+| ID | Threat | Pipeline stage(s) | Description | Example |
+|---|---|---|---|---|
+| T15 | Identity spoofing | Stage 3 - Tool / identity boundary | An entity impersonates a legitimate user, agent, or service identity to gain trust. | A sub-agent presents credentials claiming to be the orchestrator that spawned it. |
+| T16 | Privilege escalation | Stage 3 - Tool / identity boundary | An agent or component gains permissions beyond what its task or role requires. | A read-only reporting agent obtains write access via a misconfigured shared credential. |
+| T17 | Session hijack | Stage 3 - Tool / identity boundary | An active authenticated session is taken over and reused by an unauthorized party. | A leaked session token lets an attacker continue an agent's authenticated browser session. |
+
+### Tool & External Services (3)
+
+| ID | Threat | Pipeline stage(s) | Description | Example |
+|---|---|---|---|---|
+| T20 | Malicious tool call | Stage 3 - Tool execution | The agent is induced to invoke a tool or API in a harmful or unintended way. | A crafted input tricks the agent into calling a 'send email' tool to exfiltrate data. |
+| T21 | Unauthorized API access | Stage 3 - Tool execution | A tool call reaches an API or scope the agent was not authorized to use. | An agent scoped to a sandbox API instead reaches a production endpoint due to shared credentials. |
+| T26 | Sandbox escape | Stage 3 - Tool execution | Execution breaks out of its intended isolation boundary into the host system or network. | A code-execution tool call reaches the underlying host filesystem outside its container. |
+
+### Output & Exfiltration (1)
+
+| ID | Threat | Pipeline stage(s) | Description | Example |
+|---|---|---|---|---|
+| T34b | Covert side-channel exfiltration | Stage 4 - Output rendering | Sensitive data is smuggled out through a rendering channel that isn't monitored as a data-egress path. | Markdown image syntax rendered by the agent causes a client to fetch a URL encoding stolen data. |
+
+### Sub-Agents & Swarms (2)
+
+| ID | Threat | Pipeline stage(s) | Description | Example |
+|---|---|---|---|---|
+| T27 | Trust ledger manipulation | Stage 2 to 3 - Swarm coordination | The record used to establish trust between cooperating agents is falsified or tampered with. | A rogue sub-agent inflates its own trust score to gain approval authority over peers. |
+| T28 | Agentic swarm escalation | Stage 2 to 3 - Swarm coordination | Coordinated sub-agents collectively achieve an outcome no single agent was authorized to perform alone. | Several scoped-down sub-agents each perform a benign step that together bypass a control. |
+
+### Human Governance (HITL) (3)
+
+| ID | Threat | Pipeline stage(s) | Description | Example |
+|---|---|---|---|---|
+| T35 | Approval fatigue | Stage 3 to 4 - Human approval gate | Frequent, low-stakes-seeming approval requests condition a human reviewer to rubber-stamp without scrutiny. | A supervisor approves dozens of routine-looking requests per day and misses the one that isn't. |
+| T36 | Deceptive approval UI / clickjacking | Stage 3 to 4 - Human approval gate | The approval interface itself is manipulated so the human approves something other than what they believe. | An overlay or relabeled button causes a reviewer to approve a broader action than displayed. |
+| T37 | Social engineering of human supervisor | Stage 3 to 4 - Human approval gate | The agent, or content it surfaces, persuades a human overseer to override a safety control directly. | The agent argues a blocked action is urgent and safe, prompting the supervisor to bypass the gate. |
+
+### System & Escalation Boundary (2)
+
+| ID | Threat | Pipeline stage(s) | Description | Example |
+|---|---|---|---|---|
+| T30 | Cascading failure | Cross-cutting - all stages | A failure in one component propagates and compounds across other components rather than staying contained. | A memory corruption event triggers repeated flawed tool calls, each worsening system state. |
+| T31 | Out-of-bound escalation cycle | Cross-cutting - all stages | Once containment is breached, the system re-enters a failure loop rather than halting or degrading safely. | A containment failure triggers recovery logic that itself re-triggers the same failure condition. |
