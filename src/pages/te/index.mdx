@@ -107,26 +107,36 @@ description: "TE"
     }
   }
 `}</style>
-
+<div style="font-size: 1rem;">
 # Agentic AI threat model
 
-Reference for threats across an agentic AI system's architecture and execution pipeline. 
+This a Reference map of all threats across an agentic AI system's architecture and execution pipeline. 
 
 For the clickable, filterable version of this same data, see [`Agent Threat Explorer`](/images/te/agent_threat_explorer_1.html) 
 
 ## Architecture overview
+
+This represents an overview of all internal components and steps which are part of an agentic AI system which are responsible for processing of autonomous actions by the agent(s).
 <div class="svg-container" style="max-width: 800px; display: flex; flex-direction: column; margin-bottom: 2rem;">
 <img src="/images/te/archoverview.svg" alt="Architecture Overview Map" />
 </div>
 
 ## Pipeline view — where and when threats trigger
+
+This Pipeline view provides some lifecycle spots which are always prone to threats and malicious acts:
 <div class="svg-container" style="max-width: 800px; display: flex; flex-direction: column; margin-bottom: 0rem;">
 <img src="/images/te/pipelineview.svg" alt="Pipeline Threat Trigger Diagram" />
 </div>
 
+### Agentic AI threats-Operational Flow
+  <div class="svg-container">
+  <img src="/images/te/SATF-Agent_Threats_Flow.png" alt="Agentic AI Threat explorer" />
+  </div>
+
 ## Full threat catalog
 
-28 threats across 9 domains. Generated from `agent_threat_catalog.xlsx` — treat the spreadsheet as source of truth if these ever diverge.
+This is a full threat catalog with 
+28 threats across 9 domains based upon our current understanding of the agentic architecture and as source of truth if these ever diverge.
 
 ### Agent Core (Reasoning) (7)
 
@@ -211,4 +221,6 @@ For the clickable, filterable version of this same data, see [`Agent Threat Expl
 |---|---|---|---|---|
 | T30 | Cascading failure | Cross-cutting - all stages | A failure in one component propagates and compounds across other components rather than staying contained. | A memory corruption event triggers repeated flawed tool calls, each worsening system state. |
 | T31 | Out-of-bound escalation cycle | Cross-cutting - all stages | Once containment is breached, the system re-enters a failure loop rather than halting or degrading safely. | A containment failure triggers recovery logic that itself re-triggers the same failure condition. |
+</div>
+
 </div>
