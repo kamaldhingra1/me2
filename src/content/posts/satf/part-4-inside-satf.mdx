@@ -1,0 +1,198 @@
+---
+title: 'Inside Secure Agent Trust Framework (SATF)'
+description:  'SATF Series: Part 4- Agent Trust Fabric, Delegation Provenance, Goal Integrity, and Continuous Reassessment.'
+draft: false
+author: Kamal Dhingra
+tags: 
+- AI Security
+- Agentic AI
+- Agent Security
+- Zero Trust
+- SATF
+pubDatetime: 2026-07-26T04:58:53Z
+modDatetime: 2026-07-26T00:00:00.000Z
+slug: secure-agent-trust-framework-part4
+featured: true
+hideEditPost: true
+heroImage: "/images/satf/part4-continuous-reassessment-loop.png"
+---
+
+import Callout from '@/components/Callout.astro';
+import ArchitectureNote from '@/components/ArchitectureNote.astro';
+import ArchitectureNote2 from '@/components/ArchitectureNote2.astro';
+import Grid from '@/components/Grid.astro';
+import Inlineheader from '@/components/Inlineheader.astro';
+import Insight from '@/components/Insight.astro';
+import ResponsiveTable from '@/components/ResponsiveTable.astro';
+
+
+<ArchitectureNote title="Series Navigation" variant="info">
+This is Part 4 of 4 in the Secure Agent Trust Framework (SATF) series.
+
+- <a href="https://www.kamaldhingra.com/posts/satf/secure-agent-trust-framework-part1/">Part 1: The Agent Trust Gap</a> 
+- <a href="https://www.kamaldhingra.com/posts/satf/secure-agent-trust-framework-part2/">Part 2: Trust Is Not Granted Once </a>
+- <a href="https://www.kamaldhingra.com/posts/satf/secure-agent-trust-framework-part3/">Part 3: Introducing the Secure Agent Trust Framework (SATF) </a>
+- Part 4: Inside Secure Agent Trust Framework (SATF)<span style="font-size: 1.5em; line-height: 1;">👇</span>
+</ArchitectureNote>
+
+# Secure Agent Trust Framework (SATF) Series- Part 4: Inside SATF
+
+## Agent Trust Fabric, Delegation Provenance, Goal Integrity, and Continuous Reassessment
+
+![Continuous trust reassessment loop](/images/satf/part4-continuous-reassessment-loop.png)
+
+## Executive TL;DR
+
+SATF becomes operational through the Agent Trust Fabric, Ring 2 enforcement, Ring 3 validation, and the cross-cutting Governance, Telemetry, and Assurance control plane.
+
+The key operational loop is:
+<Callout type="Exe">
+
+Runtime telemetry + validation findings + governance evidence
+
+        ↓
+
+Agent Trust Fabric recalculates trust
+
+        ↓
+
+Adaptive trust policies update Ring 2 PDPs
+
+        ↓
+        
+Runtime actions are allowed, constrained, escalated, or contained
+
+
+</Callout>
+
+## Agent Trust Fabric in practice
+
+The Agent Trust Fabric is the decision engine for autonomous trust.
+
+It evaluates seven primitives:
+<Callout type="Sol">
+1. **Identity**: which agent is acting?
+2. **Intent**: what is the agent trying to accomplish?
+3. **Task context**: what workflow, user request, or business process triggered the action?
+4. **Goal**: is the objective approved, bounded, and aligned?
+5. **Dynamic risk score**: how sensitive, consequential, or anomalous is the action?
+6. **Behavior**: does the action match expected task progression and policy?
+7. **Delegation provenance**: where did authority originate, what scope was delegated, and when does delegation expire?
+</Callout>
+
+<Insight title="SATF Insight">
+Delegated trust is not inherited. Delegated trust must be verified, scoped, time-bound, and traceable.
+</Insight>
+
+## Goal Integrity and Objective Boundaries
+
+Agents may create risk without explicit malicious intent. A capable agent can pursue a narrow objective in an unsafe way.
+
+> SATF therefore includes **Goal Integrity**.
+
+<Callout type="Exe">
+      **Controls include:**
+
+        - Objective validation
+        - Success criteria constraints
+        - Forbidden-path rules
+        - Goal-drift monitoring
+        - Reward-hacking detection
+        - Objective revalidation after tool use, memory updates, delegation, privilege changes, or boundary crossing
+</Callout>
+
+<ArchitectureNote title="Goal Integrity" variant="warning">
+The question is not only whether the agent is authenticated. The question is whether the objective is legitimate, bounded, and pursued through approved paths.
+</ArchitectureNote>
+
+## Continuous Trust Reassessment Loop
+
+**SATF continuously recalculates trust.**
+<Grid isContainer>
+
+  <Grid sm="12" md="6">
+<Inlineheader title="" subtitle="" />
+      Inputs include:
+        - runtime telemetry,
+        - validation findings,
+        - audit evidence,
+        - policy violations,
+        - behavioral drift,
+        - goal drift,
+        - delegation anomalies,
+        - threat intelligence,
+        - assurance test results.
+ </Grid>
+  <Grid sm="12" md="6">
+<Inlineheader title="" subtitle="" />
+      Outputs include:
+        - tighten scope,
+        - reduce delegation authority,
+        - require step-up review,
+        - deny the action,
+        - quarantine memory,
+        - revoke credentials,
+        - isolate the agent,
+        - re-establish trust after revalidation.
+</Grid>
+ </Grid>
+
+<ArchitectureNote title="Control Separation" variant="success">
+Validation discovers. Governance decides. Enforcement applies.
+
+Keeping those responsibilities separate prevents runtime controls, assurance findings, and governance decisions from collapsing into a single opaque control point.
+</ArchitectureNote>
+
+## Maturity model
+<ResponsiveTable variant="striped" class="max-sm:-mx-4 [&_td]:first-of-type:text-nowrap">
+
+| Ring / Plane | L1 Ad hoc | L2 Defined | L3 Managed | L4-L5 Optimized |
+|---|---|---|---|---|
+| Establishment | Shared credentials, no owner map | Unique identity, named owners | Least agency by default | Lifecycle automation |
+| Enforcement | Static allowlists | Contextual policy for high-risk actions | PDP / PEP for meaningful actions | Real-time policy tuned by trust score |
+| Validation | No adversarial testing | Periodic red team | Continuous monitoring and Rule of Two | Automated containment on drift |
+| Governance / Telemetry / Assurance | No inventory | Inventory and risk tiers | Audit trail for all agents | Evidence feeds reporting and adaptive policy |
+| Operational Plane | Manual response | Playbooks | SOAR integration | Automated containment with governed recovery |
+
+</ResponsiveTable>
+
+## Practical adoption checklist
+
+Start with these actions:
+<Callout type="Exe">
+1. Build an agent inventory.
+2. Assign human controllers and business owners.
+3. Remove shared credentials.
+4. Define least-agency tool scopes.
+5. Add contextual authorization for high-risk actions.
+6. Add delegation provenance and short-lived delegation TTLs.
+7. Define objective boundaries and forbidden paths.
+8. Instrument tool calls, memory writes, policy decisions, goal-state changes, and cross-agent workflows.
+9. Apply Rule of Two guardrails to sensitive workflows.
+10. Build response playbooks for revoke, isolate, rollback, quarantine, shutdown, and re-establishment.
+11. Run red-team and goal-drift exercises.
+12. Create a maturity scorecard.
+</Callout>
+
+## Closing thought
+
+> Autonomous agents will create enormous value, but they require a different trust model.
+
+The future of agent security is not just stronger identity, better prompts, or more monitoring.
+
+<Callout type="Sol">
+The future is continuous agent trust.
+</Callout>
+
+## References
+
+- Secure Agent Trust Framework (SATF), <a href="https://github.com/kamaldhingra1/secure-agent-trust-framework" target="_blank"> *SATF- End-to-End Enterprise Framework for Autonomous Agent Governance and Contextual Security*</a>
+- OpenAI, <a href="https://openai.com/index/hugging-face-model-evaluation-security-incident/" target="_blank"> *OpenAI and Hugging Face partner to address security incident during model evaluation*</a>
+- Cloud Security Alliance AI Safety Initiative,<a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-huggingface-clawhub-malware-supply-chain-2/" target="_blank"> *Hugging Face’s Autonomous AI Agent Breach*.</a>
+- Anthropic, <a href="https://claude.com/blog/zero-trust-for-ai-agents" target="_blank">*Zero Trust for AI Agents*.</a> 
+- Google DeepMind, <a href="https://deepmind.google/blog/securing-the-future-of-ai-agents/" target="_blank"> *AI Control Roadmap* and TRAIT&R.</a>
+- Tsai and Bagdasarian,<a href="https://sigops.org/s/conferences/hotos/2025/papers/hotos25-100.pdf" target="_blank"> *Contextual Agent Security / Conseca*.</a>
+- CSA ATF,<a href="https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents" target="_blank"> *The Agentic Trust Framework: Zero Trust Governance for AI Agents*.</a>
+- Meta AI / Rule of Two discussions for agentic applications.
+- MITRE ATLAS, OWASP LLM / Agentic guidance, NIST AI RMF, ISO/IEC 42001.
+
