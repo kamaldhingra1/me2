@@ -570,7 +570,7 @@
     margin-bottom:10px;
   }
   .boundary-tag .dot{ width:6px; height:6px; border-radius:50%; }
-  .case-card .case-eyebrow{
+  .case-eyebrow{
     font-family:var(--font-mono);
     font-size:10px;
     color:var(--muted-2);
@@ -584,17 +584,19 @@
     margin:0 0 8px;
     line-height:1.3;
   }
-  .case-card .case-what{ font-size:12.5px; color:var(--text); line-height:1.55; margin-bottom:10px; flex:1; }
-  .case-card .case-echo{
+  .case-what{ font-size:12.5px; color:var(--text); line-height:1.55; margin:0 0 14px; }
+  .case-card .case-what{ flex:1; margin-bottom:10px; }
+  .case-echo{
     font-size:11.5px;
     color:var(--cyan);
     line-height:1.5;
     border-top:1px solid var(--hairline);
     padding-top:10px;
-    margin-bottom:10px;
+    margin:0 0 14px;
   }
-  .case-card .case-echo b{ color:var(--cyan); }
-  .case-card .case-source{
+  .case-card .case-echo{ margin-bottom:10px; }
+  .case-echo b{ color:var(--cyan); }
+  .case-source{
     font-family:var(--font-mono);
     font-size:9.5px;
     color:var(--muted-2);
@@ -1011,6 +1013,27 @@
           <div id="dRisks"></div>
         </div>
       </div>
+      <div id="drawerIncident" style="display:none; flex-direction:column; height:100%; min-height:0;">
+        <div class="drawer-head">
+          <span class="boundary-tag" id="iBoundaryTag">
+            <span class="dot" id="iBoundaryDot"></span><span id="iBoundaryLabel"></span>
+          </span>
+          <h2 id="iTitle" style="margin-top:6px;"></h2>
+          <p class="case-eyebrow" id="iEchoes" style="margin:0;"></p>
+        </div>
+        <div class="risk-section" style="min-height:0;">
+          <span class="section-label">What Happened</span>
+          <p class="case-what" id="iWhat"></p>
+          <span class="section-label">Attack Path</span>
+          <p class="case-echo" id="iChainPath" style="border-top:none; padding-top:0;"></p>
+          <span class="section-label">How It Plays Out</span>
+          <p class="case-what" id="iNarrative"></p>
+          <span class="section-label">Combined Impact</span>
+          <p class="case-what" id="iImpact"></p>
+          <div class="case-source" id="iSource" style="margin-bottom:14px;"></div>
+          <button class="view-map-btn" id="iBackToLibrary">← Back to Incident Library</button>
+        </div>
+      </div>
     </aside>
   </div>
 
@@ -1407,6 +1430,7 @@
   const drawerEl = document.getElementById('drawer');
   const drawerEmpty = document.getElementById('drawerEmpty');
   const drawerContent = document.getElementById('drawerContent');
+  const drawerIncident = document.getElementById('drawerIncident');
 
   function openComponent(id){
     state.activeComponent = id;
@@ -1415,6 +1439,7 @@
 
     const c = COMPONENTS.find(x => x.id === id);
     drawerEmpty.style.display = 'none';
+    drawerIncident.style.display = 'none';
     drawerContent.style.display = 'flex';
     drawerEl.classList.add('open');
 
@@ -1771,6 +1796,43 @@
   // ---------------------------------------------------------------
   // INCIDENT LIBRARY
   // ---------------------------------------------------------------
+  function openIncidentDrawer(chain){
+    state.activeComponent = null;
+    const compIds = [...new Set(chain.requires.map(componentIdForRisk))];
+    document.querySelectorAll('.node-hit').forEach(n => n.classList.remove('active'));
+    compIds.forEach(cid => {
+      const n = document.getElementById('node-' + cid);
+      if(n) n.classList.add('active');
+    });
+
+    drawerEmpty.style.display = 'none';
+    drawerContent.style.display = 'none';
+    drawerIncident.style.display = 'flex';
+    drawerEl.classList.add('open');
+
+    const bmeta = BOUNDARY_META[chain.boundary];
+    document.getElementById('iBoundaryDot').style.background = bmeta.color;
+    document.getElementById('iBoundaryLabel').textContent = bmeta.label;
+    const tagEl = document.getElementById('iBoundaryTag');
+    tagEl.style.color = bmeta.color;
+    tagEl.style.borderColor = bmeta.color;
+    document.getElementById('iTitle').textContent = chain.incident.title;
+    document.getElementById('iEchoes').textContent = 'Echoes: ' + chain.name;
+    document.getElementById('iWhat').textContent = chain.incident.what;
+    const compNames = compIds.map(cid => COMPONENTS.find(c => c.id === cid).name);
+    document.getElementById('iChainPath').textContent = compNames.join('  →  ');
+    document.getElementById('iNarrative').textContent = chain.narrative;
+    document.getElementById('iImpact').textContent = chain.impact;
+    document.getElementById('iSource').textContent = 'Source: ' + chain.incident.source;
+  }
+
+  document.getElementById('iBackToLibrary').addEventListener('click', () => {
+    drawerEl.classList.remove('open');
+    document.querySelectorAll('.node-hit').forEach(n => n.classList.remove('active'));
+    state.activeComponent = null;
+    switchTab('library');
+  });
+
   function renderLibrary(){
     const grid = document.getElementById('libraryGrid');
     grid.innerHTML = '';
@@ -1801,6 +1863,7 @@
         card.querySelector('.view-map-btn').addEventListener('click', () => {
           switchTab('map');
           drawChainArcs(chain);
+          openIncidentDrawer(chain);
         });
       }
       grid.appendChild(card);
