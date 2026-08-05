@@ -181,6 +181,8 @@
     overflow:hidden;
   }
   .diagram-wrap svg{width:100%; height:100%; max-height:82vh;}
+  .svg-scroll{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+  .scroll-hint{ display:none; }
 
   .hint-banner{
     position:absolute;
@@ -323,6 +325,7 @@
     padding:14px 20px 24px;
     overflow-y:auto;
     flex:1;
+    min-height:0;
   }
   .risk-section .section-label{
     font-family:var(--font-mono);
@@ -568,7 +571,9 @@
     .drawer{
       width:100%;
       max-width:100%;
-      max-height:52vh;
+      height:58vh;
+      max-height:58vh;
+      overflow:hidden;
       border-left:none;
       border-top:1px solid var(--hairline);
       transform:translateY(100%);
@@ -577,10 +582,54 @@
       border-radius:16px 16px 0 0;
     }
     .drawer.open{ transform:translateY(0); }
-    .diagram-wrap svg{ max-height:60vh; }
     .stats{ gap:12px; }
     header.topbar{ padding:12px 16px; }
     .tray{ padding:8px 16px; }
+
+    /* Diagram: let it scroll/pinch-zoom at real size instead of shrinking text unreadably */
+    .diagram-wrap{
+      flex-direction:column;
+      align-items:stretch;
+      padding:10px 10px 0;
+      overflow:visible;
+    }
+    .svg-scroll{
+      width:100%;
+      height:58vh;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      justify-content:flex-start;
+      touch-action:pan-x pan-y pinch-zoom;
+    }
+    .diagram-wrap svg{
+      width:640px;
+      min-width:640px;
+      height:500px;
+      max-height:none;
+      flex:none;
+    }
+    .legend{
+      position:static;
+      width:100%;
+      max-width:100%;
+      margin:8px 0;
+      justify-content:center;
+    }
+    .scroll-hint{
+      display:block;
+      text-align:center;
+      font-family:var(--font-mono);
+      font-size:10.5px;
+      color:var(--muted-2);
+      padding:6px 0 2px;
+    }
+
+    /* Bigger touch targets */
+    .quick-add{ width:30px; height:30px; font-size:16px; }
+    .risk-chip-head{ padding:13px 12px; }
+    .add-btn{ padding:10px 12px; }
+
+    .intro-card h1{ font-size:clamp(24px, 7vw, 32px); }
   }
 </style>
 </head>
@@ -624,7 +673,10 @@
   <div class="stage">
     <div class="diagram-wrap">
       <div class="hint-banner" id="hintBanner"></div>
-      <svg id="diagramSvg" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="svg-scroll" id="svgScroll">
+        <svg id="diagramSvg" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="scroll-hint">Scroll or pinch to see the full map ↔</div>
       <div class="legend">
         <div class="item"><span class="dot" style="background:var(--sev-low)"></span>Low</div>
         <div class="item"><span class="dot" style="background:var(--sev-medium)"></span>Medium</div>
@@ -636,7 +688,7 @@
     <aside class="drawer" id="drawer">
       <button class="drawer-close" id="drawerClose">×</button>
       <div class="drawer-empty" id="drawerEmpty">Select a component on the map to inspect it.</div>
-      <div id="drawerContent" style="display:none; flex-direction:column; height:100%;">
+      <div id="drawerContent" style="display:none; flex-direction:column; height:100%; min-height:0;">
         <div class="drawer-head">
           <div class="tag" id="dTag"></div>
           <h2 id="dName"></h2>

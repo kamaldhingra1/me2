@@ -392,6 +392,7 @@
     padding:14px 20px 24px;
     overflow-y:auto;
     flex:1;
+    min-height:0;
   }
   .risk-section .section-label{
     font-family:var(--font-mono);
@@ -857,7 +858,9 @@
     .drawer{
       width:100%;
       max-width:100%;
-      max-height:52vh;
+      height:58vh;
+      max-height:58vh;
+      overflow:hidden;
       border-left:none;
       border-top:1px solid var(--hairline);
       transform:translateY(100%);
@@ -993,7 +996,7 @@
     <aside class="drawer" id="drawer">
       <button class="drawer-close" id="drawerClose">×</button>
       <div class="drawer-empty" id="drawerEmpty">Select a component on the map to inspect it.</div>
-      <div id="drawerContent" style="display:none; flex-direction:column; height:100%;">
+      <div id="drawerContent" style="display:none; flex-direction:column; height:100%; min-height:0;">
         <div class="drawer-head">
           <div class="tag" id="dTag"></div>
           <h2 id="dName"></h2>
