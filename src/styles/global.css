@@ -29,6 +29,10 @@
   @apply max-w-app mx-auto w-full px-4;
 }
 
+@utility app-layout2 {
+  @apply relative max-w-app mx-auto w-full px-4;
+}
+
 @utility active-nav {
   @apply underline decoration-wavy decoration-2 underline-offset-8;
 }

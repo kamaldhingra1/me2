@@ -12,6 +12,7 @@ import { stripBase, stripLocale } from "@/utils/withBase";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 import IconRss from "@/assets/icons/favicon.svg";
+import Whatsnew from "@/components/Whatsnew.astro";
 
 const { site, features } = config;
 
@@ -43,7 +44,7 @@ const isActive = (path: string) => {
   {t.a11y.skipToContent}
 </a>
 
-<header class="app-layout flex flex-col items-center justify-between sm:flex-row w-full px-4">
+<header class="app-layout2 flex flex-col items-center justify-between sm:flex-row w-full px-4">
 
   <div class="border-border bg-background relative flex w-full flex-col border-b py-4 sm:py-6 sm:flex-row sm:items-center sm:justify-between">
       <div class="flex flex-row items-center gap-4 flex-wrap">
@@ -174,7 +175,7 @@ const isActive = (path: string) => {
  
   </div>
 
- 
+  <Whatsnew />
 </header>
 
 
