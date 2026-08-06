@@ -1,15 +1,5 @@
 # AstroPaper 📄
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
-    "preview": "astro preview",
-    "sync": "astro sync",
-    "astro": "astro",
-    "format:check": "prettier --check .",
-    "format": "prettier --write .",
-    "lint": "eslint ."
-  },
+
 ![AstroPaper](public/default-og.jpg)
 [![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/community/file/1356898632249991861)
 ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
