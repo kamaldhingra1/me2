@@ -170,12 +170,19 @@ const isActive = (path: string) => {
             </li>
           )
         }
+         <li class="col-span-2">
+          <a
+            href={getRelativeLocaleUrl(locale, "/fun/ase2")}
+            class:list={{ "active-nav": isActive("/fun/ase2") }}
+          >
+            {t.nav.whatsnew}
+          </a>
+        </li>
       </ul>
     </nav>
  
   </div>
 
-  <Whatsnew />
 </header>
 
 

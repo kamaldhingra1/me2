@@ -8,6 +8,7 @@ export default {
     about: "About",
     archives: "Archives",
     search: "Search",
+    whatsnew: "Agentic Explorer"
   },
   post: {
     publishedAt: "Published at",
