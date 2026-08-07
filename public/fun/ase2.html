@@ -1072,6 +1072,19 @@
 </div>
 
 <script>
+ 
+  // ---------------------------------------------------------------
+  // STATE
+  // ---------------------------------------------------------------
+  const state = {
+    activeComponent:null,
+    basket:new Set(),
+    viewedRisks:new Set(),
+    discoveredChains:new Set(),
+    hintTimer:null,
+    guided:true
+  };
+
 (function(){
 
   // ---------------------------------------------------------------
@@ -1307,17 +1320,6 @@
   const RISK_INDEX = {};
   COMPONENTS.forEach(c => c.risks.forEach(r => { RISK_INDEX[r.id] = { risk:r, componentId:c.id }; }));
 
-  // ---------------------------------------------------------------
-  // STATE
-  // ---------------------------------------------------------------
-  const state = {
-    activeComponent:null,
-    basket:new Set(),
-    viewedRisks:new Set(),
-    discoveredChains:new Set(),
-    hintTimer:null,
-    guided:true
-  };
 
   // ---------------------------------------------------------------
   // ICONS (simple inline glyphs drawn at local origin, scaled by caller)
