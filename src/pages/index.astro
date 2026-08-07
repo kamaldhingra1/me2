@@ -28,6 +28,8 @@ const homePath = getRelativeLocaleUrl(locale, "");
 
 <Layout>
   <Header />
+  
+
   <main
     id="main-content"
     data-layout="index"
@@ -53,11 +55,12 @@ const homePath = getRelativeLocaleUrl(locale, "");
           width={60}
           height={60}
           viewBox="0 -50 1200 850" 
-          class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
+          class="stroke-accent scale-125 stroke-3 rtl:-rotate-90 animate-pulse [animation-duration:1.2s]"
         />
         <span class="sr-only">RSS Feed</span>
       </a>
 </div>
+
       <p>
      Passionate about Securing AI for humans.
       </p>
@@ -122,6 +125,8 @@ const homePath = getRelativeLocaleUrl(locale, "");
 
   <Footer />
 </Layout>
+
+
 
 <script>
   document.addEventListener("astro:page-load", () => {
