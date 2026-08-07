@@ -951,8 +951,8 @@
       <div class="stat"><span class="num" id="statRisksViewed">0/34</span><span class="lbl">Risks Inspected</span></div>
       <div class="stat"><span class="num" id="statChains">0/8</span><span class="lbl">Cases Unlocked</span></div>
       <div class="mode-toggle">
-        <button class="mode-btn active" id="modeGuidedBtn">Guided</button>
-        <button class="mode-btn" id="modeExploreBtn">Explore</button>
+        <button class="mode-btn" id="modeGuidedBtn">Guided</button>
+        <button class="mode-btn active" id="modeExploreBtn">Explore</button>
       </div>
       <button class="ghost" id="hintBtn">Hint</button>
       <button class="ghost" id="resetBtn">Reset</button>
@@ -1082,7 +1082,7 @@
     viewedRisks:new Set(),
     discoveredChains:new Set(),
     hintTimer:null,
-    guided:true
+    guided:false
   };
 
 (function(){
