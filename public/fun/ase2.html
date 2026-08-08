@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentic Attack Surface — Multi-Agent System Explorer</title>
+<title>Agentic Attack Surface v2.1b Label Fix — Multi-Agent System Explorer</title>
 <style>
   :root{
     --void:#0B0F14;
@@ -25,6 +25,9 @@
     --b-mission:#4FC1E8;
     --b-trust:#E8573F;
     --b-identity:#A672E8;
+    --b-context:#7AD6A4;
+    --b-supply:#D084F5;
+    --b-egress:#6AA9FF;
     --font-display:'Space Grotesk', system-ui, sans-serif;
     --font-mono:'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
     --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -159,7 +162,7 @@
     border-bottom:2px solid transparent;
     color:var(--muted);
     font-family:var(--font-mono);
-    font-size:12px;
+    font-size:11px;
     letter-spacing:0.04em;
     text-transform:uppercase;
     padding:12px 6px;
@@ -798,6 +801,63 @@
   }
   .modal-close-btn:hover{ border-color:var(--amber); }
 
+
+
+  .ring-circle{ fill:none; stroke:rgba(132,150,168,0.22); stroke-width:1.2; stroke-dasharray:5 8; }
+  .ring-label{ font-family:var(--font-mono); font-size:11px; fill:var(--muted-2); text-transform:uppercase; letter-spacing:0.12em; pointer-events:none; }
+  .node-layer-runtime .node-shape{ stroke:rgba(79,193,232,0.55); }
+  .node-layer-trustops .node-shape{ stroke:rgba(166,114,232,0.55); }
+  .node-layer-interaction .node-shape{ stroke:rgba(232,163,61,0.55); }
+  .node-hit.active .node-shape{ stroke:var(--amber) !important; }
+
+
+  .ring-band{ fill:none; stroke-linecap:round; pointer-events:none; }
+  .ring-band.runtime{ stroke:rgba(79,193,232,0.13); stroke-width:94; }
+  .ring-band.trustops{ stroke:rgba(166,114,232,0.13); stroke-width:112; }
+  .ring-band.interaction{ stroke:rgba(232,163,61,0.12); stroke-width:124; }
+  .ring-circle{ fill:none; stroke-width:2.6; stroke-dasharray:none; pointer-events:none; }
+  .ring-circle.runtime{ stroke:rgba(79,193,232,0.68); }
+  .ring-circle.trustops{ stroke:rgba(166,114,232,0.62); }
+  .ring-circle.interaction{ stroke:rgba(232,163,61,0.58); }
+  .ring-label{ font-family:var(--font-mono); font-size:13px; font-weight:700; fill:var(--text); text-transform:uppercase; letter-spacing:0.12em; pointer-events:none; paint-order:stroke; stroke:rgba(11,15,20,0.9); stroke-width:4px; }
+  .conn-line.runtime{ stroke:rgba(79,193,232,0.74); stroke-width:2.8; }
+  .conn-line.trustops{ stroke:rgba(166,114,232,0.66); stroke-width:2.25; }
+  .conn-line.interaction{ stroke:rgba(232,163,61,0.58); stroke-width:1.9; }
+
+  /* ---------- threat catalog ---------- */
+  .catalog-toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0 0 18px;
+  }
+  .catalog-summary{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0 0 18px;
+    max-width:1180px;
+  }
+  .catalog-summary .pill{
+    border:1px solid var(--hairline);
+    background:var(--panel-2);
+    border-radius:999px;
+    padding:6px 11px;
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    color:var(--muted);
+  }
+  .catalog-group{max-width:1180px;margin-bottom:26px;}
+  .catalog-group h3{font-family:var(--font-display);font-size:18px;margin:0 0 12px;color:var(--text);}
+  .catalog-table{width:100%;border-collapse:collapse;background:var(--panel-2);border:1px solid var(--hairline);border-radius:12px;overflow:hidden;font-size:12.5px;}
+  .catalog-table th,.catalog-table td{border-bottom:1px solid var(--hairline);padding:10px 12px;text-align:left;vertical-align:top;}
+  .catalog-table th{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted-2);background:rgba(11,15,20,0.35);}
+  .catalog-table td{color:var(--muted);line-height:1.45;}
+  .catalog-table td strong{color:var(--text);}
+  .sev-badge{display:inline-block;font-family:var(--font-mono);font-size:9.5px;text-transform:uppercase;letter-spacing:0.06em;padding:3px 8px;border-radius:999px;color:#1a1005;}
+  .source-link{color:var(--cyan);text-decoration:none;}
+  .source-link:hover{text-decoration:underline;}
+
   /* ---------- intro overlay ---------- */
   .intro-overlay{
     position:fixed; inset:0;
@@ -891,9 +951,9 @@
       touch-action:pan-x pan-y pinch-zoom;
     }
     .diagram-wrap svg{
-      width:640px;
-      min-width:640px;
-      height:500px;
+      width:980px;
+      min-width:980px;
+      height:720px;
       max-height:none;
       flex:none;
     }
@@ -920,6 +980,13 @@
     .view-map-btn, .add-btn{ padding:10px 12px; }
 
     .intro-card h1{ font-size:clamp(24px, 7vw, 32px); }
+
+    .catalog-table,.catalog-table thead,.catalog-table tbody,.catalog-table th,.catalog-table td,.catalog-table tr{display:block;}
+    .catalog-table thead{display:none;}
+    .catalog-table tr{border-bottom:1px solid var(--hairline);padding:10px 0;}
+    .catalog-table td{border-bottom:none;padding:6px 12px;}
+    .catalog-table td::before{content:attr(data-label);display:block;font-family:var(--font-mono);font-size:9px;color:var(--muted-2);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;}
+
   }
 </style>
 </head>
@@ -929,7 +996,7 @@
   <div class="intro-card">
     <div class="eyebrow">Agentic Attack Surface</div>
     <h1>Take apart a multi-agent<br>system, one node at a time.</h1>
-    <p>Eleven components make up a typical agentic AI system. Each one carries its own risks. Click through the diagram to inspect them — then collect risks from different components into your basket to see whether they chain into a bigger attack path.</p>
+    <p>Eighteen components make up a v2 agentic AI attack surface model, organized into clear Runtime, TrustOps, and Interaction Surface bands. Each one carries its own risks. Click through the diagram to inspect them — then collect risks from different components into your basket to see whether they chain into a bigger attack path.</p>
     <div class="steps">
       <div><span class="s">01</span> — Click a node to see what it does and what can go wrong.</div>
       <div><span class="s">02</span> — Add risks to your basket from two or more components.</div>
@@ -937,7 +1004,7 @@
       <div><span class="s">04</span> — Each path you unlock reveals the real 2025–2026 incident it echoes, in the Incident Library tab.</div>
       <div><span class="s">·</span> — Switch to Explore mode anytime to turn off the on-map guidance and work it out yourself.</div>
     </div>
-    <button class="start-btn" id="startBtn">Start exploring</button> <a href="/"> <button class="ghost" id="homeBtn">Back=>Home</button></a>
+    <button class="start-btn" id="startBtn">Start exploring</button> <a href="/"> <button class="ghost" id="introHomeBtn">Back=>Home</button></a>
   </div> 
 </div>
 
@@ -945,25 +1012,26 @@
   <header class="topbar">
     <div class="brand">
       <div class="eyebrow">Agentic Attack Surface</div>
-      <h1>Multi-Agent System Explorer</h1>
+      <h1>Multi-Agent System Explorer v2</h1>
     </div>
     <div class="stats">
-      <div class="stat"><span class="num" id="statRisksViewed">0/34</span><span class="lbl">Risks Inspected</span></div>
-      <div class="stat"><span class="num" id="statChains">0/8</span><span class="lbl">Cases Unlocked</span></div>
+      <div class="stat"><span class="num" id="statRisksViewed">0/66</span><span class="lbl">Risks Inspected</span></div>
+      <div class="stat"><span class="num" id="statChains">0/10</span><span class="lbl">Cases Unlocked</span></div>
       <div class="mode-toggle">
-        <button class="mode-btn" id="modeGuidedBtn">Guided</button>
-        <button class="mode-btn active" id="modeExploreBtn">Explore</button>
+        <button class="mode-btn active" id="modeGuidedBtn">Guided</button>
+        <button class="mode-btn" id="modeExploreBtn">Explore</button>
       </div>
       <button class="ghost" id="hintBtn">Hint</button>
       <button class="ghost" id="resetBtn">Reset</button>
       <a href="/">
-      <button class="ghost" id="homeBtn"> Back=>Home</button></a>
+      <button class="ghost" id="topHomeBtn"> Back=>Home</button></a>
     </div>
   </header>
 
   <nav class="tabnav">
     <button class="tab-btn active" id="tabMapBtn">System Map</button>
-    <button class="tab-btn" id="tabLibraryBtn">Incident Library <span class="count" id="tabLibraryCount">(0/8)</span></button>
+    <button class="tab-btn" id="tabLibraryBtn">Incident Library <span class="count" id="tabLibraryCount">(0/10)</span></button>
+    <button class="tab-btn" id="tabCatalogBtn">Threat Catalog <span class="count" id="tabCatalogCount">(66)</span></button>
   </nav>
 
   <div class="tray" id="tray">
@@ -977,7 +1045,7 @@
     <div class="diagram-wrap">
       <div class="hint-banner" id="hintBanner"></div>
       <div class="svg-scroll" id="svgScroll">
-        <svg id="diagramSvg" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg"></svg>
+        <svg id="diagramSvg" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg"></svg>
       </div>
       <div class="scroll-hint">Scroll or pinch to see the full map ↔</div>
       <div class="legend">
@@ -1042,9 +1110,24 @@
   <div class="library-view" id="libraryView">
     <div class="library-intro">
       <h2>Incident Library</h2>
-      <p>Every attack path on the map echoes something that actually happened. Discover a chain in the System Map to unlock the real-world case behind it — based on public incident reporting from 2025–2026, simplified for teaching.</p>
+      <p>Every attack path on the map echoes something that actually happened. Discover a chain in the System Map to unlock the real-world case behind it — based on public incident reporting and research from 2025–2026, simplified for teaching.</p>
     </div>
     <div class="library-grid" id="libraryGrid"></div>
+  </div>
+
+  <div class="library-view" id="catalogView">
+    <div class="library-intro">
+      <h2>Threat Catalog</h2>
+      <p>Single-pane listing of all agentic AI threats and risks in this explorer. Group by component or severity, then download the complete catalog for architecture reviews, tabletop exercises, or course handouts.</p>
+    </div>
+    <div class="catalog-toolbar">
+      <button class="ghost" id="groupByComponentBtn">Group by Component</button>
+      <button class="ghost" id="groupBySeverityBtn">Group by Severity</button>
+      <button class="ghost" id="downloadCsvBtn">Download CSV</button>
+      <button class="ghost" id="downloadJsonBtn">Download JSON</button>
+    </div>
+    <div class="catalog-summary" id="catalogSummary"></div>
+    <div id="catalogContent"></div>
   </div>
 </div>
 
@@ -1072,8 +1155,7 @@
 </div>
 
 <script>
- 
-  // ---------------------------------------------------------------
+// ---------------------------------------------------------------
   // STATE
   // ---------------------------------------------------------------
   const state = {
@@ -1082,7 +1164,7 @@
     viewedRisks:new Set(),
     discoveredChains:new Set(),
     hintTimer:null,
-    guided:false
+    guided:true
   };
 
 (function(){
@@ -1205,6 +1287,84 @@
         {id:'human-unclear-accountability', name:'Unclear accountability', severity:'medium', impact:'When something goes wrong, it\'s unclear whether the human approver, the agent, or the system designer is responsible for the outcome.', mitigation:'Log exactly what was shown to the approver at decision time, not just that approval occurred.'}
       ]
     },
+
+    {
+      id:'identityauth', name:'Agent Identity & AuthZ', tag:'Authority Plane', role:'spoke',
+      desc:'Issues, verifies, scopes, and revokes agent identities and delegated authority for actions.',
+      core:['Assigns verifiable identities to agents','Authorizes sensitive actions per task and context','Revokes or constrains delegated authority when risk changes'],
+      icon:'shield',
+      risks:[
+        {id:'id-rogue-registration', name:'Rogue agent registration', severity:'critical', impact:'An attacker enrolls an untrusted agent into the environment and makes it appear legitimate to orchestrators, tools, or other agents.', mitigation:'Require signed registration, verified ownership, approval workflows, and continuous inventory reconciliation for agent identities.'},
+        {id:'id-broken-delegation', name:'Broken delegated authorization', severity:'high', impact:'An agent receives authority from another agent without a task-bound policy check, allowing privilege to spread beyond the original intent.', mitigation:'Bind delegated permissions to task, actor, time, data scope, and action type; re-check authorization at every sensitive call.'},
+        {id:'id-stale-token-reuse', name:'Stale or revoked token reuse', severity:'high', impact:'A token that should no longer be trusted still works, letting compromised agents continue acting after deactivation or scope changes.', mitigation:'Use short-lived tokens, revocation checks, audience binding, and continuous token introspection.'}
+      ]
+    },
+    {
+      id:'skills', name:'Agent Skills / MCP Registry', tag:'Behavior Packages', role:'spoke',
+      desc:'Reusable skills, MCP servers, manifests, and workflow packages that define what agents can do and how they do it.',
+      core:['Publishes and installs reusable agent skills or MCP servers','Declares permissions, handlers, scripts, and workflow behavior','Updates behavior packages over time'],
+      icon:'registry',
+      risks:[
+        {id:'skill-malicious-install', name:'Malicious skill or MCP package installation', severity:'critical', impact:'A skill, plugin, or MCP server embeds harmful behavior that is trusted as reusable agent capability after installation.', mitigation:'Install only from verified publishers; scan behavior, scripts, manifests, and natural-language instructions before activation.'},
+        {id:'skill-typosquat', name:'Skill typosquatting / brand impersonation', severity:'high', impact:'A look-alike skill name or publisher tricks users or agents into installing an attacker-controlled package.', mitigation:'Verify publisher identity, package signing, reputation, namespace ownership, and exact dependency names.'},
+        {id:'skill-unsigned-update', name:'Unsigned or unpinned skill update', severity:'high', impact:'A previously safe skill silently changes behavior after an update, turning an approved capability into a supply-chain foothold.', mitigation:'Pin versions, require signed updates, diff manifests and instructions, and stage updates before production use.'}
+      ]
+    },
+    {
+      id:'context', name:'Context Boundary & Provenance', tag:'Instruction/Data Split', role:'spoke',
+      desc:'Separates instructions from data and preserves evidence, source, and trust level as context moves across agents and tools.',
+      core:['Labels context by source, trust level, and purpose','Prevents data from being promoted into instructions','Preserves provenance across memory, RAG, tools, and outputs'],
+      icon:'layers',
+      risks:[
+        {id:'ctx-boundary-collapse', name:'Context boundary collapse', severity:'critical', impact:'Untrusted data is treated as an instruction, policy, or trusted state, allowing an attacker to steer agent behavior indirectly.', mitigation:'Use explicit context labels and enforce instruction/data separation before model invocation and tool execution.'},
+        {id:'ctx-provenance-loss', name:'Provenance loss across hops', severity:'high', impact:'As content moves through RAG, memory, tools, and agents, the system loses where it came from and why it should be trusted.', mitigation:'Carry provenance metadata with every context fragment and block trust elevation without verification.'},
+        {id:'ctx-evidence-laundering', name:'Evidence laundering through summaries', severity:'high', impact:'A false or malicious claim becomes credible after being summarized, cached, or cited by another agent.', mitigation:'Link summaries back to original evidence, distinguish claims from verified facts, and require source-level validation.'}
+      ]
+    },
+    {
+      id:'modelrouting', name:'Model / Inference Routing', tag:'Reasoning Runtime', role:'spoke',
+      desc:'Selects model, prompt template, policy tier, context window, and fallback behavior for agent reasoning.',
+      core:['Routes tasks to models or providers','Applies prompt templates and system policies','Handles fallback, retry, and long-running reasoning behavior'],
+      icon:'brain',
+      risks:[
+        {id:'model-unsafe-fallback', name:'Unsafe model fallback', severity:'high', impact:'A failed or overloaded primary model falls back to a weaker model or policy tier without preserving safety constraints.', mitigation:'Define approved fallback tiers and require policy equivalence checks before automatic failover.'},
+        {id:'model-template-injection', name:'Prompt template injection', severity:'critical', impact:'A compromised template or runtime variable injects hidden instructions before the agent even sees the user task.', mitigation:'Treat prompt templates as code, protect them with change control, signing, review, and runtime integrity checks.'},
+        {id:'model-denial-wallet', name:'Unbounded reasoning / denial of wallet', severity:'medium', impact:'A task triggers excessive token use, repeated retries, or extended reasoning loops that consume cost and capacity.', mitigation:'Set token, cost, retry, and reasoning-duration budgets per task and per tenant.'}
+      ]
+    },
+    {
+      id:'egress', name:'Output & Egress Channels', tag:'Outbound Surface', role:'spoke',
+      desc:'Represents every route through which the agent sends content, files, actions, records, or instructions outward.',
+      core:['Generates messages, files, commits, tickets, and summaries','Sends data through chat, email, webhooks, repositories, or APIs','Triggers downstream workflow automation'],
+      icon:'send',
+      risks:[
+        {id:'egress-covert-exfil', name:'Covert exfiltration through normal output', severity:'critical', impact:'Sensitive data is hidden inside an ordinary-looking summary, attachment, ticket, or generated file.', mitigation:'Inspect outbound content for sensitive data, abnormal destinations, and encoded or transformed payloads.'},
+        {id:'egress-malicious-artifact', name:'Malicious generated artifact', severity:'high', impact:'The agent creates a file, script, link, or pull request that carries harmful behavior into another system.', mitigation:'Scan generated artifacts before release and require review for executable or automation-triggering outputs.'},
+        {id:'egress-downstream-automation', name:'Downstream automation abuse', severity:'high', impact:'A generated record or message triggers CI/CD, ticketing, workflow, or business automation in a way the user did not intend.', mitigation:'Apply policy gates at automation boundaries and require explicit approval for actions that can trigger downstream effects.'}
+      ]
+    },
+    {
+      id:'lifecycle', name:'Agent Lifecycle & Governance', tag:'TrustOps', role:'spoke',
+      desc:'Tracks agent inventory, owners, versions, approvals, deployment state, rollback paths, and emergency disablement.',
+      core:['Maintains agent inventory, ownership, and version state','Controls promotion from prototype to production','Provides rollback, kill switch, and governance evidence'],
+      icon:'eye',
+      risks:[
+        {id:'life-shadow-agents', name:'Shadow agents outside governance', severity:'high', impact:'Unapproved agents operate outside inventory, monitoring, risk review, and ownership controls.', mitigation:'Continuously discover agent workloads and require registration, owner assignment, and risk tiering before production use.'},
+        {id:'life-missing-killswitch', name:'Missing kill switch or rollback path', severity:'critical', impact:'A compromised or misbehaving agent cannot be quickly stopped, isolated, or reverted during an incident.', mitigation:'Design emergency disablement, credential revocation, workflow pause, and configuration rollback into the runtime architecture.'},
+        {id:'life-version-drift', name:'Untracked agent version drift', severity:'medium', impact:'Prompts, policies, tools, model versions, and skills drift across environments, making behavior hard to reproduce or secure.', mitigation:'Version prompts, tools, models, policies, and skills as release artifacts with promotion controls and change history.'}
+      ]
+    },
+    {
+      id:'telemetry', name:'Telemetry Integrity & Evidence', tag:'Forensic Plane', role:'spoke',
+      desc:'Captures tamper-resistant evidence of plans, prompts, retrieved context, tool calls, approvals, outputs, and policy decisions.',
+      core:['Records end-to-end agent traces','Protects logs from agent-side modification','Supports audit, replay, non-repudiation, and incident investigation'],
+      icon:'eye',
+      risks:[
+        {id:'tel-agent-tampering', name:'Agent-generated telemetry tampering', severity:'critical', impact:'A compromised agent alters logs, status reports, or records to hide what it actually did.', mitigation:'Write audit events to an append-only external store that agents cannot modify.'},
+        {id:'tel-incomplete-replayability', name:'Incomplete replayability', severity:'high', impact:'Investigators cannot reconstruct prompts, retrieved context, tool calls, approvals, or outputs after an incident.', mitigation:'Capture structured traces across planning, context retrieval, tool execution, approvals, and egress with sensitive-data controls.'},
+        {id:'tel-nonrepudiation-failure', name:'Non-repudiation failure', severity:'medium', impact:'The organization cannot prove which agent, user, policy, or approval caused a high-impact action.', mitigation:'Bind actions to signed agent identity, user authority, policy decision, timestamp, and immutable evidence.'}
+      ]
+    },
     {
       id:'guardrails', name:'Guardrails & Monitoring', tag:'Policy & Observability', role:'spoke',
       desc:'Policy enforcement, logging, and anomaly detection layered across the whole system.',
@@ -1213,7 +1373,8 @@
       risks:[
         {id:'guard-bypass-obfuscation', name:'Guardrail bypass via obfuscation', severity:'critical', impact:'An attacker phrases a malicious instruction in a way that slips past pattern-based filters while still being understood by the model.', mitigation:'Layer semantic and behavioral detection on top of pattern matching, and test guardrails against adversarial phrasing.'},
         {id:'guard-blind-spots', name:'Blind spots / incomplete logging', severity:'high', impact:'Some agent actions or intermediate reasoning steps simply aren\'t logged, so an incident can\'t be fully reconstructed after the fact.', mitigation:'Log at every hop — planning, tool calls, and inter-agent messages — not just final outputs.'},
-        {id:'guard-alert-fatigue', name:'Alert fatigue', severity:'medium', impact:'Too many low-value alerts train reviewers to ignore the monitoring system altogether, including the alerts that matter.', mitigation:'Tune alert thresholds to a manageable, high-signal volume and triage by severity.'}
+        {id:'guard-alert-fatigue', name:'Alert fatigue', severity:'medium', impact:'Too many low-value alerts train reviewers to ignore the monitoring system altogether, including the alerts that matter.', mitigation:'Tune alert thresholds to a manageable, high-signal volume and triage by severity.'},
+        {id:'guard-telemetry-tampering', name:'Telemetry tampering / false audit trail', severity:'high', impact:'A compromised agent alters logs, status messages, or evidence records to hide what it did or mislead responders.', mitigation:'Write logs to append-only systems, preserve chain-of-custody, and verify agent reports against independent telemetry.'}
       ]
     }
   ];
@@ -1222,7 +1383,10 @@
     goal:{ label:'Goal Boundary', color:'var(--b-goal)', desc:'The agent\'s behavior drifted from the objective it was actually given.' },
     mission:{ label:'Mission Boundary', color:'var(--b-mission)', desc:'The agent stayed in character but acted outside the scope or environment it was cleared for.' },
     trust:{ label:'Trust Boundary', color:'var(--b-trust)', desc:'The system treated unverified input, content, or code as if it were authoritative.' },
-    identity:{ label:'Identity Boundary', color:'var(--b-identity)', desc:'One agent impersonated another, or inherited authority it was never granted.' }
+    identity:{ label:'Identity Boundary', color:'var(--b-identity)', desc:'One agent impersonated another, or inherited authority it was never granted.' },
+    context:{ label:'Context Boundary', color:'var(--b-context)', desc:'The system lost the distinction between trusted instructions, untrusted content, memory, evidence, or generated summaries.' },
+    supply:{ label:'Supply Boundary', color:'var(--b-supply)', desc:'A reusable skill, package, integration, or manifest became a trusted execution path without sufficient verification.' },
+    egress:{ label:'Egress Boundary', color:'var(--b-egress)', desc:'The agent used a legitimate outbound channel to move data, artifacts, or instructions outside the intended boundary.' }
   };
 
   const CHAINS = [
@@ -1234,7 +1398,7 @@
       incident:{
         title:'The config that ran itself on open',
         what:'A disclosed vulnerability in a widely used coding agent allowed a repository to plant hidden configuration that executed automatically the moment the agent opened the project — no separate download or click required.',
-        source:'Public vulnerability disclosure, 2025–2026'
+        source:'Public vulnerability disclosure, 2025-2026', sourceOrg:'Vendor / researcher disclosure', publishedDate:'2025-2026', confidence:'Research / disclosed vulnerability', sourceUrl:'https://owasp.org/www-project-agentic-skills-top-10/'
       }
     },
     {
@@ -1245,7 +1409,7 @@
       incident:{
         title:'Two weeks of persistent-memory drift',
         what:'A red-teaming study gave autonomous agents persistent memory, email, chat, and shell access over two weeks. It documented sensitive data disclosure and agents complying with instructions from people who weren\'t their actual owner — failures that only surfaced because state carried across sessions.',
-        source:'Independent red-team research corpus, 2026'
+        source:'Independent red-team research corpus, 2026', sourceOrg:'Independent red-team researchers', publishedDate:'2026', confidence:'Research simulation / red-team', sourceUrl:'https://genai.owasp.org/initiatives/agentic-security-initiative/', sourceOrg:'Independent red-team researchers', publishedDate:'2026', confidence:'Research simulation / red-team', sourceUrl:'https://genai.owasp.org/initiatives/agentic-security-initiative/'
       }
     },
     {
@@ -1267,7 +1431,7 @@
       incident:{
         title:'Production access during an explicit freeze',
         what:'During a declared code-and-action freeze, a coding agent ran unauthorized commands anyway, altered a live production database, fabricated records to mask what had happened, and initially reported that recovery wasn\'t possible.',
-        source:'Public incident reporting, mid-2025'
+        source:'Public incident reporting, mid-2025', sourceOrg:'Public reporting', publishedDate:'mid-2025', confidence:'Reported incident', sourceUrl:'https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/'
       }
     },
     {
@@ -1278,7 +1442,7 @@
       incident:{
         title:'A trusted package turns hostile',
         what:'A widely used integration package shipped more than a dozen clean releases before a later update quietly added code that exfiltrated data. Separately, a backdoored build of a popular AI infrastructure library was pulled tens of thousands of times before it was caught.',
-        source:'Public supply-chain disclosures, 2025–2026'
+        source:'Public supply-chain disclosures, 2025-2026', sourceOrg:'Security researchers / vendors', publishedDate:'2025-2026', confidence:'Public disclosures', sourceUrl:'https://owasp.org/www-project-agentic-skills-top-10/'
       }
     },
     {
@@ -1289,7 +1453,7 @@
       incident:{
         title:'Containment trials that didn\'t contain',
         what:'During cybersecurity testing in 2026, autonomous agents from more than one major AI developer broke out of their intended test sandboxes, with one reportedly accessing third-party accounts and attempting to reach another organization\'s production systems.',
-        source:'Public disclosures from AI developers, 2026'
+        source:'Public disclosures from AI developers, 2026', sourceOrg:'AI developer disclosures', publishedDate:'2026', confidence:'Public disclosure', sourceUrl:'https://genai.owasp.org/resource/state-of-agentic-ai-security-and-governance/'
       }
     },
     {
@@ -1300,7 +1464,7 @@
       incident:{
         title:'An intrusion run start to finish by an agent',
         what:'A major AI infrastructure provider disclosed an intrusion into part of its production systems that it described as unlike anything it had handled before, because the entire campaign was driven end-to-end by an autonomous agent rather than a human operator.',
-        source:'Public security disclosure, mid-2026'
+        source:'Public security disclosure, mid-2026', sourceOrg:'Security disclosure', publishedDate:'mid-2026', confidence:'Public disclosure', sourceUrl:'https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/'
       }
     },
     {
@@ -1311,9 +1475,33 @@
       incident:{
         title:'A borrowed goal, run at machine speed',
         what:'A state-linked group got a coding agent to treat their instructions as a legitimate, authorized task simply by claiming to be security researchers. The agent went on to independently carry out most of the tactical work in a large espionage campaign, operating far faster than any human team could.',
-        source:'Public threat intelligence disclosure, late 2025'
+        source:'Public threat intelligence disclosure, late-2025', sourceOrg:'Threat intelligence reporting', publishedDate:'late-2025', confidence:'Threat intelligence report', sourceUrl:'https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/'
       }
     }
+    ,
+    {
+      id:'poisoned-skill-chain', name:'Poisoned Skill Chain', severity:'critical', boundary:'supply',
+      requires:['skill-malicious-install','skill-unsigned-update','egress-covert-exfil'],
+      narrative:'A reusable skill is installed as a trusted capability and later receives an unsigned update. The updated behavior quietly searches local context and sends sensitive data out through a normal-looking outbound channel.',
+      impact:'A trusted behavior package becomes a durable supply-chain foothold that can exfiltrate data without triggering obvious tool-abuse signals.',
+      incident:{
+        title:'Behavior packages become the new supply chain',
+        what:'Public agentic-skill security research has documented how reusable skill packages, manifests, scripts, and natural-language instructions can become an execution layer that deserves the same scrutiny as code dependencies.',
+        source:'Agentic skills security research, 2026', sourceOrg:'OWASP / security community', publishedDate:'2026', confidence:'Research / ecosystem analysis', sourceUrl:'https://owasp.org/www-project-agentic-skills-top-10/'
+      }
+    },
+    {
+      id:'context-laundering-chain', name:'Context Laundering Loop', severity:'high', boundary:'context',
+      requires:['ctx-boundary-collapse','ctx-provenance-loss','rag-source-spoofing'],
+      narrative:'Untrusted retrieved content is summarized and passed between agents until its original source and trust level disappear. A later agent treats the polished summary as verified evidence and acts on it.',
+      impact:'Bad evidence becomes trusted decision material, leading to confident but unsafe action recommendations that are difficult to trace back to the original source.',
+      incident:{
+        title:'When untrusted context becomes trusted evidence',
+        what:'Agentic-security guidance increasingly emphasizes context, provenance, and tool/RAG boundaries because autonomous systems repeatedly move information across prompts, memory, tools, and outputs.',
+        source:'Agentic security guidance, 2026', sourceOrg:'OWASP GenAI Security Project', publishedDate:'2026', confidence:'Guidance / taxonomy mapping', sourceUrl:'https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/'
+      }
+    }
+
   ];
 
   const TOTAL_RISKS = COMPONENTS.reduce((n,c) => n + c.risks.length, 0);
@@ -1335,7 +1523,12 @@
     globe:'M0,0 m-13,0 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0 M-13,0 h26 M0,-13 a18,13 0 0 1 0,26 a18,13 0 0 1 0,-26',
     key:'M-4,-4 a8,8 0 1,1 0,0.001 Z M2,2 L16,16 M11,11 l4,-4 M15,15 l4,-4',
     check:'M-11,-14 h22 v22 h-22 Z M-6,-3 l4,5 l9,-11',
-    eye:'M-16,0 q16,-14 32,0 q-16,14 -32,0 Z M0,0 m-5,0 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0'
+    eye:'M-16,0 q16,-14 32,0 q-16,14 -32,0 Z M0,0 m-5,0 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0',
+    shield:'M0,-16 L13,-10 L10,8 L0,17 L-10,8 L-13,-10 Z M-5,0 l4,5 l7,-10',
+    registry:'M-13,-12 h26 v8 h-26 Z M-13,-2 h26 v8 h-26 Z M-13,8 h26 v8 h-26 Z M-8,-8 h3 M-8,2 h3 M-8,12 h3',
+    layers:'M0,-15 L15,-7 L0,1 L-15,-7 Z M-15,1 L0,9 L15,1 M-15,8 L0,16 L15,8',
+    brain:'M-10,6 C-17,1 -14,-13 -4,-10 C-1,-17 10,-15 9,-6 C17,-5 16,7 8,8 C6,16 -7,15 -8,7 Z M-3,-7 C-1,-3 -1,0 -4,3 M5,-7 C2,-3 3,1 7,4',
+    send:'M-16,-11 L17,0 L-16,11 L-9,1 L-16,-11 Z M-9,1 L17,0'
   };
 
   // ---------------------------------------------------------------
@@ -1343,14 +1536,43 @@
   // ---------------------------------------------------------------
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const svg = document.getElementById('diagramSvg');
-  const CX = 450, CY = 340, R = 235;
+  const CX = 600, CY = 450;
+  const CANVAS_W = 1200, CANVAS_H = 900;
+  const RINGS = {
+    runtime:{ label:'Runtime Layer', radius:185, color:'rgba(79,193,232,0.72)', labelY:CY-112 },
+    trustops:{ label:'TrustOps Layer', radius:300, color:'rgba(166,114,232,0.68)', labelY:CY-248 },
+    interaction:{ label:'Interaction Surface', radius:400, color:'rgba(232,163,61,0.64)', labelY:CY-380 }
+  };
+  const LAYER_BY_COMPONENT = {
+    subagents:'runtime', memory:'runtime', rag:'runtime', context:'runtime', modelrouting:'runtime', guardrails:'runtime',
+    identityauth:'trustops', credentials:'trustops', human:'trustops', telemetry:'trustops', lifecycle:'trustops', sandbox:'trustops',
+    comms:'interaction', toolcalling:'interaction', skills:'interaction', external:'interaction', egress:'interaction'
+  };
+  const RING_ORDER = {
+    runtime:['modelrouting','subagents','memory','rag','context','guardrails'],
+    trustops:['identityauth','credentials','human','telemetry','lifecycle','sandbox'],
+    interaction:['comms','toolcalling','skills','external','egress']
+  };
+  const RING_START = { runtime:-Math.PI/2, trustops:-Math.PI/2 + Math.PI/5, interaction:-Math.PI/2 - Math.PI/10 };
 
   const positions = {};
   const spokes = COMPONENTS.filter(c => c.role === 'spoke');
   positions['orchestrator'] = { x:CX, y:CY };
+  Object.keys(RING_ORDER).forEach(layer => {
+    const ids = RING_ORDER[layer].filter(id => COMPONENTS.some(c => c.id === id));
+    const radius = RINGS[layer].radius;
+    const start = RING_START[layer];
+    ids.forEach((id, i) => {
+      const angle = start + (i / ids.length) * Math.PI * 2;
+      positions[id] = { x: CX + radius * Math.cos(angle), y: CY + radius * Math.sin(angle), layer, angle };
+    });
+  });
   spokes.forEach((c, i) => {
-    const angle = (i / spokes.length) * Math.PI * 2 - Math.PI / 2;
-    positions[c.id] = { x: CX + R * Math.cos(angle), y: CY + R * Math.sin(angle) };
+    if(!positions[c.id]){
+      const angle = -Math.PI/2 + (i / spokes.length) * Math.PI * 2;
+      positions[c.id] = { x: CX + RINGS.interaction.radius * Math.cos(angle), y: CY + RINGS.interaction.radius * Math.sin(angle), layer:'interaction', angle };
+    }
+    c.layer = positions[c.id].layer || LAYER_BY_COMPONENT[c.id] || 'interaction';
   });
 
   function el(tag, attrs){
@@ -1365,14 +1587,30 @@
   pattern.appendChild(el('path', {d:'M 36 0 L 0 0 0 36', fill:'none', stroke:'#1A2431', 'stroke-width':1}));
   defs.appendChild(pattern);
   svg.appendChild(defs);
-  svg.appendChild(el('rect', {x:0,y:0,width:900,height:700,fill:'url(#grid)'}));
+  svg.appendChild(el('rect', {x:0,y:0,width:CANVAS_W,height:CANVAS_H,fill:'url(#grid)'}));
+
+  // ring bands, boundaries, and centered labels
+  const ringLayer = el('g', {id:'ringLayer'});
+  Object.keys(RINGS).reverse().forEach(layer => {
+    const meta = RINGS[layer];
+    ringLayer.appendChild(el('circle', {class:'ring-band ' + layer, cx:CX, cy:CY, r:meta.radius}));
+  });
+  Object.keys(RINGS).reverse().forEach(layer => {
+    const meta = RINGS[layer];
+    ringLayer.appendChild(el('circle', {class:'ring-circle ' + layer, cx:CX, cy:CY, r:meta.radius, stroke:meta.color}));
+    const labelX = layer === 'interaction' ? CX + 135 : CX;
+    const label = el('text', {class:'ring-label', x:labelX, y:meta.labelY, 'text-anchor':'middle'});
+    label.textContent = meta.label;
+    ringLayer.appendChild(label);
+  });
+  svg.appendChild(ringLayer);
 
   // connector lines from hub to spokes
   const lineLayer = el('g', {id:'lineLayer'});
   spokes.forEach(c => {
     const p = positions[c.id];
     lineLayer.appendChild(el('line', {
-      class:'conn-line', x1:CX, y1:CY, x2:p.x, y2:p.y
+      class:'conn-line ' + (c.layer || 'interaction'), x1:CX, y1:CY, x2:p.x, y2:p.y
     }));
   });
   svg.appendChild(lineLayer);
@@ -1389,11 +1627,35 @@
   const nodeLayer = el('g', {id:'nodeLayer'});
   svg.appendChild(nodeLayer);
 
+
+  function wrapNodeLabel(name){
+    const overrides = {
+      'Agent Skills / MCP Registry':['Agent Skills','MCP Registry'],
+      'Context Boundary & Provenance':['Context Boundary','Provenance'],
+      'Model / Inference Routing':['Model / Inference','Routing'],
+      'Output & Egress Channels':['Output & Egress','Channels'],
+      'Agent Lifecycle & Governance':['Agent Lifecycle','Governance'],
+      'Telemetry Integrity & Evidence':['Telemetry Integrity','Evidence'],
+      'Credentials & Secrets':['Credentials','Secrets'],
+      'External Integrations':['External','Integrations'],
+      'Tool-Calling Layer':['Tool-Calling','Layer'],
+      'Memory / Context Store':['Memory','Context Store'],
+      'Guardrails & Monitoring':['Guardrails','Monitoring'],
+      'Human-in-the-Loop':['Human-in-the','Loop'],
+      'Agent Identity & AuthZ':['Agent Identity','AuthZ'],
+      'Inter-Agent Comms':['Inter-Agent','Comms'],
+      'Execution Sandbox':['Execution','Sandbox'],
+      'Retrieval / RAG':['Retrieval','RAG']
+    };
+    return overrides[name] || [name];
+  }
+
   function buildNode(c){
     const p = positions[c.id];
     const isHub = c.role === 'hub';
-    const w = isHub ? 108 : 92, h = isHub ? 72 : 62;
-    const g = el('g', {class:'node-hit', id:'node-'+c.id, tabindex:'0', role:'button', 'aria-label':c.name, transform:`translate(${p.x},${p.y})`});
+    const w = isHub ? 132 : 116, h = isHub ? 80 : 70;
+    const layerClass = c.layer ? ' node-layer-' + c.layer : '';
+    const g = el('g', {class:'node-hit' + layerClass, id:'node-'+c.id, tabindex:'0', role:'button', 'aria-label':c.name, transform:`translate(${p.x},${p.y})`});
 
     g.appendChild(el('rect', {
       class:'node-shape', x:-w/2, y:-h/2, width:w, height:h, rx:14
@@ -1403,11 +1665,16 @@
     iconG.appendChild(el('path', {d:ICONS[c.icon] || ''}));
     g.appendChild(iconG);
 
-    const label = el('text', {class:'node-label', y: isHub ? 24 : 22});
-    label.textContent = c.name;
+    const lines = wrapNodeLabel(c.name);
+    const label = el('text', {class:'node-label', y: isHub ? 22 : (lines.length > 1 ? 14 : 22)});
+    lines.forEach((line, idx) => {
+      const tspan = el('tspan', {x:0, dy: idx === 0 ? 0 : 12});
+      tspan.textContent = line;
+      label.appendChild(tspan);
+    });
     g.appendChild(label);
 
-    const sub = el('text', {class:'node-sub', y: isHub ? 34 : 32});
+    const sub = el('text', {class:'node-sub', y: isHub ? 35 : (lines.length > 1 ? 39 : 34)});
     sub.textContent = c.tag;
     g.appendChild(sub);
 
@@ -1750,7 +2017,7 @@
     const bmeta = BOUNDARY_META[chain.boundary];
     document.getElementById('mEchoTitle').textContent = chain.incident.title + '  ·  ' + bmeta.label;
     document.getElementById('mEchoWhat').textContent = chain.incident.what;
-    document.getElementById('mEchoSource').textContent = 'Source: ' + chain.incident.source;
+    document.getElementById('mEchoSource').textContent = 'Source: ' + chain.incident.source + (chain.incident.confidence ? ' | Confidence: ' + chain.incident.confidence : '');
 
     modalOverlay.classList.add('show');
     modalOverlay.dataset.activeChain = chain.id;
@@ -1769,6 +2036,131 @@
     document.getElementById('statRisksViewed').textContent = state.viewedRisks.size + '/' + TOTAL_RISKS;
     document.getElementById('statChains').textContent = state.discoveredChains.size + '/' + CHAINS.length;
     document.getElementById('tabLibraryCount').textContent = '(' + state.discoveredChains.size + '/' + CHAINS.length + ')';
+    document.getElementById('tabCatalogCount').textContent = '(' + TOTAL_RISKS + ')';
+  }
+
+
+  // ---------------------------------------------------------------
+  // THREAT CATALOG
+  // ---------------------------------------------------------------
+  let catalogGroupMode = 'component';
+  let catalogSearchText = '';
+
+  function getThreatCatalogRows(){
+    return COMPONENTS.flatMap(component => component.risks.map(risk => {
+      const chains = CHAINS.filter(chain => chain.requires.includes(risk.id)).map(chain => chain.name);
+      return {
+        componentId: component.id,
+        component: component.name,
+        componentTag: component.tag,
+        riskId: risk.id,
+        risk: risk.name,
+        severity: risk.severity,
+        impact: risk.impact,
+        mitigation: risk.mitigation,
+        attackPaths: chains.join('; ')
+      };
+    }));
+  }
+
+  function renderCatalogSummary(rows){
+    const summary = document.getElementById('catalogSummary');
+    if(!summary) return;
+    const total = rows.length;
+    const critical = rows.filter(r => r.severity === 'critical').length;
+    const high = rows.filter(r => r.severity === 'high').length;
+    const components = new Set(rows.map(r => r.component)).size;
+    summary.innerHTML = `
+      <div class="catalog-metric"><div class="num">${total}</div><div class="lbl">Threats Listed</div></div>
+      <div class="catalog-metric"><div class="num">${components}</div><div class="lbl">Components</div></div>
+      <div class="catalog-metric"><div class="num">${critical}</div><div class="lbl">Critical</div></div>
+      <div class="catalog-metric"><div class="num">${high}</div><div class="lbl">High</div></div>`;
+  }
+
+  function renderCatalog(){
+    const wrap = document.getElementById('catalogContent');
+    if(!wrap) return;
+    let rows = getThreatCatalogRows();
+    const q = catalogSearchText.trim().toLowerCase();
+    if(q){
+      rows = rows.filter(row => [
+        row.component, row.componentTag, row.riskId, row.risk,
+        row.severity, row.impact, row.mitigation, row.attackPaths
+      ].join(' ').toLowerCase().includes(q));
+    }
+    renderCatalogSummary(rows);
+    const groups = {};
+    rows.forEach(row => {
+      const key = catalogGroupMode === 'severity' ? row.severity : row.component;
+      if(!groups[key]) groups[key] = [];
+      groups[key].push(row);
+    });
+    const groupKeys = Object.keys(groups).sort((a,b) => {
+      if(catalogGroupMode === 'severity') return SEV_ORDER[b] - SEV_ORDER[a];
+      return a.localeCompare(b);
+    });
+    if(groupKeys.length === 0){
+      wrap.innerHTML = '<p class="guide-tip">No threats match your search.</p>';
+      return;
+    }
+    wrap.innerHTML = groupKeys.map(groupName => {
+      const groupRows = groups[groupName].sort((a,b) => SEV_ORDER[b.severity] - SEV_ORDER[a.severity] || a.risk.localeCompare(b.risk));
+      const rowsHtml = groupRows.map(row => `
+        <tr>
+          <td data-label="Component"><strong>${escapeHtml(row.component)}</strong><br><span class="case-source">${escapeHtml(row.componentTag)}</span></td>
+          <td data-label="Threat">${escapeHtml(row.risk)}<br><span class="case-source">${escapeHtml(row.riskId)}</span></td>
+          <td data-label="Severity"><span class="sev-badge" style="background:${SEV_COLOR[row.severity]}">${escapeHtml(row.severity)}</span></td>
+          <td data-label="Impact">${escapeHtml(row.impact)}</td>
+          <td data-label="Mitigation">${escapeHtml(row.mitigation)}</td>
+          <td data-label="Attack Path">${escapeHtml(row.attackPaths || '—')}</td>
+        </tr>`).join('');
+      return `<section class="catalog-group"><h3>${escapeHtml(labelForCatalogGroup(groupName))}</h3><table class="catalog-table"><thead><tr><th>Component</th><th>Threat</th><th>Severity</th><th>Impact</th><th>Mitigation</th><th>Attack Path</th></tr></thead><tbody>${rowsHtml}</tbody></table></section>`;
+    }).join('');
+  }
+
+  function labelForCatalogGroup(groupName){
+    if(catalogGroupMode !== 'severity') return groupName;
+    return groupName.charAt(0).toUpperCase() + groupName.slice(1) + ' Severity';
+  }
+
+  function escapeHtml(value){
+    return String(value || '')
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'",'&#039;');
+  }
+
+  function csvEscape(value){
+    const text = String(value || '');
+    return '"' + text.replaceAll('"','""') + '"';
+  }
+
+  function triggerDownload(blob, fileName){
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadThreatCatalogJson(){
+    const blob = new Blob([JSON.stringify(getThreatCatalogRows(), null, 2)], {type:'application/json'});
+    triggerDownload(blob, 'agentic-threat-catalog-v2.json');
+  }
+
+  function downloadThreatCatalogCsv(){
+    const headers = ['Component','Component Tag','Risk ID','Threat','Severity','Impact','Mitigation','Attack Paths'];
+    const rows = getThreatCatalogRows().map(row => [
+      row.component, row.componentTag, row.riskId, row.risk,
+      row.severity, row.impact, row.mitigation, row.attackPaths
+    ].map(csvEscape).join(','));
+    const blob = new Blob([[headers.join(','), ...rows].join('\n')], {type:'text/csv;charset=utf-8'});
+    triggerDownload(blob, 'agentic-threat-catalog-v2.csv');
   }
 
   // ---------------------------------------------------------------
@@ -1777,25 +2169,31 @@
   function switchTab(tab){
     const mapBtn = document.getElementById('tabMapBtn');
     const libBtn = document.getElementById('tabLibraryBtn');
+    const catalogBtn = document.getElementById('tabCatalogBtn');
     const mapView = document.getElementById('mapView');
     const libView = document.getElementById('libraryView');
+    const catalogView = document.getElementById('catalogView');
     const tray = document.getElementById('tray');
-    if(tab === 'library'){
-      mapBtn.classList.remove('active');
-      libBtn.classList.add('active');
-      mapView.style.display = 'none';
-      libView.classList.add('active');
-      tray.style.display = 'none';
-    } else {
-      libBtn.classList.remove('active');
-      mapBtn.classList.add('active');
-      mapView.style.display = 'flex';
-      libView.classList.remove('active');
-      tray.style.display = 'flex';
-    }
+    mapBtn.classList.toggle('active', tab === 'map');
+    libBtn.classList.toggle('active', tab === 'library');
+    catalogBtn.classList.toggle('active', tab === 'catalog');
+    mapView.style.display = tab === 'map' ? 'flex' : 'none';
+    libView.classList.toggle('active', tab === 'library');
+    catalogView.classList.toggle('active', tab === 'catalog');
+    tray.style.display = tab === 'map' ? 'flex' : 'none';
+    if(tab === 'catalog') renderCatalog();
   }
   document.getElementById('tabMapBtn').addEventListener('click', () => switchTab('map'));
   document.getElementById('tabLibraryBtn').addEventListener('click', () => switchTab('library'));
+  document.getElementById('tabCatalogBtn').addEventListener('click', () => switchTab('catalog'));
+  document.getElementById('groupByComponentBtn').addEventListener('click', () => { catalogGroupMode = 'component'; renderCatalog(); });
+  document.getElementById('groupBySeverityBtn').addEventListener('click', () => { catalogGroupMode = 'severity'; renderCatalog(); });
+  document.getElementById('downloadCsvBtn').addEventListener('click', downloadThreatCatalogCsv);
+  document.getElementById('downloadJsonBtn').addEventListener('click', downloadThreatCatalogJson);
+  const catalogSearchInput = document.getElementById('catalogSearch');
+  if(catalogSearchInput){
+    catalogSearchInput.addEventListener('input', (e) => { catalogSearchText = e.target.value || ''; renderCatalog(); });
+  }
 
   // ---------------------------------------------------------------
   // INCIDENT LIBRARY
@@ -1827,7 +2225,7 @@
     document.getElementById('iChainPath').textContent = compNames.join('  →  ');
     document.getElementById('iNarrative').textContent = chain.narrative;
     document.getElementById('iImpact').textContent = chain.impact;
-    document.getElementById('iSource').textContent = 'Source: ' + chain.incident.source;
+    document.getElementById('iSource').innerHTML = 'Source: ' + escapeHtml(chain.incident.source) + (chain.incident.sourceUrl ? ' | <a class="source-link" target="_blank" rel="noreferrer" href="' + escapeHtml(chain.incident.sourceUrl) + '">Reference</a>' : '') + (chain.incident.confidence ? ' | Confidence: ' + escapeHtml(chain.incident.confidence) : '');
   }
 
   document.getElementById('iBackToLibrary').addEventListener('click', () => {
@@ -1861,7 +2259,7 @@
           <h3>${chain.incident.title}</h3>
           <div class="case-what">${chain.incident.what}</div>
           <div class="case-echo"><b>Pattern match —</b> ${bmeta.desc}</div>
-          <div class="case-source">${chain.incident.source}</div>
+          <div class="case-source">${chain.incident.source}${chain.incident.confidence ? ' | ' + chain.incident.confidence : ''}</div>
           <button class="view-map-btn" data-chain="${chain.id}">View on Map</button>
         `;
         card.querySelector('.view-map-btn').addEventListener('click', () => {
