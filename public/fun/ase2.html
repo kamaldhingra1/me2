@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentic Attack Surface v2.1b Label Fix — Multi-Agent System Explorer</title>
+<title>Agentic Attack Surface v2.1c — Multi-Agent System Explorer</title>
 <style>
   :root{
     --void:#0B0F14;
@@ -914,6 +914,26 @@
   }
   .start-btn:hover{ background:#f0b256; }
 
+
+  /* ---------- mobile map pan/zoom controls ---------- */
+  .map-controls{ display:none; }
+  .diagram-wrap svg{ transform-origin:0 0; }
+  .chain-arc{
+    stroke:var(--sev-critical) !important;
+    stroke-width:3.25;
+    stroke-dasharray:7 6;
+    stroke-linecap:round;
+    filter:drop-shadow(0 0 6px rgba(255,91,91,0.72));
+  }
+  .chain-arc.show{
+    opacity:0.98;
+    animation:dashMove 1.15s linear infinite, chainPulse 1.55s ease-in-out infinite;
+  }
+  @keyframes chainPulse{
+    0%,100%{ filter:drop-shadow(0 0 4px rgba(255,91,91,0.55)); }
+    50%{ filter:drop-shadow(0 0 12px rgba(255,91,91,0.95)); }
+  }
+
   /* ---------- mobile ---------- */
   @media (max-width: 860px){
     .stage{ flex-direction:column; }
@@ -996,7 +1016,7 @@
   <div class="intro-card">
     <div class="eyebrow">Agentic Attack Surface</div>
     <h1>Take apart a multi-agent<br>system, one node at a time.</h1>
-    <p>Eighteen components make up a v2 agentic AI attack surface model, organized into clear Runtime, TrustOps, and Interaction Surface bands. Each one carries its own risks. Click through the diagram to inspect them — then collect risks from different components into your basket to see whether they chain into a bigger attack path.</p>
+    <p>Eighteen components make up a v2.1c agentic AI attack surface model with mobile pan/zoom and consistent attack-chain rings. Each one carries its own risks. Click through the diagram to inspect them — then collect risks from different components into your basket to see whether they chain into a bigger attack path.</p>
     <div class="steps">
       <div><span class="s">01</span> — Click a node to see what it does and what can go wrong.</div>
       <div><span class="s">02</span> — Add risks to your basket from two or more components.</div>
@@ -1012,7 +1032,7 @@
   <header class="topbar">
     <div class="brand">
       <div class="eyebrow">Agentic Attack Surface</div>
-      <h1>Multi-Agent System Explorer v2</h1>
+      <h1>Multi-Agent System Explorer v2.1c</h1>
     </div>
     <div class="stats">
       <div class="stat"><span class="num" id="statRisksViewed">0/66</span><span class="lbl">Risks Inspected</span></div>
@@ -1044,6 +1064,12 @@
   <div class="stage" id="mapView">
     <div class="diagram-wrap">
       <div class="hint-banner" id="hintBanner"></div>
+      <div class="map-controls" id="mapControls" aria-label="Map zoom controls">
+        <button type="button" id="zoomFitBtn">Fit</button>
+        <button type="button" id="zoomOutBtn">-</button>
+        <button type="button" id="zoomResetBtn">100%</button>
+        <button type="button" id="zoomInBtn">+</button>
+      </div>
       <div class="svg-scroll" id="svgScroll">
         <svg id="diagramSvg" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg"></svg>
       </div>
@@ -1536,6 +1562,44 @@
   // ---------------------------------------------------------------
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const svg = document.getElementById('diagramSvg');
+
+  // ---------------------------------------------------------------
+  // MOBILE MAP ZOOM / PAN
+  // ---------------------------------------------------------------
+  const svgScroll = document.querySelector('.svg-scroll');
+  let mapScale = 1;
+  const MAP_W = 1200, MAP_H = 900;
+  function isMobileMap(){ return window.matchMedia('(max-width: 860px)').matches; }
+  function applyMapScale(scale, center=true){
+    mapScale = Math.max(0.42, Math.min(1.85, scale));
+    svg.style.width = Math.round(MAP_W * mapScale) + 'px';
+    svg.style.height = Math.round(MAP_H * mapScale) + 'px';
+    svg.style.minWidth = Math.round(MAP_W * mapScale) + 'px';
+    if(center && svgScroll){
+      requestAnimationFrame(() => {
+        svgScroll.scrollLeft = Math.max(0, (svg.clientWidth - svgScroll.clientWidth) / 2);
+        svgScroll.scrollTop = Math.max(0, (svg.clientHeight - svgScroll.clientHeight) / 2);
+      });
+    }
+  }
+  function fitMapToMobile(){
+    if(!svgScroll || !isMobileMap()) { applyMapScale(1, false); return; }
+    const fit = Math.min(svgScroll.clientWidth / MAP_W, svgScroll.clientHeight / MAP_H);
+    // Keep the full architecture visible but avoid making the nodes unusably tiny.
+    applyMapScale(Math.max(0.52, Math.min(0.9, fit)), true);
+  }
+  function setupMapControls(){
+    const fitBtn = document.getElementById('zoomFitBtn');
+    const outBtn = document.getElementById('zoomOutBtn');
+    const resetBtn = document.getElementById('zoomResetBtn');
+    const inBtn = document.getElementById('zoomInBtn');
+    if(!fitBtn || !outBtn || !resetBtn || !inBtn) return;
+    fitBtn.addEventListener('click', fitMapToMobile);
+    outBtn.addEventListener('click', () => applyMapScale(mapScale - 0.12, true));
+    resetBtn.addEventListener('click', () => applyMapScale(1, true));
+    inBtn.addEventListener('click', () => applyMapScale(mapScale + 0.12, true));
+    window.addEventListener('resize', () => { if(isMobileMap()) fitMapToMobile(); else applyMapScale(1, false); });
+  }
   const CX = 600, CY = 450;
   const CANVAS_W = 1200, CANVAS_H = 900;
   const RINGS = {
@@ -1970,7 +2034,7 @@
 
   function drawChainArcs(chain){
     const compIds = [...new Set(chain.requires.map(componentIdForRisk))];
-    const color = 'var(--' + (chain.severity === 'critical' ? 'sev-critical' : chain.severity === 'high' ? 'sev-high' : 'sev-medium') + ')';
+    const color = 'var(--sev-critical)';
 
     if(compIds.length <= 1){
       const n = document.getElementById('node-' + compIds[0]);
