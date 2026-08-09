@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentic Attack Surface v2.1c — Multi-Agent System Explorer</title>
+<title>Agentic Attack Surface v2 — Multi-Agent System Explorer</title>
 <style>
   :root{
     --void:#0B0F14;
@@ -1008,6 +1008,43 @@
     .catalog-table td::before{content:attr(data-label);display:block;font-family:var(--font-mono);font-size:9px;color:var(--muted-2);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;}
 
   }
+
+  /* v2.1d: mobile controls as visible bar below map */
+  .map-controls{
+    display:none;
+  }
+  @media (max-width: 860px){
+    .map-controls{
+      display:flex !important;
+      position:static !important;
+      z-index:2;
+      justify-content:center;
+      align-items:center;
+      gap:8px;
+      margin:8px 10px 0;
+      padding:8px;
+      background:rgba(18,25,34,0.94);
+      border:1px solid var(--hairline);
+      border-radius:10px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.18);
+    }
+    .map-controls button{
+      border:1px solid var(--hairline);
+      background:rgba(255,255,255,0.04);
+      color:var(--text);
+      font-family:var(--font-mono);
+      font-size:11px;
+      border-radius:6px;
+      padding:8px 10px;
+      cursor:pointer;
+      min-width:42px;
+    }
+    .map-controls button:first-child{ min-width:72px; }
+    .map-controls button:hover{ border-color:var(--amber); color:var(--amber); }
+    .diagram-wrap{ padding-top:14px !important; }
+    .svg-scroll{ margin-top:8px; }
+  }
+
 </style>
 </head>
 <body>
@@ -1016,7 +1053,7 @@
   <div class="intro-card">
     <div class="eyebrow">Agentic Attack Surface</div>
     <h1>Take apart a multi-agent<br>system, one node at a time.</h1>
-    <p>Eighteen components make up a v2.1c agentic AI attack surface model with mobile pan/zoom and consistent attack-chain rings. Each one carries its own risks. Click through the diagram to inspect them — then collect risks from different components into your basket to see whether they chain into a bigger attack path.</p>
+    <p>Eighteen components make up a v2.1d agentic AI attack surface model with visible mobile map controls and consistent attack-chain rings. Each one carries its own risks. Click through the diagram to inspect them — then collect risks from different components into your basket to see whether they chain into a bigger attack path.</p>
     <div class="steps">
       <div><span class="s">01</span> — Click a node to see what it does and what can go wrong.</div>
       <div><span class="s">02</span> — Add risks to your basket from two or more components.</div>
@@ -1032,7 +1069,7 @@
   <header class="topbar">
     <div class="brand">
       <div class="eyebrow">Agentic Attack Surface</div>
-      <h1>Multi-Agent System Explorer v2.1c</h1>
+      <h1>Multi-Agent System Explorer v2.1d</h1>
     </div>
     <div class="stats">
       <div class="stat"><span class="num" id="statRisksViewed">0/66</span><span class="lbl">Risks Inspected</span></div>
@@ -1064,16 +1101,16 @@
   <div class="stage" id="mapView">
     <div class="diagram-wrap">
       <div class="hint-banner" id="hintBanner"></div>
-      <div class="map-controls" id="mapControls" aria-label="Map zoom controls">
-        <button type="button" id="zoomFitBtn">Fit</button>
-        <button type="button" id="zoomOutBtn">-</button>
-        <button type="button" id="zoomResetBtn">100%</button>
-        <button type="button" id="zoomInBtn">+</button>
-      </div>
       <div class="svg-scroll" id="svgScroll">
         <svg id="diagramSvg" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg"></svg>
       </div>
       <div class="scroll-hint">Scroll or pinch to see the full map ↔</div>
+      <div class="map-controls" id="mapControls" aria-label="Map zoom controls">
+        <button type="button" id="zoomFitBtn">Fit map</button>
+        <button type="button" id="zoomOutBtn">-</button>
+        <button type="button" id="zoomResetBtn">100%</button>
+        <button type="button" id="zoomInBtn">+</button>
+      </div>
       <div class="legend">
         <div class="item"><span class="dot" style="background:var(--sev-low)"></span>Low</div>
         <div class="item"><span class="dot" style="background:var(--sev-medium)"></span>Medium</div>
