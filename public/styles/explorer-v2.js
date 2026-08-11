@@ -734,13 +734,13 @@
     head.addEventListener('click', (e) => {
       if(e.target.closest('.quick-add')) return;
       wrap.classList.toggle('expanded');
-      if(wrap.classList.contains('expanded') && !state.viewedRisks.has(r.id)){
-        state.viewedRisks.add(r.id);
-        updateStats();
+      if(wrap.classList.contains('expanded')){
+        markRiskViewed(r.id);
       }
     });
     head.querySelector('.quick-add').addEventListener('click', (e) => {
       e.stopPropagation();
+      markRiskViewed(r.id);
       toggleBasket(r.id);
     });
     wrap.appendChild(head);
@@ -757,6 +757,7 @@
     addBtn.textContent = state.basket.has(r.id) ? '✓ In basket' : '+ Add to basket';
     addBtn.addEventListener('click', (e) => {
       e.stopPropagation();
+      markRiskViewed(r.id);
       toggleBasket(r.id);
     });
     body.appendChild(addBtn);
@@ -775,6 +776,13 @@
       if(qa){ qa.classList.toggle('added', inBasket); qa.textContent = inBasket ? '✓' : '+'; }
       const ab = chip.querySelector('.add-btn');
       if(ab){ ab.classList.toggle('added', inBasket); ab.textContent = inBasket ? '✓ In basket' : '+ Add to basket'; }
+    }
+  }
+
+  function markRiskViewed(riskId){
+    if(!state.viewedRisks.has(riskId)){
+      state.viewedRisks.add(riskId);
+      updateStats();
     }
   }
 
