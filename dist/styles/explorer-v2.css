@@ -1334,3 +1334,259 @@
   .node-label{ font-size:11.5px; }
   .node-sub{ font-size:7.6px; }
 }
+
+/* =====================================================================
+   ASE vNext Header Consolidation
+   - Global header keeps ASE site navigation.
+   - Explorer controls and view tabs are combined into one compact row.
+   - Intro overlay gets mobile spacing so it does not sit under the site header.
+   ===================================================================== */
+.explorer-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:10px 20px;
+  background:var(--panel);
+  border-bottom:1px solid var(--hairline);
+  position:sticky;
+  top:74px;
+  z-index:28;
+  flex-wrap:wrap;
+}
+.explorer-tabs{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  flex-wrap:wrap;
+  min-width:0;
+}
+.explorer-tabs .tab-btn{
+  margin-right:10px;
+  padding:8px 4px;
+}
+.explorer-stats{
+  margin-left:auto;
+  justify-content:flex-end;
+}
+.app > header.topbar .brand h1,
+.app > header.topbar .brand .eyebrow{
+  display:none;
+}
+@media (max-width: 860px){
+  .intro-overlay{
+    align-items:flex-start;
+    padding-top:118px;
+    overflow-y:auto;
+  }
+  .intro-card{
+    max-width:100%;
+    padding-bottom:28px;
+  }
+  .intro-card h1{
+    font-size:clamp(22px, 6vw, 28px);
+    line-height:1.15;
+    margin:10px 0 12px;
+  }
+  .intro-card p{
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:18px;
+  }
+  .intro-card .steps{
+    font-size:11.5px;
+    gap:7px;
+    margin-bottom:20px;
+  }
+  .explorer-bar{
+    top:96px;
+    padding:8px 10px;
+    gap:8px;
+  }
+  .explorer-tabs{
+    width:100%;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding-bottom:2px;
+  }
+  .explorer-tabs .tab-btn{
+    white-space:nowrap;
+    margin-right:12px;
+    font-size:10px;
+    padding:8px 2px;
+  }
+  .explorer-stats{
+    width:100%;
+    justify-content:space-between;
+    gap:8px;
+  }
+  .explorer-stats .stat{
+    align-items:flex-start;
+  }
+  .explorer-stats .stat .num{
+    font-size:14px;
+  }
+  .explorer-stats .stat .lbl{
+    font-size:8.5px;
+  }
+  .explorer-stats .ghost,
+  .explorer-stats .mode-btn{
+    font-size:9.5px;
+    padding:7px 9px;
+  }
+}
+@media (max-width: 420px){
+  .intro-overlay{
+    padding-top:132px;
+  }
+  .explorer-bar{
+    top:108px;
+  }
+}
+
+
+/* =====================================================================
+   ASE vNext Compact Header Patch
+   Purpose: prevent the stats/actions area from wrapping unexpectedly on
+   GitHub Pages and keep Hint/Reset on the same row on mobile.
+   ===================================================================== */
+.explorer-bar{
+  gap:10px;
+  padding:8px 14px;
+  flex-wrap:nowrap;
+}
+.explorer-tabs{
+  flex:0 1 auto;
+  min-width:0;
+  overflow-x:auto;
+  white-space:nowrap;
+  scrollbar-width:thin;
+}
+.explorer-tabs .tab-btn{
+  flex:0 0 auto;
+  margin-right:10px;
+  padding:7px 3px;
+  font-size:10.5px;
+}
+.explorer-stats{
+  flex:0 0 auto;
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  flex-wrap:nowrap;
+  white-space:nowrap;
+}
+.explorer-stats .stat{
+  min-width:auto;
+  align-items:flex-end;
+}
+.explorer-stats .stat .num{
+  font-size:15px;
+}
+.explorer-stats .stat .lbl{
+  font-size:8.5px;
+  letter-spacing:.055em;
+}
+.explorer-stats .mode-btn{
+  padding:6px 9px;
+  font-size:9.5px;
+}
+.explorer-stats button.ghost{
+  padding:6px 10px;
+  font-size:10px;
+  border-radius:6px;
+}
+
+@media (max-width: 1024px){
+  .explorer-bar{
+    flex-wrap:wrap;
+    gap:6px;
+    padding:7px 10px;
+  }
+  .explorer-tabs{
+    order:1;
+    width:100%;
+  }
+  .explorer-stats{
+    order:2;
+    width:100%;
+    margin-left:0;
+    justify-content:space-between;
+    gap:6px;
+  }
+}
+
+@media (max-width: 860px){
+  .explorer-bar{
+    top:96px;
+    padding:6px 8px;
+    gap:5px;
+  }
+  .explorer-tabs{
+    width:100%;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding-bottom:0;
+  }
+  .explorer-tabs .tab-btn{
+    margin-right:10px;
+    padding:7px 2px;
+    font-size:9.5px;
+  }
+  .explorer-stats{
+    width:100%;
+    justify-content:space-between;
+    gap:4px;
+    flex-wrap:nowrap;
+  }
+  .explorer-stats .stat{
+    flex:0 1 auto;
+    align-items:flex-start;
+    line-height:1;
+  }
+  .explorer-stats .stat .num{
+    font-size:12.5px;
+  }
+  .explorer-stats .stat .lbl{
+    font-size:7.3px;
+    letter-spacing:.035em;
+  }
+  .explorer-stats .mode-toggle{
+    flex:0 0 auto;
+  }
+  .explorer-stats .mode-btn{
+    font-size:8.3px;
+    padding:5px 6px;
+  }
+  .explorer-stats button.ghost{
+    font-size:8.5px;
+    padding:5px 7px;
+    min-width:auto;
+  }
+}
+
+@media (max-width: 420px){
+  .explorer-bar{
+    top:108px;
+    padding:5px 6px;
+  }
+  .explorer-stats{
+    gap:3px;
+  }
+  .explorer-stats .stat .num{
+    font-size:11.5px;
+  }
+  .explorer-stats .stat .lbl{
+    font-size:6.8px;
+  }
+  .explorer-stats .mode-btn{
+    font-size:7.8px;
+    padding:5px 5px;
+  }
+  .explorer-stats button.ghost{
+    font-size:8px;
+    padding:5px 6px;
+  }
+}

@@ -1,3 +1,4 @@
+// ASE vNext header consolidation note: tab/control IDs are preserved in the combined explorer bar.
 // ---------------------------------------------------------------
   // STATE
   // ---------------------------------------------------------------
@@ -779,7 +780,7 @@
     }
   }
 
-  function markRiskViewed(riskId){
+    function markRiskViewed(riskId){
     if(!state.viewedRisks.has(riskId)){
       state.viewedRisks.add(riskId);
       updateStats();

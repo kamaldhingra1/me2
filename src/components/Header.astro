@@ -173,8 +173,8 @@ const isActive = (path: string) => {
          <li class="col-span-2">
             <span class="inline-block border border-amber-500 p-2 rounded  bg-amber-400 whitespace-normal font-medium">
           <a
-            href={"/fun/ase"}
-            class:list={{ "active-nav": isActive("/fun/ase") }} title="Agentic Attack Surface-System Explorer"
+            href={`https://ase.${Astro.site?.host}`}
+            class:list={{ "active-nav": isActive("/fun/ase") }} title="Agentic Attack Surface-Security Explorer" target="_blank"
           >
             {t.nav.whatsnew}
           </a> </span>

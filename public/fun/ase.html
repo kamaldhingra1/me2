@@ -5,26 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agentic Security Explorer (ASE)</title>
 <link rel="stylesheet" href="/styles/explorer-v2.css">
-
 </head>
 <body>
 <div class="ase-site-header">
-  <header class="topbar"><div class="brand"><h1>Agentic Security Explorer (ASE)</h1><p>Learn Agentic Attack Surfaces, Risks, and Business Impact</p><div class="context">Agentic Attack Surface</div></div>
-  <div class="stats">
-      <div class="stat"><span class="num" id="statRisksViewed">0/56</span><span class="lbl">Risks Inspected</span></div>
-      <div class="stat"><span class="num" id="statChains">0/10</span><span class="lbl">Cases Unlocked</span></div>
-      <div class="mode-toggle">
-        <button class="mode-btn active" id="modeGuidedBtn">Guided</button>
-        <button class="mode-btn" id="modeExploreBtn">Explore</button>
-      </div>
-      <button class="ghost" id="hintBtn">Hint</button>
-      <button class="ghost" id="resetBtn">Reset</button>
-      <a href="/">
-      <button class="ghost" id="topHomeBtn"> <span>Home</span></button></a>
-    </div>
-  </header>
+  <header class="topbar"><div class="brand"><h1>Agentic Security Explorer (ASE)</h1><p>Learn Agentic Attack Surfaces, Risks, and Business Impact</p><div class="context">Agentic Attack Surface</div></div><nav class="nav"><a data-nav="home" href="./index.html">Home</a><a data-nav="explorer" class="active" href="./ase3.html">Explorer</a><a data-nav="guide" href="./guide/index.html">Business Guide</a><a data-nav="architecture" href="./architecture/index.html">Architecture</a><a data-nav="learning" href="./learning/index.html">Learning</a><a data-nav="about" href="./about/index.html">About</a></nav></header>
 </div>
-<style>.ase-site-header{position:sticky;top:0;z-index:210}.ase-site-header .topbar{background:rgba(12,17,23,.98)}.ase-site-header .brand h1{font-family:var(--font-display);font-size:18px;margin:0}.ase-site-header .brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.ase-site-header .brand .context{margin:2px 0 0;color:var(--amber);font-size:10.5px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em}.ase-site-header .nav{display:flex;gap:8px;flex-wrap:wrap}.ase-site-header .nav a{border:1px solid var(--hairline);background:rgba(255,255,255,.04);color:var(--text);border-radius:10px;padding:7px 10px;text-decoration:none;font-family:var(--font-body);font-size:13px}.ase-site-header .nav a.active{border-color:var(--amber);color:var(--amber)}@media(max-width:860px){.ase-site-header .topbar{padding:8px 10px}.ase-site-header .brand h1{font-size:14px}.ase-site-header .brand p{display:block;font-size:10px}.ase-site-header .nav{gap:4px;flex-wrap:nowrap;overflow-x:auto}.ase-site-header .nav a{font-size:11px;padding:6px 8px;white-space:nowrap}}</style>
+<style>
+.ase-site-header{position:sticky;top:0;z-index:210}
+.ase-site-header .topbar{background:rgba(12,17,23,.98)}
+.ase-site-header .brand h1{font-family:var(--font-display);font-size:18px;margin:0}
+.ase-site-header .brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+.ase-site-header .brand .context{margin:2px 0 0;color:var(--amber);font-size:10.5px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em}
+.ase-site-header .nav{display:flex;gap:8px;flex-wrap:wrap}
+.ase-site-header .nav a{border:1px solid var(--hairline);background:rgba(255,255,255,.04);color:var(--text);border-radius:10px;padding:7px 10px;text-decoration:none;font-family:var(--font-body);font-size:13px}
+.ase-site-header .nav a.active{border-color:var(--amber);color:var(--amber)}
+@media(max-width:860px){.ase-site-header .topbar{padding:8px 10px}.ase-site-header .brand h1{font-size:14px}.ase-site-header .brand p{display:block;font-size:10px}.ase-site-header .nav{gap:4px;flex-wrap:nowrap;overflow-x:auto}.ase-site-header .nav a{font-size:11px;padding:6px 8px;white-space:nowrap}}
+</style>
 
 
 
@@ -43,13 +39,25 @@
     <button class="start-btn" id="startBtn">Start exploring</button> <a href="/"> <button class="ghost" id="introHomeBtn">Home</button></a>
   </div> 
 </div>
-<div class="app">
 
-  <nav class="tabnav">
-    <button class="tab-btn active" id="tabMapBtn">System Map</button>
-    <button class="tab-btn" id="tabLibraryBtn">Incident Library <span class="count" id="tabLibraryCount">(0/10)</span></button>
-    <button class="tab-btn" id="tabCatalogBtn">Threat Catalog <span class="count" id="tabCatalogCount">(66)</span></button>
-  </nav>
+<div class="app">
+  <header class="explorer-bar">
+    <div class="explorer-tabs" aria-label="Explorer views">
+      <button class="tab-btn active" id="tabMapBtn">System Map</button>
+      <button class="tab-btn" id="tabLibraryBtn">Incident Library <span class="count" id="tabLibraryCount">(0/10)</span></button>
+      <button class="tab-btn" id="tabCatalogBtn">Threat Catalog <span class="count" id="tabCatalogCount">(66)</span></button>
+    </div>
+    <div class="stats explorer-stats">
+      <div class="stat"><span class="num" id="statRisksViewed">0/66</span><span class="lbl">Risks Inspected</span></div>
+      <div class="stat"><span class="num" id="statChains">0/10</span><span class="lbl">Cases Unlocked</span></div>
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="modeGuidedBtn">Guided</button>
+        <button class="mode-btn" id="modeExploreBtn">Explore</button>
+      </div>
+      <button class="ghost" id="hintBtn">Hint</button>
+      <button class="ghost" id="resetBtn">Reset</button>
+    </div>
+  </header>
 
   <div class="tray" id="tray">
     <span class="tray-label">Basket</span>
