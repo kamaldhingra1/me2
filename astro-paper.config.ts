@@ -14,7 +14,7 @@ export default defineAstroPaperConfig({
     dir: "ltr",
     outDir: './dist',
     output: "static",
-
+    googleVerification: "8iK1WQYkRRG_VANqjTptyU4uQkJpmETGxemcIYAXhvM",
   },
 
 
