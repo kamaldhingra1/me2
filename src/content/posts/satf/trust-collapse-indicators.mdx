@@ -184,23 +184,6 @@ These are attack techniques, threat events, or weaknesses.
 ![Trust lifecycle from healthy assumptions through degradation, TCI, collapse, and business impact](/images/satf/tci-trust-lifecycle.png)
 
 
-```mermaid
-
-flowchart LR
-    A["🟢 Healthy Trust Assumptions"] --> B["🟡 Trust Degradation"]
-    B --> C["🟠 Trust Collapse Indicator — TCI"]
-    C --> D["🔴 Trust Collapse"]
-    D --> E["💥 Incident"]
-    E --> F["📉 Business Impact"]
-
-    style A fill:#14532d,stroke:#4ade80,color:#ffffff
-    style B fill:#713f12,stroke:#facc15,color:#ffffff
-    style C fill:#7c2d12,stroke:#fb923c,color:#ffffff
-    style D fill:#7f1d1d,stroke:#ef4444,color:#ffffff
-    style E fill:#881337,stroke:#fb7185,color:#ffffff
-    style F fill:#450a0a,stroke:#dc2626,color:#ffffff
-```
-
 <Callout type="warning" title="The Intervention Window">
 The most valuable characteristic of a TCI is that it appears before trust has fully collapsed.
 
@@ -306,31 +289,6 @@ A single issue may be manageable.
 > Several interacting issues can produce an entirely different outcome.
 
 ![Multiple degraded trust boundaries converging into trust collapse and an autonomous business fraud event](/images/satf/tci-boundary-convergence.png)
-
-```mermaid
-
-flowchart TD
-    A["🟡 Memory Integrity Degradation"]
-    B["🟡 Context Manipulation"]
-    C["🟡 Tool Trust Weakening"]
-    D["🟡 Human Oversight Erosion"]
-
-    A --> E["🟠 Trust Boundary Convergence — TCI"]
-    B --> E
-    C --> E
-    D --> E
-
-    E --> F["🔴 Trust Collapse"]
-    F --> G["💥 Autonomous Business Fraud Event"]
-
-    style A fill:#713f12,stroke:#facc15,color:#ffffff
-    style B fill:#713f12,stroke:#facc15,color:#ffffff
-    style C fill:#713f12,stroke:#facc15,color:#ffffff
-    style D fill:#713f12,stroke:#facc15,color:#ffffff
-    style E fill:#7c2d12,stroke:#fb923c,color:#ffffff
-    style F fill:#7f1d1d,stroke:#ef4444,color:#ffffff
-    style G fill:#450a0a,stroke:#dc2626,color:#ffffff
-```
 
 <ArchitectureNote2 type="warning" title="Interaction Effects Matter">
 Trust Boundary Convergence may become one of the most important TCIs in future multi-agent environments because the ultimate failure emerges from interaction effects, not from any individual weakness.

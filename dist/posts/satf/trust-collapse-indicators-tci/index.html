@@ -624,20 +624,6 @@
 <hr/>
 <h2 id="the-trust-lifecycle-and-the-intervention-window">The Trust Lifecycle and the Intervention Window</h2>
 <p><img src="/images/satf/tci-trust-lifecycle.png" alt="Trust lifecycle from healthy assumptions through degradation, TCI, collapse, and business impact"/></p>
-<div class="mermaid-container" style="visibility: hidden;"><div class="mermaid-raw" style="display: none;"><code><span class="line"></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">flowchart LR</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    A[&quot;🟢 Healthy Trust Assumptions&quot;] --&gt; B[&quot;🟡 Trust Degradation&quot;]</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    B --&gt; C[&quot;🟠 Trust Collapse Indicator — TCI&quot;]</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    C --&gt; D[&quot;🔴 Trust Collapse&quot;]</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    D --&gt; E[&quot;💥 Incident&quot;]</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    E --&gt; F[&quot;📉 Business Impact&quot;]</span></span>
-<span class="line"></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style A fill:#14532d,stroke:#4ade80,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style B fill:#713f12,stroke:#facc15,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style C fill:#7c2d12,stroke:#fb923c,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style D fill:#7f1d1d,stroke:#ef4444,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style E fill:#881337,stroke:#fb7185,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style F fill:#450a0a,stroke:#dc2626,color:#ffffff</span></span></code></div><pre class="mermaid"></pre></div><script type="module" src="/_astro/Mermaid.astro_astro_type_script_index_0_lang.CLrNHi4P.js"></script>
 <div class="border-l-4 p-4 my-4 rounded-r-md bg-yellow-50 border-yellow-400 text-yellow-800"><p class="font-bold mb-1 flex items-center gap-2"><span>⚠️</span> The Intervention Window</p><div class="text-base"><p>The most valuable characteristic of a TCI is that it appears before trust has fully collapsed.</p><p>In the yellow and orange zones, organizations can still strengthen controls, reduce exposure, increase oversight, narrow authority, or re-establish trust relationships.</p><p>Once the system enters the red zone, recovery becomes significantly more expensive, disruptive, and uncertain.</p></div></div>
 <blockquote><h3 id="traditional-thinking">Traditional Thinking</h3><p>Prompt Injection</p><p>⬇</p><p>Unauthorized Payment</p></blockquote>
 <div class="border-l-4 p-4 my-4 rounded-r-md bg-purple-50 border-purple-400 text-purple-800"><p class="font-bold mb-1 flex items-center gap-2"><span>🚨</span> TCI Thinking</p><div class="text-base"><p>Prompt Injection</p><p>⬇</p><p>Mission Overreach</p><p>⬇</p><p>Authority Escalation</p><p>⬇</p><p>Delegated Trust Failure</p><p>⬇</p><p>Unauthorized Payment</p></div></div>
@@ -657,28 +643,6 @@
 <p>A single issue may be manageable.</p>
 <blockquote><p>Several interacting issues can produce an entirely different outcome.</p></blockquote>
 <p><img src="/images/satf/tci-boundary-convergence.png" alt="Multiple degraded trust boundaries converging into trust collapse and an autonomous business fraud event"/></p>
-<div class="mermaid-container" style="visibility: hidden;"><div class="mermaid-raw" style="display: none;"><code><span class="line"></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">flowchart TD</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    A[&quot;🟡 Memory Integrity Degradation&quot;]</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    B[&quot;🟡 Context Manipulation&quot;]</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    C[&quot;🟡 Tool Trust Weakening&quot;]</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    D[&quot;🟡 Human Oversight Erosion&quot;]</span></span>
-<span class="line"></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    A --&gt; E[&quot;🟠 Trust Boundary Convergence — TCI&quot;]</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    B --&gt; E</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    C --&gt; E</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    D --&gt; E</span></span>
-<span class="line"></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    E --&gt; F[&quot;🔴 Trust Collapse&quot;]</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    F --&gt; G[&quot;💥 Autonomous Business Fraud Event&quot;]</span></span>
-<span class="line"></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style A fill:#713f12,stroke:#facc15,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style B fill:#713f12,stroke:#facc15,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style C fill:#713f12,stroke:#facc15,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style D fill:#713f12,stroke:#facc15,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style E fill:#7c2d12,stroke:#fb923c,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style F fill:#7f1d1d,stroke:#ef4444,color:#ffffff</span></span>
-<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    style G fill:#450a0a,stroke:#dc2626,color:#ffffff</span></span></code></div><pre class="mermaid"></pre></div>
 <aside class="not-prose my-8 rounded-2xl border p-5 shadow-sm backdrop-blur border-amber-300/80 bg-amber-50/80 dark:border-amber-500/40 dark:bg-amber-950/30" data-astro-cid-svvsleh5><div class="flex items-start gap-4" data-astro-cid-svvsleh5><div class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-lg font-bold shadow-sm bg-amber-500 text-white dark:bg-amber-500" aria-hidden="true" data-astro-cid-svvsleh5>!</div><div class="min-w-0 flex-1" data-astro-cid-svvsleh5><div class="mb-2 flex flex-wrap items-center gap-2" data-astro-cid-svvsleh5><span class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide bg-amber-100 text-amber-900 dark:bg-amber-900/70 dark:text-amber-200" data-astro-cid-svvsleh5>Warning</span><h4 class="m-0 text-base font-semibold leading-snug text-amber-950 dark:text-amber-100" data-astro-cid-svvsleh5>Interaction Effects Matter</h4></div><div class="architecture-note-content text-sm leading-7 text-slate-800 dark:text-slate-200 md:text-base" data-astro-cid-svvsleh5><p>Trust Boundary Convergence may become one of the most important TCIs in future multi-agent environments because the ultimate failure emerges from interaction effects, not from any individual weakness.</p></div></div></div></aside>
 <hr/>
 <h2 id="proposed-tci-categories">Proposed TCI Categories</h2>
