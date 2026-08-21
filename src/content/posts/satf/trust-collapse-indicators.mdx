@@ -125,12 +125,21 @@ The challenge is no longer only establishing trust. The challenge is recognizing
        >                 
        >     Then trust collapses.
 
+<Callout type="intro" title="The Core Premise">
+ - Trust is not binary.
+
+ - Trust is established, inherited, delegated, expanded, reinforced, weakened, and sometimes collapsed.
+
+ - TCIs exist to help identify when trust is beginning to move in the wrong direction.
+</Callout>
             
 ---
 
 ## Introducing Trust Collapse Indicators (TCIs)
 
-A **Trust Collapse Indicator (TCI)** is an observable, forward-looking signal that a critical trust relationship is weakening, degrading, or becoming susceptible to failure.
+A **Trust Collapse Indicator (TCI)** is an observable, forward-looking signal that one or more critical trust relationships or trust assumptions within an agentic system are weakening, degrading, becoming invalid, or converging toward failure.
+
+Unlike threats, vulnerabilities, or incidents, TCIs are intended to identify emerging trust instability before significant operational, security, or business consequences occur.
 
 > A TCI does not necessarily mean that an incident has already occurred.
 
@@ -165,6 +174,39 @@ TCIs help answer:
 
 These are attack techniques, threat events, or weaknesses.
 
+<Callout type="tip" title="TCI is Not Behavioral Telemetry">
+ - Behavioral telemetry may reveal what an agent is doing.
+
+ - TCIs help explain why trust is becoming unstable.
+
+</Callout>
+
+Example: 
+
+      Agent unexpectedly calls a tool
+
+             ⬇
+
+      Behavioral Signal
+
+
+      Delegated Trust Failure
+
+            ⬇
+
+      Trust Collapse Indicator
+
+<Callout type="info" title="TCIs vs Behavioral Monitoring">
+
+  - Behavioral monitoring focuses on what an agent is doing.
+
+  - Trust Collapse Indicators focus on whether the trust assumptions supporting that behavior are becoming invalid.
+
+  - The same behavioral anomaly may lead to different trust failures, and the same trust failure may emerge from different behavioral signals.
+
+</Callout>
+
+## What a Trust Collapse Indicator(TCI) Is
 
 <Callout type="Sol" title="Potential TCIs">
  - Mission Overreach
@@ -176,6 +218,7 @@ These are attack techniques, threat events, or weaknesses.
  - Trust Boundary Convergence
  - Cascading Trust Failure
 </Callout>
+
 
 ---
 
