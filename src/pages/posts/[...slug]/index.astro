@@ -15,6 +15,7 @@ import BackButton from "./_components/BackButton.astro";
 import BackToTopButton from "./_components/BackToTopButton.astro";
 import AdjacentPostNav from "./_components/AdjacentPostNav.astro";
 import config from "@/config";
+import Mermaid from "@/components/Mermaid.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -143,7 +144,7 @@ const ogImage = ogImageUrl
         "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
       ]}
     >
-      <Content />
+      <Content components={{ pre: Mermaid }}/>
   
     <div class="text-xs italic text-gray-500">
     <p>All content provided on this blog is for informational and educational purposes only. The views expressed here are mine alone and do not represent the views of my employer. </p>

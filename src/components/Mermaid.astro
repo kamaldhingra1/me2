@@ -1,0 +1,53 @@
+---
+// src/components/Mermaid.astro
+const props = Astro.props;
+
+// Detect mermaid code block configurations
+const isMermaid = props["data-language"] === "mermaid" || 
+                  (props.class && props.class.includes("language-mermaid"));
+---
+
+{isMermaid ? (
+  /* We capture the block into an outer template div to pull clean inner text */
+  <div class="mermaid-container" style="visibility: hidden;">
+    <div class="mermaid-raw" style="display: none;"><slot /></div>
+    <pre class="mermaid"></pre>
+  </div>
+) : (
+  <pre {...props}><slot /></pre>
+)}
+
+<script>
+  import mermaid from "mermaid";
+
+  // Initialize mermaid configuration options safely
+  mermaid.initialize({ 
+    startOnLoad: false, // Must be false when calling mermaid.run() manually
+    theme: 'neutral',
+    securityLevel: 'loose'
+  });
+
+  // Target every rendered custom wrapper instance on the page
+  const containers = document.querySelectorAll(".mermaid-container");
+
+  containers.forEach((container) => {
+    const rawDiv = container.querySelector(".mermaid-raw");
+    const outputPre = container.querySelector(".mermaid");
+    
+    if (rawDiv && outputPre) {
+      // 1. Extract ONLY raw text string content, stripping HTML tags completely
+      const rawText = rawDiv.textContent?.trim() || "";
+      
+      // 2. Insert the sanitized plain text string safely into the presentation block
+      outputPre.textContent = rawText;
+      
+      // 3. Make the wrapper visible once text injection completes safely
+      (container as HTMLElement).style.visibility = "visible";
+    }
+  });
+
+  // Run the parser engine against the sanitized text blocks
+  mermaid.run({
+    querySelector: '.mermaid'
+  });
+</script>
